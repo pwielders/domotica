@@ -1,0 +1,38 @@
+From 63005048c98c73b1fb64b191b1ec9f4a43ba48ab Mon Sep 17 00:00:00 2001
+From: Bram Oosterhuis <mail@bybram.com>
+Date: Sat, 13 Nov 2021 01:30:49 +0100
+Subject: [PATCH] fix build
+
+---
+ Makefile             | 2 +-
+ src/audio_server.cpp | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 4c7b0e6..fc13923 100644
+--- a/Makefile
++++ b/Makefile
+@@ -28,7 +28,7 @@ GRPC_CPP_PLUGIN_PATH=$(HOST_DIR)/bin/grpc_cpp_plugin
+ 
+ CFLAGS+=-fPIC -O2 -I$(PROTOC_INC) -I./include -I. -I./src
+ CXXFLAGS+=-std=c++14
+-SC_LDFLAGS+=-Wl,--no-as-needed -lgrpc++_unsecure -lprotobuf -lboost_system -lamaudioutils -llog -ldl -lrt -lpthread -lstdc++ -pthread
++SC_LDFLAGS+=-Wl,--no-as-needed -labsl_synchronization -lgrpc++_unsecure -lprotobuf -lboost_system -lamaudioutils -llog -ldl -lrt -lpthread -lstdc++ -pthread
+ LDFLAGS+= -Wl,--no-as-needed -llog -ldl -lrt -lpthread -lstdc++ -pthread
+ 
+ %.grpc.pb.cc %.grpc.pb.h: %.proto
+diff --git a/src/audio_server.cpp b/src/audio_server.cpp
+index 115d4a5..ae35d85 100644
+--- a/src/audio_server.cpp
++++ b/src/audio_server.cpp
+@@ -16,6 +16,7 @@
+ #include <chrono>
+ #include <condition_variable>
+ #include <thread>
++#include <signal.h>
+ 
+ #define LOG_TAG "audio_server"
+ #include <cutils/log.h>
+-- 
+2.25.1
+

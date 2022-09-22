@@ -1,0 +1,29 @@
+From 46f490b30a2d1fa470d71a07050863e674df9d6a Mon Sep 17 00:00:00 2001
+From: Bram Oosterhuis <mail@bybram.com>
+Date: Sat, 13 Nov 2021 11:30:37 +0100
+Subject: [PATCH] Make ad properies always avalable
+
+---
+ src/gstamlhalasink_new.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/gstamlhalasink_new.c b/src/gstamlhalasink_new.c
+index 025bc44..7b82798 100644
+--- a/src/gstamlhalasink_new.c
++++ b/src/gstamlhalasink_new.c
+@@ -199,10 +199,10 @@ struct _GstAmlHalAsinkPrivate
+   int ms12_mix_en;
+ #endif
+ #ifdef SUPPORT_AD
+-  gboolean is_dual_audio;
+-  gboolean is_ad_audio;
+   struct ad_des des_ad;
+ #endif
++  gboolean is_dual_audio;
++  gboolean is_ad_audio;
+ };
+ 
+ enum
+-- 
+2.25.1
+

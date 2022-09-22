@@ -1,0 +1,6 @@
+config BR2_PACKAGE_GST1_AMLOGIC_ASINK
+    bool "gst1-amlogic-asink"
+    depends on BR2_PACKAGE_GSTREAMER1
+    select BR2_PACKAGE_AML_AVSYNC
+    help
+        Amlogic GStreamer1 plugins 1.0 to send audio es to aml dsp and video es to aml hw decoder. decode and render will be complete at kernel level.

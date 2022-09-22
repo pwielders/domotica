@@ -1,0 +1,25 @@
+From e968f1fdefc5d0f938e9019c63c23e171ccad325 Mon Sep 17 00:00:00 2001
+From: Bram Oosterhuis <mail@bybram.com>
+Date: Tue, 26 Oct 2021 21:38:52 +0200
+Subject: [PATCH] Lower kernel version check for sysinfo include
+
+---
+ Source/core/SystemInfo.cpp | 26 +++++++++++++-------------
+ 1 file changed, 13 insertions(+), 13 deletions(-)
+
+diff --git a/Source/core/SystemInfo.cpp b/Source/core/SystemInfo.cpp
+index 6f40c06..76e1fc0 100644
+--- a/Source/core/SystemInfo.cpp
++++ b/Source/core/SystemInfo.cpp
+@@ -44,7 +44,7 @@
+
+ #include <linux/version.h>
+
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(4,15,15)
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4,9,119)
+ #include <sys/sysinfo.h>
+ #else
+ #ifdef __cplusplus
+--
+2.25.1
+

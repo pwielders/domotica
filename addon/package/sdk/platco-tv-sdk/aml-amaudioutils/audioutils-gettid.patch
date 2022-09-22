@@ -1,0 +1,20 @@
+Date: Feb 15, 2021
+From: None
+Subject: Removing unwanted declaration
+Source: COMCAST
+License: None
+Upstream-Status: Pending
+Signed-off-by: Anoop Ravi <Anoop_Ravi2@comcast.com>
+
+diff --git a/include/cutils/threads.h b/include/cutils/threads.h
+index 5727494..d2dab39 100644
+--- a/include/cutils/threads.h
++++ b/include/cutils/threads.h
+@@ -37,7 +37,6 @@ extern "C" {
+ /***********************************************************************/
+ /***********************************************************************/
+
+-extern pid_t gettid();
+
+ #if !defined(_WIN32)
+

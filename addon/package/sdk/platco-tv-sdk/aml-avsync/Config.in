@@ -1,0 +1,2 @@
+config BR2_PACKAGE_AML_AVSYNC
+    bool "aml-avsync"

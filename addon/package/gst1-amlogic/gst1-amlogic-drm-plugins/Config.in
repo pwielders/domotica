@@ -1,0 +1,5 @@
+config BR2_PACKAGE_GST1_AMLOGIC_DRM_PLUGINS
+    bool "gst1-amlogic-drm-plugins"
+    depends on BR2_PACKAGE_GSTREAMER1
+    help
+        Amlogic GStreamer1 plugins 1.0 to send audio es to aml dsp and video es to aml hw decoder. decode and render will be complete at kernel level.

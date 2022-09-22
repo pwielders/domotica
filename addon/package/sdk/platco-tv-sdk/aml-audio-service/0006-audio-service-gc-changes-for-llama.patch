@@ -1,0 +1,405 @@
+Date: Apr 12 14:00:00 2021
+From: 8ff8572a87992d784d27bc0b13309d31df80719e Tue Feb 2 11:43:46 2021
+Subject: Optimize resource free up for audio server 
+Source: SKY
+License: CLOSED
+Upstream-Status: Pending
+Signed-off-by: Ben Gray <ben.gray@sky.uk>
+---
+
+This patch re-works the way the garbage collect works for streams.
+Previously a client would send their PID and a sequence number as
+a string to use as the name for a stream, the GC would then check
+the PID supplied (in the name) is still running and if not close it.
+
+The problem with this is that PIDs within a container start at 1,
+so typically, a client inside a container would send PID 1 or 2,
+the server running outside a container would then get confused.
+In addition, the name string supplied by the client is formatted
+like "%d-%d", the first arg is the PID and the second is a sequence
+number, but every client's sequence number starts at 0, so almost
+all clients in (different) containers would have the same 'unique'
+name, this further confuses the server and leads to mixed up streams.
+
+The solution contains a few changes:
+
+1. Changed the name supplied by the client from being a PID plus
+   sequence number, to a randomly generated UUID string instead.
+2. Changed the GRPC server code so it run a simple socket accept
+   loop before passing the client sockets to the GRPC server.
+   This allows for getting the fd / socket descriptor from within
+   the RPC method calls.  Which in turn allows the code to get the
+   real PID of the caller using SO_PEERCRED syscall.
+3. When an input or output stream is opened, the client's supplied
+   name (UUID) is now stored against the PID gleaned from the socket,
+   and it's this pid that is then used in the garbage collector code.
+
+
+
+--- a/src/audio_client.cpp	2021-04-11 23:41:23.000000000 +0100
++++ b/src/audio_client.cpp	2021-04-11 23:39:41.000000000 +0100
+@@ -210,7 +210,7 @@
+ }
+ 
+ 
+-std::atomic_int AudioClient::stream_seq_;
++boost::uuids::random_generator AudioClient::uuidGenerator_;
+ 
+ int AudioClient::Device_common_close(struct hw_device_t* device)
+ {
+--- a/src/audio_client.h	2021-04-11 23:41:23.000000000 +0100
++++ b/src/audio_client.h	2021-04-11 23:45:30.000000000 +0100
+@@ -2,6 +2,9 @@
+ #define AUDIO_CLIENT_H
+ 
+ #include <boost/interprocess/managed_shared_memory.hpp>
++#include <boost/uuid/uuid.hpp>
++#include <boost/uuid/uuid_generators.hpp>
++#include <boost/uuid/uuid_io.hpp>
+ #include <cstdlib>
+ #include <iomanip>
+ #include <unistd.h>
+@@ -27,17 +30,17 @@
+ using google::protobuf::Empty;
+ 
+ typedef struct audio_stream_client {
+-  char name[32];
++  char name[64];
+   struct audio_stream stream;
+ } audio_stream_client_t;
+ 
+ typedef struct audio_stream_out_client {
+-  char name[32];
++  char name[64];
+   struct audio_stream_out stream_out;
+ } audio_stream_out_client_t;
+ 
+ typedef struct audio_stream_in_client {
+-  char name[32];
++  char name[64];
+   struct audio_stream_in stream_in;
+ } audio_stream_in_client_t;
+ 
+@@ -160,16 +163,14 @@
+ 
+   private:
+     std::string new_stream_name(char *name, size_t size) {
+-      int pid = ::getpid();
+-      int seq = (stream_seq_++);
+-      printf("pid=%d seq=%d\n", pid, seq);
+-      snprintf(name, size, "%d-%d", pid, seq);
+-      printf("name = %s\n", name);
+-      return std::string(name);
++      std::string uuid = boost::uuids::to_string(uuidGenerator_());
++      strncpy(name, uuid.c_str(), size);
++      name[size - 1] = '\0';
++      return uuid;
+     }
+ 
+     std::unique_ptr<AudioService::Stub> stub_;
+-    static std::atomic_int stream_seq_;
++    static boost::uuids::random_generator uuidGenerator_;
+ };
+ 
+ #endif // AUDIO_CLIENT_H
+--- a/src/audio_server.cpp	2021-04-11 23:41:23.000000000 +0100
++++ b/src/audio_server.cpp	2021-04-11 23:48:31.000000000 +0100
+@@ -5,6 +5,9 @@
+ #include <sys/stat.h>
+ #include <fcntl.h>
+ #include <grp.h>
++#include <sys/un.h>
++#include <sys/socket.h>
++#include <sys/stat.h>
+ 
+ #include <boost/interprocess/managed_shared_memory.hpp>
+ #include <cstdlib>
+@@ -22,6 +25,7 @@
+ #include <grpcpp/server.h>
+ #include <grpcpp/server_builder.h>
+ #include <grpcpp/server_context.h>
++#include <grpcpp/server_posix.h>
+ #include <grpcpp/security/server_credentials.h>
+ #include <IpcBuffer/audio_server_shmem.h>
+ #include <IpcBuffer/IpcBuffer.h>
+@@ -248,6 +252,10 @@
+           cb = shm_->construct<IpcBuffer>(request->name().c_str())(request->name().c_str(), request->size());
+         }
+ 
++        pid_t pid = get_client_pid_(context);
++        if (pid > 0)
++          map_name_to_pid_(request->name(), pid);
++
+         std::lock_guard<std::mutex> lock(map_out_mutex_);
+         streamout_map_.insert(
+           std::pair<const std::string, streamout_map_t>(request->name(), streamout_map_t(cb, stream)));
+@@ -269,6 +277,8 @@
+         shm_->destroy<IpcBuffer>(request->name().c_str());
+       }
+ 
++      unmap_name_from_pid_(request->name());
++
+       std::lock_guard<std::mutex> lock(map_out_mutex_);
+       streamout_map_.erase(it);
+ 
+@@ -304,6 +314,10 @@
+         if (cb == nullptr)
+           cb = shm_->construct<IpcBuffer>(request->name().c_str())(request->name().c_str(), request->size());
+ 
++        pid_t pid = get_client_pid_(context);
++        if (pid > 0)
++          map_name_to_pid_(request->name(), pid);
++
+         std::lock_guard<std::mutex> lock(map_in_mutex_);
+         streamin_map_.insert(
+           std::pair<const std::string, streamin_map_t>(request->name(), streamin_map_t(cb, stream)));
+@@ -325,6 +339,8 @@
+         shm_->destroy<IpcBuffer>(request->name().c_str());
+       }
+ 
++      unmap_name_from_pid_(request->name());
++
+       std::lock_guard<std::mutex> lock(map_in_mutex_);
+       streamin_map_.erase(it);
+ 
+@@ -764,31 +780,83 @@
+     }
+ 
+   private:
++    // This gets the fd of the client socket used for the call, and from that it
++    // gets the client credentials including the pid of the caller
++    static pid_t get_client_pid_(grpc::ServerContext* context)
++    {
++      // get the client socket fd
++      int socketFd = -1;
++      if ((sscanf(context->peer().c_str(), "fd:%d", &socketFd) != 1) || (socketFd < 0)) {
++          ALOGE("Error: failed to get fd of the client");
++          return -1;
++      }
++
++      // sanity check it's an actual fd by dup'ing it
++      int duppedFd = fcntl(socketFd, F_DUPFD_CLOEXEC, 3);
++      if (duppedFd < 0) {
++        ALOGE("Error: failed to dup client socket fd (%d - %s)", errno, strerror(errno));
++        return -1;
++      }
++
++      struct ucred cred;
++      socklen_t credLen = sizeof(cred);
++      if (getsockopt(duppedFd, SOL_SOCKET, SO_PEERCRED, &cred, &credLen) < 0) {
++        ALOGE("Error: failed to get creds from client socket (%d - %s)", errno, strerror(errno));
++        cred.pid = -1;
++      }
++
++      if (close(duppedFd) != 0) {
++        ALOGE("Error: failed to close dup'd socket (%d - %s)", errno, strerror(errno));
++      }
++
++      return cred.pid;
++    }
++
++    pid_t pid_from_name_(const std::string &name) const
++    {
++      std::lock_guard<std::mutex> locker(name2pid_mutex_);
++      auto it = name2pid_map_.find(name);
++      if (it != name2pid_map_.end())
++        return it->second;
++      else
++        return -1;
++    }
++
++    void map_name_to_pid_(const std::string &name, pid_t pid)
++    {
++      std::lock_guard<std::mutex> locker(name2pid_mutex_);
++      name2pid_map_[name] = pid;
++    }
++
++    void unmap_name_from_pid_(const std::string &name)
++    {
++      std::lock_guard<std::mutex> locker(name2pid_mutex_);
++      name2pid_map_.erase(name);
++    }
++
+     void streamout_gc_()
+     {
+       std::lock_guard<std::mutex> lock_out(map_out_mutex_);
+       for (std::map<const std::string, streamout_map_t >::iterator it = streamout_map_.begin(); it != streamout_map_.end(); ) {
+-          int pid, seq;
+-          bool need_close = false;
+ 
+-          if (sscanf(it->first.c_str(), "%d-%d", &pid, &seq) == 2) {
+-            // Garbage collect streams when PID does not exists.
+-            // It happens when client side crashed, or the client
+-            // side does not have the right sequence to close opened streams.
+-            if ((kill(pid, 0) == -1) && (errno == ESRCH)) {
+-              need_close = true;
+-            }
+-          }
+-          if (need_close) {
+-            ALOGI("Close disconnected output stream from PID %d", pid);
+-            dev_->close_output_stream(dev_, it->second.second);
+-            if (it->second.first) {
+-              shm_->destroy<IpcBuffer>(it->first.c_str());
+-            }
+-            streamout_map_.erase(it++);
+-          } else {
+-            ++it;
++        const pid_t pid = pid_from_name_(it->first);
++
++        // Garbage collect streams when PID does not exists.
++        // It happens when client side crashed, or the client
++        // side does not have the right sequence to close opened streams.
++        const bool need_close = (pid < 0) || ((kill(pid, 0) == -1) && (errno == ESRCH));
++
++        if (need_close) {
++          ALOGI("Close disconnected output stream from PID %d", pid);
++          dev_->close_output_stream(dev_, it->second.second);
++          if (it->second.first) {
++            shm_->destroy<IpcBuffer>(it->first.c_str());
+           }
++          unmap_name_from_pid_(it->first);
++          it = streamout_map_.erase(it);
++        } else {
++          ++it;
++        }
+       }
+     }
+ 
+@@ -796,23 +864,22 @@
+     {
+       std::lock_guard<std::mutex> lock_out(map_in_mutex_);
+       for (std::map<const std::string, streamin_map_t >::iterator it = streamin_map_.begin(); it != streamin_map_.end(); ) {
+-          int pid, seq;
+-          bool need_close = false;
+ 
+-          if (sscanf(it->first.c_str(), "%d-%d", &pid, &seq) == 2) {
+-            // Garbage collect streams when PID does not exists.
+-            // It happens when client side crashed, or the client
+-            // side does not have the right sequence to close opened streams.
+-            if (kill(pid, 0) == ESRCH) {
+-              need_close = true;
+-            }
+-          }
+-          if (need_close) {
+-            dev_->close_input_stream(dev_, it->second.second);
+-            streamin_map_.erase(it++);
+-          } else {
+-            ++it;
+-          }
++        const pid_t pid = pid_from_name_(it->first);
++
++        // Garbage collect streams when PID does not exists.
++        // It happens when client side crashed, or the client
++        // side does not have the right sequence to close opened streams.
++        const bool need_close = (pid < 0) || ((kill(pid, 0) == -1) && (errno == ESRCH));
++
++        if (need_close) {
++          ALOGI("Close disconnected input stream from PID %d", pid);
++          dev_->close_input_stream(dev_, it->second.second);
++          unmap_name_from_pid_(it->first);
++          it = streamin_map_.erase(it);
++        } else {
++          ++it;
++        }
+       }
+     }
+ 
+@@ -869,6 +936,9 @@
+     std::map<const std::string, streamout_map_t > streamout_map_;
+     std::map<const std::string, streamin_map_t > streamin_map_;
+ 
++    mutable std::mutex name2pid_mutex_;
++    std::map<std::string, pid_t> name2pid_map_;
++
+     /* gc thread to close dead streams */
+     bool gc_runner_stop_;
+     std::mutex gc_mutex_;
+@@ -902,6 +972,74 @@
+   chmod(file_path, (buf.st_mode & 0717) | 0060);
+ }
+ 
++static bool runListenerLoop(const std::unique_ptr<grpc::Server> &server,
++                            const std::string &address)
++{
++  if (address.find("unix://") != 0) {
++    ALOGE("Error: must be an 'unix://' server address");
++    return false;
++  }
++
++  std::string socketPath = address.substr(strlen("unix://"));
++
++  struct stat st;
++  if ((stat(socketPath.c_str(), &st) == 0) && ((st.st_mode & S_IFMT) == S_IFSOCK)) {
++    unlink(socketPath.c_str());
++  }
++
++  int serverSock = socket(AF_UNIX, SOCK_STREAM | SOCK_CLOEXEC, 0);
++  if (serverSock < 0) {
++    ALOGE("Error: failed to create unix socket (%d - %s)", errno, strerror(errno));
++    return false;
++  }
++
++  struct sockaddr_un serverAddr;
++  memset(&serverAddr, 0, sizeof(serverAddr));
++  serverAddr.sun_family = AF_UNIX;
++  strncpy(serverAddr.sun_path, socketPath.c_str(), sizeof(serverAddr.sun_path) - 1);
++
++  if (bind(serverSock, (struct sockaddr*)&serverAddr, sizeof(serverAddr)) != 0) {
++    ALOGE("Error: failed to bind to unix socket @ '%s' (%d - %s)",
++          socketPath.c_str(), errno, strerror(errno));
++    return false;
++  }
++
++  SetAudioPermissions(socketPath.c_str());
++
++  if (listen(serverSock, 5) == -1) {
++    ALOGE("Error: failed to set socket to listening mode (%d - %s)",
++          errno, strerror(errno));
++    return false;
++  }
++
++  for (;;) {
++
++    struct sockaddr_un clientAddr;
++    socklen_t clientAddrLen = sizeof(clientAddr);
++
++    int clientSock = TEMP_FAILURE_RETRY(accept4(serverSock,
++                                                (struct sockaddr *) &clientAddr, &clientAddrLen,
++                                                SOCK_NONBLOCK | SOCK_CLOEXEC));
++    if (clientSock < 0) {
++      ALOGE("Error: accepting new connection (%d - %s)", errno, strerror(errno));
++      continue;
++    }
++
++    struct ucred cred;
++    socklen_t credLen = sizeof(cred);
++    if (getsockopt(clientSock, SOL_SOCKET, SO_PEERCRED, &cred, &credLen) < 0) {
++      ALOGE("Error: failed to get creds from client socket (%d - %s)",
++            errno, strerror(errno));
++      close(clientSock);
++      continue;
++    }
++
++    grpc::AddInsecureChannelFromFd(server.get(), clientSock);
++  }
++
++  return true;
++}
++
+ void RunServer()
+ {
+   const char *url = std::getenv("AUDIO_SERVER_SOCKET");
+@@ -912,12 +1050,11 @@
+       server_address = url;
+   }
+   ServerBuilder builder;
+-  builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
+   builder.RegisterService(&service);
+   std::unique_ptr<Server> server(builder.BuildAndStart());
+-  SetAudioPermissions(socket_location.c_str());
+   SetAudioPermissions("/dev/shm/AudioServiceShmem");
+   std::cout << "[AudioServer] listening on " << server_address << std::endl;
++  runListenerLoop(server, server_address);
+   server->Wait();
+ }
+ 

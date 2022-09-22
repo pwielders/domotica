@@ -1,0 +1,29 @@
+config BR2_PACKAGE_PLATCO_TV_BSP
+	bool "platco-tv-bsp"
+	depends on BR2_arm
+	select BR2_PACKAGE_HAS_LIBEGL
+	select BR2_PACKAGE_HAS_LIBGLES
+	select BR2_PACKAGE_HAS_LIBGBM
+	select BR2_PACKAGE_LIBDRM
+	help
+	  BSP for Platco TV platform
+
+comment "platco-tv-bsp needs BR2_arm"
+	depends on !BR2_arm
+
+if BR2_PACKAGE_PLATCO_TV_BSP
+
+config BR2_PACKAGE_PROVIDES_LIBEGL
+	default "platco-tv-bsp"
+
+config BR2_PACKAGE_PROVIDES_LIBGBM
+	default "platco-tv-bsp"
+
+config BR2_PACKAGE_PROVIDES_LIBGLES
+	default "platco-tv-bsp"
+
+config BR2_PACKAGE_SDK_INSTALL
+    string
+	default "platco-tv-bsp"
+
+endif
