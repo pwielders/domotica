@@ -19,3 +19,6 @@ if BR2_PACKAGE_PLAYREADY
 config BR2_PACKAGE_PROVIDES_PLAYREADY
         default "playready4"
 endif
+
+comment "playready4 needs wpeframework cdmi and its playready ocdm module"
+    depends on !BR2_PACKAGE_WPEFRAMEWORK && !BR2_PACKAGE_WPEFRAMEWORK_CDMI_PLAYREADY
