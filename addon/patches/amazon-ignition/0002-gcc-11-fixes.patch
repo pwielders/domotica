@@ -1,0 +1,55 @@
+From 498692a04797d03eeefcbbc71f534195e2cb66ec Mon Sep 17 00:00:00 2001
+From: Bram Oosterhuis <bram.oosterhuis.nl@gmail.com>
+Date: Fri, 23 Sep 2022 10:23:04 +0200
+Subject: [PATCH] gcc 11+ fixes
+
+---
+ ignition/src/StringHolder.h                              | 2 ++
+ ignition/src/diskstorage/src/MemoryStorage.cpp           | 2 +-
+ thunder/amp-thunder/libs/Core/Core/src/thread/Thread.cpp | 4 ++--
+ 3 files changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/ignition/src/StringHolder.h b/ignition/src/StringHolder.h
+index 2c7e57c8..6ea2d09f 100644
+--- a/ignition/src/StringHolder.h
++++ b/ignition/src/StringHolder.h
+@@ -3,6 +3,8 @@
+ 
+ #include "Hash.h"
+ 
++#include <cstddef>
++
+ namespace ignite
+ {
+ class StringHolder
+diff --git a/ignition/src/diskstorage/src/MemoryStorage.cpp b/ignition/src/diskstorage/src/MemoryStorage.cpp
+index f988780b..88cce3bc 100644
+--- a/ignition/src/diskstorage/src/MemoryStorage.cpp
++++ b/ignition/src/diskstorage/src/MemoryStorage.cpp
+@@ -140,7 +140,7 @@ ErrorCode MemoryStorage::get_all_files(ignite::core::vector<std::string>& out_fi
+     core::lock_guard<core::mutex> l(_storage_mtx);
+     out_files.reserve(_objects.size());
+ 
+-    for (const auto file : _objects)
++    for (const auto& file : _objects)
+     {
+         out_files.push_back(file.first.c_str());
+     }
+diff --git a/thunder/amp-thunder/libs/Core/Core/src/thread/Thread.cpp b/thunder/amp-thunder/libs/Core/Core/src/thread/Thread.cpp
+index 77fadb72..349003ce 100755
+--- a/thunder/amp-thunder/libs/Core/Core/src/thread/Thread.cpp
++++ b/thunder/amp-thunder/libs/Core/Core/src/thread/Thread.cpp
+@@ -174,8 +174,8 @@ namespace thread
+ 		AMP_VALIDATE_EQ( int, 0, pthread_attr_init( &attr ), ::error::kError_Internal );
+ 
+ 		// prepare a deferred cleanup of attr, in case one of the following AMP_VALIDATE calls fails & leaves scope early
+-		core::BoundFunction< int(pthread_attr_t*), pthread_attr_t* > functorAttrDestroy = core::bind( pthread_attr_destroy, &attr );
+-		core::Defer< core::BoundFunction< int(pthread_attr_t*), pthread_attr_t* > > deferAttrDestroy( functorAttrDestroy );
++		core::BoundFunction< int(pthread_attr_t*)noexcept, pthread_attr_t* > functorAttrDestroy = core::bind( pthread_attr_destroy, &attr );
++		core::Defer< core::BoundFunction< int(pthread_attr_t*)noexcept, pthread_attr_t* > > deferAttrDestroy( functorAttrDestroy );
+ 
+ 		// Set inherit sched
+ 		AMP_VALIDATE_EQ( int, 0, pthread_attr_setinheritsched(&attr, PTHREAD_EXPLICIT_SCHED), ::error::kError_Internal );
+-- 
+2.34.1
+

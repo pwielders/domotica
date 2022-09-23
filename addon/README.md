@@ -1,6 +1,6 @@
-# Metrological Restricted Buildroot External
+# Metrological Open Source Buildroot External
 
-This [buildroot external][1] includes Metrological's private packages, patches,
+This [buildroot external][1] includes Metrological's open source packages, patches,
 setup, and configuration to work on Metrological provided software not provided
 in mainline buildroot. This project gives you an extension to buildroot to
 support these customizations outside of the standard buildroot tree.
@@ -21,19 +21,18 @@ required. It will let you know what those are.
 ## Build
 
 Starting is easy, clone, configure and build. When building, use the appropriate
-defconfig in the `buildroot-external-metrological-restricted/configs` directory
+defconfig in the `buildroot-external-metrological-open-source/configs` directory
 for your platform. Feel free to add defconfig if you are missing one.
 
 1. Clone the required buildroot sources.
    ``` shell
    git clone https://git.buildroot.net/buildroot
    git clone git@github.com:Metrological/buildroot-external-metrological-open-source.git
-   git clone git@github.com:Metrological/buildroot-external-metrological-restricted.git
    ```
 2. Enter the buildroot directory and prepare the environment. Usually the export is
    only needed once unless you want to add/remove layers.
    ``` shell
-   export BR2_EXTERNAL="${PWD}/../buildroot-external-metrological-restricted:${PWD}/../buildroot-external-metrological-open-source"
+   export BR2_EXTERNAL="${PWD}/../buildroot-external-metrological-open-source"
    ```
 3. Continue your build as a usual buildroot build.
    ``` shell
@@ -64,10 +63,18 @@ To configure the kernel and build:
 Create a list of software licenses used:
 
     make legal-info
+  
+## License
+
+This project is licensed under the [GPLv2][2] or later with exceptions.  See the
+`COPYING` file for more information.  Buildroot is licensed under the [GPLv2][2]
+or later with exceptions. See the `COPYING` file in that project for more
+information.
 
 ## Documentation
 
 For more information on using and updating buildroot, see the [buildroot documentation][3].
 
 [1]: https://buildroot.org/downloads/manual/manual.html#outside-br-custom
+[2]: https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html
 [3]: https://buildroot.org/docs.html
