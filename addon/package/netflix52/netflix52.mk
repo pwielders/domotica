@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-NETFLIX52_VERSION = 59b1d0ac86ac629bcd7c1b29c736561d9e743fb7
+NETFLIX52_VERSION = de35de7caf6d3740c739bdb54be4b5a035d23969
 NETFLIX52_SITE = git@github.com:Metrological/netflix.git
 NETFLIX52_SITE_METHOD = git
 NETFLIX52_LICENSE = PROPRIETARY
@@ -18,6 +18,14 @@ NETFLIX52_CONF_ENV += TARGET_CROSS="$(GNU_TARGET_NAME)-"
 
 NETFLIX52_CONF_OPTS += -DBUILD_REFERENCE=${NETFLIX52_VERSION}
 NETFLIX52_SUPPORTS_IN_SOURCE_BUILD = NO
+
+define NETFLIX52_FIX_OPENJPEG
+if [ ! -d "${STAGING_DIR}/usr/include/openjpeg-2.3" ]; then \
+    ln -s openjpeg-$(shell echo $(OPENJPEG_VERSION) | cut -f1 -d.).$(shell echo $(OPENJPEG_VERSION) | cut -f2 -d.) "${STAGING_DIR}/usr/include/openjpeg-2.3" ; \
+fi
+endef
+
+NETFLIX52_PRE_CONFIGURE_HOOKS += NETFLIX52_FIX_OPENJPEG
 
 NETFLIX52_CONF_OPTS = \
 	-DBUILD_GIBBON_DIRECTORY=$(@D)/partner/gibbon \
@@ -93,6 +101,7 @@ NETFLIX52_CONF_OPTS += \
 	-DNRDP_HAS_QA=OFF \
 	-DNRDP_HAS_TRACING=OFF 
 endif
+
 
 ifeq ($(BR2_PACKAGE_VSS_SDK),y)
 NETFLIX52_CONF_OPTS += \
