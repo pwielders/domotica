@@ -1,1 +1,1 @@
-include  $(BR2_EXTERNAL_ADDON_PACKAGES_PATH)/package/amazon-alexa-opensource/*/*.mk
+include  $(BR2_EXTERNAL_ML_OSS_PATH)/package/amazon-alexa-opensource/*/*.mk

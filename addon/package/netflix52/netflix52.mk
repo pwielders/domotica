@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-NETFLIX52_VERSION = de35de7caf6d3740c739bdb54be4b5a035d23969
+NETFLIX52_VERSION = 59b1d0ac86ac629bcd7c1b29c736561d9e743fb7
 NETFLIX52_SITE = git@github.com:Metrological/netflix.git
 NETFLIX52_SITE_METHOD = git
 NETFLIX52_LICENSE = PROPRIETARY
@@ -244,7 +244,7 @@ define NETFLIX52_INSTALL_TO_STAGING
 	$(call NETFLIX52_INSTALL_TO_TARGET, $(1))
 
 	$(INSTALL) -d $(1)/usr/lib/pkgconfig
-	$(INSTALL) -D $(BR2_EXTERNAL_ADDON_PACKAGES_PATH)/package/netflix52/netflix.pc $(1)/usr/lib/pkgconfig/netflix.pc
+	$(INSTALL) -D $(BR2_EXTERNAL_ML_CSS_PATH)/package/netflix52/netflix.pc $(1)/usr/lib/pkgconfig/netflix.pc
 	$(INSTALL) -d $(1)/usr/lib/cmake/netflix/
 	$(INSTALL) -D $(NETFLIX52_BUILD_DIR)/src/platform/gibbon/netflix-config.cmake $(1)/usr/lib/cmake/netflix/netflix-config.cmake
 

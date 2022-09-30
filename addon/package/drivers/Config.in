@@ -1,4 +1,4 @@
 menu  "drivers"
 comment "Platform drivers"
-source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic-mali-driver/Config.in"
+source "$BR2_EXTERNAL_ML_CSS_PATH/package/drivers/amlogic-mali-driver/Config.in"
 endmenu

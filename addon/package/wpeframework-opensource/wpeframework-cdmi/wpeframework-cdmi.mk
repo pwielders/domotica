@@ -1,2 +1,2 @@
-include $(BR2_EXTERNAL_ADDON_PACKAGES_PATH)/package/wpeframework-opensource/wpeframework-cdmi/*/*.mk
+include $(BR2_EXTERNAL_ML_OSS_PATH)/package/wpeframework-opensource/wpeframework-cdmi/*/*.mk
 

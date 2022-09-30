@@ -22,8 +22,8 @@ if BR2_PACKAGE_WESTEROS
 	help
 	 Enable essos in westeros
 
-	source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/westeros/westeros-simpleshell/Config.in"	
-	source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/westeros/westeros-simplebuffer/Config.in"
-	source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/westeros/westeros-soc/Config.in"
-	source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/westeros/westeros-sink/Config.in"
+	source "$BR2_EXTERNAL_ML_OSS_PATH/package/westeros/westeros-simpleshell/Config.in"	
+	source "$BR2_EXTERNAL_ML_OSS_PATH/package/westeros/westeros-simplebuffer/Config.in"
+	source "$BR2_EXTERNAL_ML_OSS_PATH/package/westeros/westeros-soc/Config.in"
+	source "$BR2_EXTERNAL_ML_OSS_PATH/package/westeros/westeros-sink/Config.in"
 endif #BR2_PACKAGE_WESTEROS

@@ -5,7 +5,7 @@
 ################################################################################
 
 LIBDRM_EXAMPLES_VERSION = 1.0
-LIBDRM_EXAMPLES_SITE=$(BR2_EXTERNAL_ADDON_PACKAGES_PATH)/package/libdrm-examples/src
+LIBDRM_EXAMPLES_SITE=$(BR2_EXTERNAL_ML_OSS_PATH)/package/libdrm-examples/src
 LIBDRM_EXAMPLES_SITE_METHOD=local
 
 LIBDRM_EXAMPLES_INSTALL_STAGING = YES

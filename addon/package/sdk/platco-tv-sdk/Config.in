@@ -5,14 +5,14 @@ menuconfig BR2_PACKAGE_PLATCO_TV_SDK
 
 if BR2_PACKAGE_PLATCO_TV_SDK
 
-source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/sdk/platco-tv-sdk/platco-tv-bsp/Config.in"
+source "$BR2_EXTERNAL_ML_CSS_PATH/package/sdk/platco-tv-sdk/platco-tv-bsp/Config.in"
 
-source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/sdk/platco-tv-sdk/aml-amaudioutils/Config.in"
-source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/sdk/platco-tv-sdk/aml-audio-service/Config.in"
-source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/sdk/platco-tv-sdk/aml-avsync/Config.in"
-source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/sdk/platco-tv-sdk/aml-commonlib/Config.in"
-source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/sdk/platco-tv-sdk/aml-mediahal-sdk/Config.in"
-source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/sdk/platco-tv-sdk/aml-secmem/Config.in"
-source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/sdk/platco-tv-sdk/dolby-ms12/Config.in"
+source "$BR2_EXTERNAL_ML_CSS_PATH/package/sdk/platco-tv-sdk/aml-amaudioutils/Config.in"
+source "$BR2_EXTERNAL_ML_CSS_PATH/package/sdk/platco-tv-sdk/aml-audio-service/Config.in"
+source "$BR2_EXTERNAL_ML_CSS_PATH/package/sdk/platco-tv-sdk/aml-avsync/Config.in"
+source "$BR2_EXTERNAL_ML_CSS_PATH/package/sdk/platco-tv-sdk/aml-commonlib/Config.in"
+source "$BR2_EXTERNAL_ML_CSS_PATH/package/sdk/platco-tv-sdk/aml-mediahal-sdk/Config.in"
+source "$BR2_EXTERNAL_ML_CSS_PATH/package/sdk/platco-tv-sdk/aml-secmem/Config.in"
+source "$BR2_EXTERNAL_ML_CSS_PATH/package/sdk/platco-tv-sdk/dolby-ms12/Config.in"
 
 endif

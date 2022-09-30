@@ -33,8 +33,8 @@ endif
 define BCM_REFSW_INSTALL_GRAPHICS_DEV
 	$(call BCM_REFSW_INSTALL_GRAPHICS,$(STAGING_DIR))
 	$(INSTALL) -m 755 -d $(STAGING_DIR)/usr/lib/pkgconfig
-	$(INSTALL) -m 644 $(BR2_EXTERNAL_ADDON_PACKAGES_PATH)/package/bcm-refsw/${BCM_REFSW_PLATFORM_VC}/egl.pc $(STAGING_DIR)/usr/lib/pkgconfig/egl.pc
-	$(INSTALL) -m 644 $(BR2_EXTERNAL_ADDON_PACKAGES_PATH)/package/bcm-refsw/${BCM_REFSW_PLATFORM_VC}/glesv2.pc $(STAGING_DIR)/usr/lib/pkgconfig/
+	$(INSTALL) -m 644 $(BR2_EXTERNAL_ML_CSS_PATH)/package/bcm-refsw/${BCM_REFSW_PLATFORM_VC}/egl.pc $(STAGING_DIR)/usr/lib/pkgconfig/egl.pc
+	$(INSTALL) -m 644 $(BR2_EXTERNAL_ML_CSS_PATH)/package/bcm-refsw/${BCM_REFSW_PLATFORM_VC}/glesv2.pc $(STAGING_DIR)/usr/lib/pkgconfig/
 	sed -i 's/@CFLAGS@/${EGL_EXTRA_CFLAGS}/g' $(STAGING_DIR)/usr/lib/pkgconfig/egl.pc; \
 	sed -i 's/@CFLAGS@/${EGL_EXTRA_CFLAGS}/g' $(STAGING_DIR)/usr/lib/pkgconfig/glesv2.pc; \
 	$(INSTALL) -m 755 -d $(STAGING_DIR)/usr/include/GLES

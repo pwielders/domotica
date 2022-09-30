@@ -16,8 +16,8 @@ config	BR2_PACKAGE_WPEFRAMEWORK_CDMI_SOFTWARE_OVERRIDE
 	bool
 endif
 
-source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/wpeframework-opensource/wpeframework-cdmi/ClearkeyConfig.in"
-source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/wpeframework-opensource/wpeframework-cdmi/PlayreadyConfig.in"
-source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/wpeframework-opensource/wpeframework-cdmi/WidevineConfig.in"
-source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/wpeframework-opensource/wpeframework-cdmi/NagraConfig.in"
-source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/wpeframework-opensource/wpeframework-cdmi/NCASConfig.in"
+source "$BR2_EXTERNAL_ML_OSS_PATH/package/wpeframework-opensource/wpeframework-cdmi/ClearkeyConfig.in"
+source "$BR2_EXTERNAL_ML_OSS_PATH/package/wpeframework-opensource/wpeframework-cdmi/PlayreadyConfig.in"
+source "$BR2_EXTERNAL_ML_OSS_PATH/package/wpeframework-opensource/wpeframework-cdmi/WidevineConfig.in"
+source "$BR2_EXTERNAL_ML_OSS_PATH/package/wpeframework-opensource/wpeframework-cdmi/NagraConfig.in"
+source "$BR2_EXTERNAL_ML_OSS_PATH/package/wpeframework-opensource/wpeframework-cdmi/NCASConfig.in"

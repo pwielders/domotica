@@ -19,12 +19,12 @@ BR2_LINUX_KERNEL_CUSTOM_GIT=y
 BR2_LINUX_KERNEL_CUSTOM_REPO_URL="git@github.com:Metrological/bcm-stblinux-4.9.git"
 BR2_LINUX_KERNEL_CUSTOM_REPO_VERSION="dae011466609eb35cb5543e281a82207b4f03141"
 BR2_LINUX_KERNEL_DEFCONFIG="brcmstb"
-BR2_LINUX_KERNEL_CONFIG_FRAGMENT_FILES="${BR2_EXTERNAL_ADDON_PACKAGES_PATH}/board/bcm/config-fragments/cgroups.cfg ${BR2_EXTERNAL_ADDON_PACKAGES_PATH}/board/bcm/config-fragments/ipv6.cfg ${BR2_EXTERNAL_ADDON_PACKAGES_PATH}/board/bcm/config-fragments/netfilter.cfg ${BR2_EXTERNAL_ADDON_PACKAGES_PATH}/board/bcm/config-fragments/wpa-supplicant.cfg ${BR2_EXTERNAL_ADDON_PACKAGES_PATH}/board/bcm/config-fragments/no-vdso.cfg ${BR2_EXTERNAL_ADDON_PACKAGES_PATH}/board/bcm/config-fragments/bt.cfg"
+BR2_LINUX_KERNEL_CONFIG_FRAGMENT_FILES="${BR2_EXTERNAL_ML_CSS_PATH}/board/bcm/config-fragments/cgroups.cfg ${BR2_EXTERNAL_ML_CSS_PATH}/board/bcm/config-fragments/ipv6.cfg ${BR2_EXTERNAL_ML_CSS_PATH}/board/bcm/config-fragments/netfilter.cfg ${BR2_EXTERNAL_ML_CSS_PATH}/board/bcm/config-fragments/wpa-supplicant.cfg ${BR2_EXTERNAL_ML_CSS_PATH}/board/bcm/config-fragments/no-vdso.cfg ${BR2_EXTERNAL_ML_CSS_PATH}/board/bcm/config-fragments/bt.cfg"
 BR2_PACKAGE_BUSYBOX_SMP=y
 
 BR2_TARGET_GENERIC_ROOT_PASSWD="root"
 BR2_TARGET_GENERIC_GETTY_PORT="ttyS0"
-BR2_ROOTFS_POST_BUILD_SCRIPT="${BR2_EXTERNAL_ADDON_PACKAGES_PATH}/board/arris/post-build.sh"
+BR2_ROOTFS_POST_BUILD_SCRIPT="${BR2_EXTERNAL_ML_CSS_PATH}/board/arris/post-build.sh"
 BR2_TARGET_GENERIC_CABUNDLE=y
 BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_EUDEV=y
 
