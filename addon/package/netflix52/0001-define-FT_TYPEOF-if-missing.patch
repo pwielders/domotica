@@ -1,0 +1,35 @@
+From 557fb12810cb5783175348693937f5b9b8e9749e Mon Sep 17 00:00:00 2001
+From: Bram Oosterhuis <bram.oosterhuis.nl@gmail.com>
+Date: Fri, 23 Sep 2022 14:34:53 +0200
+Subject: [PATCH 1/2] define FT_TYPEOF if missing
+
+---
+ netflix/src/platform/gibbon/text/FontCache.cpp | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/netflix/src/platform/gibbon/text/FontCache.cpp b/netflix/src/platform/gibbon/text/FontCache.cpp
+index 0b3ecea..a41f04f 100644
+--- a/netflix/src/platform/gibbon/text/FontCache.cpp
++++ b/netflix/src/platform/gibbon/text/FontCache.cpp
+@@ -229,6 +229,18 @@ protected:
+ 
+ #if FREETYPE_MAJOR > 2 || (FREETYPE_MAJOR == 2 && FREETYPE_MINOR > 4) || (FREETYPE_MAJOR == 2 && FREETYPE_MINOR == 4 && FREETYPE_PATCH > 5)
+ 
++#ifndef FT_TYPEOF
++  /* `typeof` condition taken from gnulib's `intprops.h` header file */
++#if ( ( defined( __GNUC__ ) && __GNUC__ >= 2 )                       || \
++      ( defined( __IBMC__ ) && __IBMC__ >= 1210 &&                      \
++        defined( __IBM__TYPEOF__ ) )                                 || \
++      ( defined( __SUNPRO_C ) && __SUNPRO_C >= 0x5110 && !__STDC__ ) )
++#define FT_TYPEOF( type )  ( __typeof__ ( type ) )
++#else
++#define FT_TYPEOF( type )  /* empty */
++#endif
++#endif
++
+ // the following code was lifted from FreeType 2.6.2, licensed under the FTL license
+ // which is a 3-clause BSD-like license with an advertising clause.
+ 
+-- 
+2.34.1
+

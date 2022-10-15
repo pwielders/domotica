@@ -217,7 +217,7 @@ endef
 endif
 
 define WPEFRAMEWORK_INSTALL_UDEV_RULES
-	$(INSTALL) -D -m 0644 ${BR2_EXTERNAL_ML_OSS_PATH}/package/wpeframework-opensource/wpeframework/20-video-device-udev.rules.in \
+	$(INSTALL) -D -m 0644 ${BR2_EXTERNAL_ADDON_PACKAGES_PATH}/package/wpeframework-opensource/wpeframework/20-video-device-udev.rules.in \
                 $(TARGET_DIR)/lib/udev/rules.d/20-video-device-udev.rules
 	$(SED) "s/@SUBSYSTEM@/${VIDEO_PLATFORM_SUBSYSTEM}/" $(TARGET_DIR)/lib/udev/rules.d/20-video-device-udev.rules
 	$(SED) "s/@GROUP@/${BR2_PACKAGE_WPEFRAMEWORK_PLATFORM_VIDEO_DEVICE_GROUP}/" $(TARGET_DIR)/lib/udev/rules.d/20-video-device-udev.rules

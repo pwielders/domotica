@@ -54,7 +54,7 @@ define PLAYREADY4_INSTALL_DEV
         $(call PLAYREADY4_INSTALL, $(1))
 
         $(INSTALL) -d $(1)/usr/lib/pkgconfig
-        $(INSTALL) -D $(BR2_EXTERNAL_ML_CSS_PATH)/package/playready4/playready.pc $(1)/usr/lib/pkgconfig/playready.pc
+        $(INSTALL) -D $(BR2_EXTERNAL_ADDON_PACKAGES_PATH)/package/playready4/playready.pc $(1)/usr/lib/pkgconfig/playready.pc
 
         $(INSTALL) -d $(1)/usr/include/playready
         cp -a $(@D)/source/inc/* $(1)/usr/include/playready

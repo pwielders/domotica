@@ -148,7 +148,7 @@ endif
 define BCM_REFSW_INSTALL_WAYLAND_EGL_DEV
 	$(call BCM_REFSW_INSTALL_WAYLAND_EGL,  $(STAGING_DIR))
 
-    $(INSTALL) -m 644 $(BR2_EXTERNAL_ML_CSS_PATH)/package/bcm-refsw/${BCM_REFSW_PLATFORM_VC}/wayland-egl.pc $(STAGING_DIR)/usr/lib/pkgconfig/
+    $(INSTALL) -m 644 $(BR2_EXTERNAL_ADDON_PACKAGES_PATH)/package/bcm-refsw/${BCM_REFSW_PLATFORM_VC}/wayland-egl.pc $(STAGING_DIR)/usr/lib/pkgconfig/
     if [ $(shell expr $(BCM_REFSW_VERSION) \< 19.1) = 1 ]; then \
         $(INSTALL) -m 644 $(WAYLAND_EGL_DIR)/autogen/*.h $(STAGING_DIR)/usr/include/refsw/; \
     fi

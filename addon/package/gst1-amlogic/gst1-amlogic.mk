@@ -1,1 +1,1 @@
-include $(BR2_EXTERNAL_ML_CSS_PATH)/package/gst1-amlogic/*/*.mk
+include $(BR2_EXTERNAL_ADDON_PACKAGES_PATH)/package/gst1-amlogic/*/*.mk

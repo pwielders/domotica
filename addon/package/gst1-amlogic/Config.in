@@ -6,7 +6,7 @@ menuconfig BR2_PACKAGE_GST1_AMLOGIC
 
 if BR2_PACKAGE_GST1_AMLOGIC
 
-source "$BR2_EXTERNAL_ML_CSS_PATH/package/gst1-amlogic/gst1-amlogic-asink/Config.in"
-source "$BR2_EXTERNAL_ML_CSS_PATH/package/gst1-amlogic/gst1-amlogic-pcr-sink/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/gst1-amlogic/gst1-amlogic-asink/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/gst1-amlogic/gst1-amlogic-pcr-sink/Config.in"
 
 endif

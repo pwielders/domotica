@@ -1,0 +1,6 @@
+config BR2_PACKAGE_BRIDGE_UI
+	bool "UI"
+	default n
+
+	help
+	   Bridge User Interface for domotica frontend

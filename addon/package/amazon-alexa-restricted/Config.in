@@ -1,3 +1,3 @@
 menu "amazon alexa"
-source "$BR2_EXTERNAL_ML_CSS_PATH/package/amazon-alexa-restricted/alexa-pryon-kwd/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/amazon-alexa-restricted/alexa-pryon-kwd/Config.in"
 endmenu

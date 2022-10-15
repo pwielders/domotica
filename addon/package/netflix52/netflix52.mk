@@ -244,7 +244,7 @@ define NETFLIX52_INSTALL_TO_STAGING
 	$(call NETFLIX52_INSTALL_TO_TARGET, $(1))
 
 	$(INSTALL) -d $(1)/usr/lib/pkgconfig
-	$(INSTALL) -D $(BR2_EXTERNAL_ML_CSS_PATH)/package/netflix52/netflix.pc $(1)/usr/lib/pkgconfig/netflix.pc
+	$(INSTALL) -D $(BR2_EXTERNAL_ADDON_PACKAGES_PATH)/package/netflix52/netflix.pc $(1)/usr/lib/pkgconfig/netflix.pc
 	$(INSTALL) -d $(1)/usr/lib/cmake/netflix/
 	$(INSTALL) -D $(NETFLIX52_BUILD_DIR)/src/platform/gibbon/netflix-config.cmake $(1)/usr/lib/cmake/netflix/netflix-config.cmake
 

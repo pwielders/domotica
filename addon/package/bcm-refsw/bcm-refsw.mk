@@ -58,7 +58,7 @@ ifeq ($(BR2_PACKAGE_WESTEROS),y)
 endif
 
 # SOC related info
-include $(BR2_EXTERNAL_ML_CSS_PATH)/package/bcm-refsw/platforms.inc
+include $(BR2_EXTERNAL_ADDON_PACKAGES_PATH)/package/bcm-refsw/platforms.inc
 
 ifeq ($(BR2_TOOLCHAIN_HEADERS_AT_LEAST_3_14),y)
 BCM_PMLIB_VERSION = 314
@@ -159,17 +159,17 @@ else
 endif
 
 # Nexus build and install targets
-include $(BR2_EXTERNAL_ML_CSS_PATH)/package/bcm-refsw/nexus.inc
+include $(BR2_EXTERNAL_ADDON_PACKAGES_PATH)/package/bcm-refsw/nexus.inc
 
 # Graphics build and install targets
-include $(BR2_EXTERNAL_ML_CSS_PATH)/package/bcm-refsw/graphics.inc
+include $(BR2_EXTERNAL_ADDON_PACKAGES_PATH)/package/bcm-refsw/graphics.inc
 
 # NX Server build and install targets
-include $(BR2_EXTERNAL_ML_CSS_PATH)/package/bcm-refsw/nxserver.inc
+include $(BR2_EXTERNAL_ADDON_PACKAGES_PATH)/package/bcm-refsw/nxserver.inc
 
 # Wayland-EGL build and install targets
 ifeq ($(BR2_PACKAGE_WESTEROS),y)
-	include $(BR2_EXTERNAL_ML_CSS_PATH)/package/bcm-refsw/wayland-egl.inc
+	include $(BR2_EXTERNAL_ADDON_PACKAGES_PATH)/package/bcm-refsw/wayland-egl.inc
 endif
 
 define BCM_REFSW_BUILD_CMDS

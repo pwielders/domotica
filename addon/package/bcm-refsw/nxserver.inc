@@ -31,7 +31,7 @@ define BCM_REFSW_INSTALL_NXSERVER_INIT
 endef
 else
 define BCM_REFSW_INSTALL_NXSERVER_INIT
-	$(INSTALL) -D -m 755 $(BR2_EXTERNAL_ML_CSS_PATH)/package/bcm-refsw/S70nxserver $(TARGET_DIR)/etc/init.d/S70nxserver; \
+	$(INSTALL) -D -m 755 $(BR2_EXTERNAL_ADDON_PACKAGES_PATH)/package/bcm-refsw/S70nxserver $(TARGET_DIR)/etc/init.d/S70nxserver; \
 	sed -i 's/%IRMODE%/${BCM_REFSW_IRMODE}/g' $(TARGET_DIR)/etc/init.d/S70nxserver;
 endef
 endif

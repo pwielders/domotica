@@ -12,7 +12,7 @@ MFR_LIBRARY_INSTALL_STAGING = YES
 
 define MFR_LIBRARY_POST_STAGING_INSTALL_PKGCONFIG
     $(INSTALL) -d ${STAGING_DIR}/usr/lib/pkgconfig
-    $(INSTALL) -D $(BR2_EXTERNAL_ML_CSS_PATH)/package/mfr-library/fwupgrade.pc ${STAGING_DIR}/usr/lib/pkgconfig/fwupgrade.pc
+    $(INSTALL) -D $(BR2_EXTERNAL_ADDON_PACKAGES_PATH)/package/mfr-library/fwupgrade.pc ${STAGING_DIR}/usr/lib/pkgconfig/fwupgrade.pc
 endef
 
 define MFR_LIBRARY_POST_TARGET_REMOVE_HEADERS

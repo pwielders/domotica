@@ -1,0 +1,5 @@
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/bridge/plugin-cdmi/cdmi-clearkey/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/bridge/plugin-cdmi/cdmi-playready/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/bridge/plugin-cdmi/cdmi-playready-nexus/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/bridge/plugin-cdmi/cdmi-widevine/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/bridge/plugin-cdmi/cdmi-nagra/Config.in"

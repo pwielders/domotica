@@ -2,7 +2,7 @@ BR2_arm=y
 BR2_cortex_a53=y
 BR2_ARM_FPU_NEON_FP_ARMV8=y
 BR2_CCACHE=y
-BR2_GLOBAL_PATCH_DIR="$(BR2_EXTERNAL_ML_CSS_PATH)/board/sky/platco/patches"
+BR2_GLOBAL_PATCH_DIR="$(BR2_EXTERNAL_ADDON_PACKAGES_PATH)/board/sky/platco/patches"
 # BR2_PIC_PIE is not set
 BR2_SSP_NONE=y
 BR2_RELRO_NONE=y

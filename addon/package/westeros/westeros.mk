@@ -85,4 +85,4 @@ endef
 
 $(eval $(autotools-package))
 
-include $(sort $(wildcard $(BR2_EXTERNAL_ML_OSS_PATH)/package/westeros/westeros-*/*.mk))
+include $(sort $(wildcard $(BR2_EXTERNAL_ADDON_PACKAGES_PATH)/package/westeros/westeros-*/*.mk))

@@ -193,7 +193,7 @@ config BR2_PACKAGE_WPEFRAMEWORK_PLATFORM_VIDEO_DEVICE_GROUP
 #         This should be set to the group needed to access the inpout devices on the platform.
          
 endmenu
-source "$BR2_EXTERNAL_ML_OSS_PATH/package/wpeframework-opensource/wpeframework-devtools/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/wpeframework-opensource/wpeframework-devtools/Config.in"
 
 endmenu
 

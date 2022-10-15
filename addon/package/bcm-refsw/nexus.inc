@@ -10,15 +10,15 @@ endef
 define BCM_REFSW_INSTALL_NEXUS
 	$(INSTALL) -m 750 -D $(BCM_REFSW_BIN)/nexus $(1)/sbin/nexus
 	$(INSTALL) -m 644 -D $(BCM_REFSW_BIN)/nexus.ko $(1)/lib/modules/nexus.ko
-	$(INSTALL) -D -m 755 $(BR2_EXTERNAL_ML_CSS_PATH)/package/bcm-refsw/S11nexus $(1)/etc/init.d/S11nexus
+	$(INSTALL) -D -m 755 $(BR2_EXTERNAL_ADDON_PACKAGES_PATH)/package/bcm-refsw/S11nexus $(1)/etc/init.d/S11nexus
 	$(INSTALL) -D $(BCM_REFSW_BIN)/libnexus.so $(1)/usr/lib/libnexus.so
 	if [ -f $(BCM_REFSW_BIN)/wakeup_drv.ko ]; then \
-   	     $(INSTALL) -D -m 755 $(BR2_EXTERNAL_ML_CSS_PATH)/package/bcm-refsw/S11wakeup $(1)/etc/init.d/S11wakeup ; \
+   	     $(INSTALL) -D -m 755 $(BR2_EXTERNAL_ADDON_PACKAGES_PATH)/package/bcm-refsw/S11wakeup $(1)/etc/init.d/S11wakeup ; \
   	      $(INSTALL) -m 644 -D $(BCM_REFSW_BIN)/wakeup_drv.ko $(1)/lib/modules/wakeup_drv.ko ; \
 	fi
 	# VC5 Graphics Execution Manger (GEM) interface
 	if [ -f $(BCM_REFSW_BIN)/brcmv3d.ko ]; then \
-		$(INSTALL) -D -m 755 $(BR2_EXTERNAL_ML_CSS_PATH)/package/bcm-refsw/S11brcmv3d $(1)/etc/init.d/S11brcmv3d ; \
+		$(INSTALL) -D -m 755 $(BR2_EXTERNAL_ADDON_PACKAGES_PATH)/package/bcm-refsw/S11brcmv3d $(1)/etc/init.d/S11brcmv3d ; \
 		$(INSTALL) -m 644 -D $(BCM_REFSW_BIN)/brcmv3d.ko $(1)/lib/modules/brcmv3d.ko ; \
 	fi
 endef
