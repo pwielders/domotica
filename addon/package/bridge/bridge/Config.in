@@ -9,6 +9,12 @@ if BR2_PACKAGE_BRIDGE
 
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/bridge/bridge-controller/Config.in"
 
+config BR2_PACKAGE_BRIDGE_BLUETOOTH
+       bool "bluetooth"
+       select BR2_PACKAGE_BLUEZ5_UTILS_HEADERS
+       help 
+          Bluetooth abstraction layer on top of Bluez (Kernel module stuff).
+
 config 	BR2_PACKAGE_BRIDGE_DEVICES
 	bool "devices"
 	select BR2_PACKAGE_LIBUSB
