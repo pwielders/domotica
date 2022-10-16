@@ -1,9 +1,10 @@
 config BR2_PACKAGE_PLAYREADY4
         select BR2_PACKAGE_HAS_PLAYREADY
         select BR2_PACKAGE_LIBCURL
-        select BR2_PACKAGE_WPEFRAMEWORK_PROVISIONING
-        select BR2_PACKAGE_WPEFRAMEWORK_PROVISIONING_FILES
-        depends on BR2_PACKAGE_WPEFRAMEWORK_CDMI_PLAYREADY
+        select BR2_PACKAGE_WPEFRAMEWORK_PROVISIONING if BR2_PACKAGE_WPEFRAMEWORK
+        select BR2_PACKAGE_WPEFRAMEWORK_PROVISIONING_FILES if BR2_PACKAGE_WPEFRAMEWORK
+        select BR2_PACKAGE_BRIDGE_PROVISIONING if BR2_PACKAGE_BRIDGE
+        select BR2_PACKAGE_BRIDGE_PROVISIONING_FILES if BR2_PACKAGE_BRIDGE
         bool "Playready v4.0"
         help
           A playready v4 implementation port from Microsoft.
@@ -19,6 +20,3 @@ if BR2_PACKAGE_PLAYREADY
 config BR2_PACKAGE_PROVIDES_PLAYREADY
         default "playready4"
 endif
-
-comment "playready4 needs wpeframework cdmi and its playready ocdm module"
-    depends on !BR2_PACKAGE_WPEFRAMEWORK && !BR2_PACKAGE_WPEFRAMEWORK_CDMI_PLAYREADY
