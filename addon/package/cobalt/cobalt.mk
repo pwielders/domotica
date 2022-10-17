@@ -8,13 +8,19 @@ COBALT_VERSION = 3ba98a48be9cc4d6a8cc04d74e85ca9f830e13ee
 COBALT_SITE_METHOD = git
 COBALT_SITE = git@github.com:Metrological/cobalt
 COBALT_INSTALL_STAGING = YES
-COBALT_DEPENDENCIES = gst1-plugins-good gst1-plugins-bad host-bison host-ninja wpeframework-clientlibraries
+COBALT_DEPENDENCIES = gst1-plugins-good gst1-plugins-bad host-bison host-ninja host-gyp
 
 export COBALT_STAGING_DIR=$(STAGING_DIR)
 export COBALT_TOOLCHAIN_PREFIX=$(TARGET_CROSS)
 export COBALT_INSTALL_DIR=$(TARGET_DIR)
 
 export PATH := $(HOST_DIR)/bin:$(HOST_DIR)/usr/bin:$(HOST_DIR)/usr/sbin:$(PATH)
+
+ifeq ($(BR2_PACKAGE_BRIDGE_COMPOSITORCLIENT),y)
+COBALT_DEPENDENCIES += bridge-clients
+else
+COBALT_DEPENDENCIES += wpeframework-clientlibraries
+endif
 
 ifeq ($(BR2_PACKAGE_HAS_NEXUS),y)
 # TODO: we might also have mips here at some point.

@@ -25,20 +25,3 @@ index 7c4efbd..6df4e98 100644
 +
      GstBuffer* gstBuffer = gst_buffer_new_wrapped(mem, sampleSize);
  
- 
-diff --git a/partner/dpi/gstreamer/GstServer.cpp b/partner/dpi/gstreamer/GstServer.cpp
-index f8a44d0..d267927 100644
---- a/partner/dpi/gstreamer/GstServer.cpp
-+++ b/partner/dpi/gstreamer/GstServer.cpp
-@@ -311,7 +311,7 @@ bool GstUtilities::ResetGstreamerPipeline(const char * szStreamURI)
-         gst_message_unref(msg);
-     }
-     else {
--        Log::error(TRACE_MEDIACONTROL, "%s : Pipeline closed, but no output message -> %p", __FUNCTION__, (unsigned int)msg);
-+        Log::error(TRACE_MEDIACONTROL, "%s : Pipeline closed, but no output message -> %p", __FUNCTION__, &msg);
-         retVal = false;
-     }
- 
--- 
-2.34.1
-
