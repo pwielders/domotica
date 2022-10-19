@@ -20,6 +20,10 @@ ifeq ($(BR2_PACKAGE_WPEFRAMEWORK_PROVISIONPROXY), y)
     PLAYREADY4_DEPENDENCIES += wpeframework-clientlibraries
 endif
 
+ifeq ($(BR2_PACKAGE_BRIDGE_PROVISIONING), y)
+    PLAYREADY_USE_PROVISION = "ON"
+    PLAYREADY4_DEPENDENCIES += bridge-clients
+endif
 
 # Generic Buildroot
 # Parallel build issues, Use MAKE1 to disable parallel

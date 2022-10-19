@@ -4,7 +4,7 @@
 #
 ################################################################################
 PLUGIN_COMMON_VERSION = main
-PLUGIN_COMMON_SITE = git@git.integraal.info:domotica/module.git
+PLUGIN_COMMON_SITE = git@git.integraal.info:domotica/modules.git
 PLUGIN_COMMON_SUBDIR = src
 PLUGIN_COMMON_SITE_METHOD = git
 PLUGIN_COMMON_INSTALL_STAGING = NO 
