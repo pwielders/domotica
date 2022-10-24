@@ -1,12 +1,10 @@
 #!/bin/bash
 
-set -e
-
 BOARD_DIR="$(dirname $0)"
 BOARD_NAME="$(basename ${BOARD_DIR})"
 GENIMAGE_CFG="${BOARD_DIR}/genimage-${BOARD_NAME}.cfg"
 GENIMAGE_TMP="${BUILD_DIR}/genimage.tmp"
-BLUETOOTH=$(eval grep ^BR2_PACKAGE_WPEFRAMEWORK_BLUETOOTH=y ${BR2_CONFIG} | wc -l)
+BLUETOOTH=$(eval "grep -E '^BR2_PACKAGE_WPEFRAMEWORK_BLUETOOTH=y|^BR2_PACKAGE_BRIDGE_BLUETOOTH=y' ${BR2_CONFIG} | wc -l")
 
 if [ ! "x${BLUETOOTH}" = "x" ]; then
    if ! grep -qE '^enable_uart=1' "${BINARIES_DIR}/rpi-firmware/config.txt"; then
@@ -107,6 +105,9 @@ arm_freq=1350
 gpu_freq=500
 sdram_freq=500
 over_voltage=5
+[pi4]
+# Run as fast as firmware / board allows
+arm_boost=1
 [all]
 avoid_warnings=1
 __EOF__
