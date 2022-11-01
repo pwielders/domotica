@@ -357,6 +357,7 @@ endif
 config BR2_PACKAGE_PLUGIN_SNAPSHOT
 	bool "Snapshot"
 	select BR2_PACKAGE_PLUGIN_COMMON
+	select BR2_PACKAGE_LIBPNG
 	help
 	  Snapshot Plugin
 
