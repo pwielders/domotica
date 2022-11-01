@@ -3,8 +3,8 @@
 # Plugin Nagra CDM(i)
 #
 ################################################################################
-CDMI_NAGRA_VERSION = trunk
-CDMI_NAGRA_SITE = git@git.integraal.info:Integraal/drm
+CDMI_NAGRA_VERSION = main
+CDMI_NAGRA_SITE = git@git.integraal.info:domotica/drm
 CDMI_NAGRA_SUBDIR = src/nagra
 CDMI_NAGRA_SITE_METHOD = git
 CDMI_NAGRA_INSTALL_STAGING = NO

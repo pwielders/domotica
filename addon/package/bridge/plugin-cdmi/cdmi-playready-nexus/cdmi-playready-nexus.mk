@@ -3,8 +3,8 @@
 # Plugin PlayReady (Nexus) CDM(i)
 #
 ################################################################################
-CDMI_PLAYREADY_NEXUS_VERSION = trunk
-CDMI_PLAYREADY_NEXUS_SITE = git@git.integraal.info:Integraal/drm
+CDMI_PLAYREADY_NEXUS_VERSION = main
+CDMI_PLAYREADY_NEXUS_SITE = git@git.integraal.info:domotica/drm
 CDMI_PLAYREADY_NEXUS_SUBDIR = src/playready_nexus
 CDMI_PLAYREADY_NEXUS_SITE_METHOD = git
 CDMI_PLAYREADY_NEXUS_INSTALL_STAGING = NO
