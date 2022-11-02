@@ -27,12 +27,25 @@ config BR2_PACKAGE_PLUGIN_I2CCONTROL
 	help
 	   I2CControl plugin
 
-config BR2_PACKAGE_PLUGIN_IOCONTROL
+menuconfig BR2_PACKAGE_PLUGIN_IOCONTROL
 	bool "IOControl"
 	select BR2_PACKAGE_BRIDGE_DEVICES
         select BR2_PACKAGE_PLUGIN_DOMOTICA
 	help
 	   IOControl plugin
+
+if BR2_PACKAGE_PLUGIN_IOCONTROL
+
+config BR2_PACKAGE_PLUGIN_IOCONNECTOR_PINS
+    string "Pin details"
+    default ""
+    help
+      Set details of pins in the format "ID:Mode:State:PullUp".
+      ID: Id of the PIN, Mode: Output/Input, State: activelow or not
+      PullUp, up, down or nothing.
+      Example "169:output:true;172:output:false"
+
+endif
 
 config BR2_PACKAGE_PLUGIN_ONEWIRECONTROL
 	bool "OneWireControl"
