@@ -1,4 +1,5 @@
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/amazon-alexa-opensource/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/gn/Config.in"
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/cobalt/Config.in"
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/gyp/Config.in"
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/kms-cube/Config.in"
