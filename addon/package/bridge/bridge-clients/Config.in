@@ -3,6 +3,7 @@ config BR2_PACKAGE_BRIDGE_CLIENTS
 
 config BR2_PACKAGE_BRIDGE_VIRTUALINPUT
         bool "VirtualInput"
+	select BR2_PACKAGE_BRIDGE_CONTRACTS
         select BR2_PACKAGE_BRIDGE_CLIENTS
         help
           If the dynamic uinput system can not be used for security reasons, this
@@ -10,6 +11,7 @@ config BR2_PACKAGE_BRIDGE_VIRTUALINPUT
 
  config BR2_PACKAGE_BRIDGE_COMPOSITORCLIENT
         bool "CompositorClient"
+	select BR2_PACKAGE_BRIDGE_CONTRACTS
         select BR2_PACKAGE_BRIDGE_CLIENTS
         help
           A graphical/input abstraction. This library is included in micro services that requires user
@@ -18,6 +20,7 @@ config BR2_PACKAGE_BRIDGE_VIRTUALINPUT
 
 config BR2_PACKAGE_BRIDGE_PROVISIONPROXY
         bool "ProvisionProxy"
+	select BR2_PACKAGE_BRIDGE_CONTRACTS
         select BR2_PACKAGE_LIBPROVISION
         select BR2_PACKAGE_BRIDGE_CLIENTS
         help
@@ -25,21 +28,14 @@ config BR2_PACKAGE_BRIDGE_PROVISIONPROXY
 
 config BR2_PACKAGE_BRIDGE_OPENCDM
         bool "OpenCDM"
+	select BR2_PACKAGE_BRIDGE_CONTRACTS
         select BR2_PACKAGE_BRIDGE_CLIENTS
         select BR2_PACKAGE_GSTREAMER1
         help
           Creates a ocdm compatible library to be used as a plugin to the OpenCDMServer in the bridge.
 
-config BR2_PACKAGE_BRIDGE_GSTREAMERCLIENT
-        select BR2_PACKAGE_BRIDGE_CLIENTS
-        select BR2_PACKAGE_GSTREAMER1
-        bool "GstreamerClient"
-        default n
-        help
-          Gstreamer client provides custom APIs to manipulate underneath stream sinks which will be linked with created pipeline.
-          This implementation will vary based on custom platforms and sink backends.
-
 config BR2_PACKAGE_BRIDGE_DISPLAYINFO
+	select BR2_PACKAGE_BRIDGE_CONTRACTS
         select BR2_PACKAGE_BRIDGE_CLIENTS
         bool "DisplayInfo"
         default n
@@ -47,6 +43,7 @@ config BR2_PACKAGE_BRIDGE_DISPLAYINFO
           A helpful C-interface to easily get information from the DisplayInfo plugin.
 
 config BR2_PACKAGE_BRIDGE_PLAYERINFO
+	select BR2_PACKAGE_BRIDGE_CONTRACTS
         select BR2_PACKAGE_BRIDGE_CLIENTS
         select BR2_PACKAGE_GSTREAMER1
         bool "PlayerInfo"
@@ -55,6 +52,7 @@ config BR2_PACKAGE_BRIDGE_PLAYERINFO
           A helpful C-interface to easily get information from the PlayerInfo plugin.
 
 menuconfig BR2_PACKAGE_BRIDGE_CRYPTOGRAPHY
+	select BR2_PACKAGE_BRIDGE_CONTRACTS
         select BR2_PACKAGE_BRIDGE_CLIENTS
         bool "Cryptography"
         default n

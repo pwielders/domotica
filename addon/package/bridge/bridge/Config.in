@@ -12,6 +12,10 @@ comment "bridge depends on a toolchain w/ C++, threads support"
 
 if BR2_PACKAGE_BRIDGE
 
+menu "Bridge"
+
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/bridge/bridge-contracts/Config.in"
+
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/bridge/bridge-controller/Config.in"
 
 config BR2_PACKAGE_BRIDGE_BLUETOOTH
@@ -106,6 +110,8 @@ endmenu
 
 menu "Domotica"
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/bridge/bridge-ui/Config.in"
+endmenu
+
 endmenu
 
 endif

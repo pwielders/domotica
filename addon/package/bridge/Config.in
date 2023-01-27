@@ -3,7 +3,3 @@ source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/bridge/bridge-tools/Config.in"
 
 # Bridge framework
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/bridge/bridge/Config.in"
-
-# Bridge Contracts
-source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/bridge/bridge-contracts/Config.in"
-
