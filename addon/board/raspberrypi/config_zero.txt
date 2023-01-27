@@ -1,0 +1,26 @@
+kernel=zImage
+
+# Silent
+disable_splash=1
+boot_delay=0
+
+### DISPLAY ###################################################################
+# Disable overscan assuming the display supports displaying the full resolution
+# If the text shown on the screen disappears off the edge, comment this out
+disable_overscan=1
+
+# How much memory in MB to assign to the GPU on Pi models having
+# 256, 512 or 1024 MB total memory
+gpu_mem_256=128
+gpu_mem_512=384
+gpu_mem_1024=512
+
+# Automatically load overlays for detected DSI displays
+display_auto_detect=1
+
+### HARDWARE ##################################################################
+# Enable audio (loads snd_bcm2835)
+dtparam=audio=on
+
+# Automatically load overlays for detected cameras
+# camera_auto_detect=1
