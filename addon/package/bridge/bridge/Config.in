@@ -82,6 +82,30 @@ config BR2_PACKAGE_BRIDGE_OOM_ADJUST
 	string "oom-adjust"
 	default ""
 
+config BR2_PACKAGE_BRIDGE_COMRPC_PLATFORM_DEFINITION
+        bool "Select COMRPC platform"
+	default n
+
+if BR2_PACKAGE_BRIDGE_COMRPC_PLATFORM_DEFINITION
+
+choice BR2_PACKAGE_BRIDGE_COMRPC_INSTANCE
+        prompt "COMRPC instance length"
+        default BR2_PACKAGE_BRIDGE_COMRPC_INSTANCE_32
+        help
+          For COMRPC crossplatform communication, the instanceid must be
+          defined to fit the largest platform. This means select the 
+          larget platform used in the exchange.
+
+config BR2_PACKAGE_BRIDGE_COMRPC_INSTANCE_32
+        bool "32bits platform"
+
+config BR2_PACKAGE_BRIDGE_COMRPC_INSTANCE_64
+        bool "64bits platform"
+
+endchoice
+
+endif
+
 config BR2_PACKAGE_BRIDGE_MESSAGING
     bool "Use messaging i.s.o. tracing"
     default n

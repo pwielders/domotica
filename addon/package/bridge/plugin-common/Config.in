@@ -102,6 +102,12 @@ endif
 
 endif
 
+config BR2_PACKAGE_PLUGIN_BRIDGELINK
+	bool "BridgeLink"
+	select BR2_PACKAGE_PLUGIN_COMMON
+	help
+	  BridgeLink Plugin, connect one bridge to another..
+
 config BR2_PACKAGE_PLUGIN_COMMANDER
 	bool "Commander"
 	select BR2_PACKAGE_PLUGIN_COMMON
