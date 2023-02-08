@@ -69,6 +69,20 @@ hdmi_mode=16
 __EOF__
                 fi
 	        ;;
+		--tvmode-panel)
+		if ! grep -qE '^hdmi_mode=65' "${BINARIES_DIR}/rpi-firmware/config.txt"; then
+			echo "Adding 'hdmi_mode=65' to config.txt."
+			cat << __EOF__ >> "${BINARIES_DIR}/rpi-firmware/config.txt"
+
+# 7" RPI touch screen panel
+max_usb_current=1                       
+hdmi_group=1                            
+hdmi_mode=65                            
+hdmi_cvt 800 480 60 6 1 0 0            
+lcd_rotate=2  
+__EOF__
+		fi
+		;;
 	        --silent)
 	        if ! grep -qE '^disable_splash=1' "${BINARIES_DIR}/rpi-firmware/config.txt"; then
 	            echo "Adding 'silent=1' to config.txt."
@@ -210,6 +224,7 @@ dtparam=audio=on
 __EOF__
 		fi
 		;;
+
 	esac
 
 done
