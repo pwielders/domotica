@@ -358,6 +358,12 @@ config BR2_PACKAGE_PLUGIN_REMOTECONTROL_RF
     help
       Select devices which are based on Radio Frequency (RF) technology
 
+config BR2_PACKAGE_PLUGIN_REMOTECONTROL_LINUX_INPUT
+    bool "Linux uinput devices"
+    default n
+    help 
+      Add all linux input devices as input devices for the bridge clients.
+
 endif
 
 config BR2_PACKAGE_PLUGIN_SNAPSHOT
