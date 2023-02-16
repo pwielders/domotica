@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-WESTEROS_SINK_VERSION = 23a65d1fa48f6d82d51c3cb6cd08bf403f95187d
+WESTEROS_SINK_VERSION = 380015778c45e7f26406f22a063bd259a7dece46
 WESTEROS_SINK_SITE_METHOD = git
 WESTEROS_SINK_SITE = https://github.com/rdkcmf/westeros
 WESTEROS_SINK_INSTALL_STAGING = YES
