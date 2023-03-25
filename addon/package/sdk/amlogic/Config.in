@@ -1,0 +1,17 @@
+menuconfig BR2_PACKAGE_AMLOGIC_SDK
+	bool "amlogic-sdk"
+	help
+	  AMLogic Base Support packager
+
+if BR2_PACKAGE_AMLOGIC_SDK
+
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/sdk/amlogic/aml-mali/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/sdk/amlogic/aml-amaudioutils/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/sdk/amlogic/aml-audio-service/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/sdk/amlogic/aml-avsync/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/sdk/amlogic/aml-commonlib/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/sdk/amlogic/aml-mediahal-sdk/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/sdk/amlogic/aml-secmem/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/sdk/amlogic/dolby-ms12/Config.in"
+
+endif

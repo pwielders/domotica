@@ -1,0 +1,32 @@
+config BR2_PACKAGE_AML_MALI
+	bool "aml-mali"
+	depends on BR2_arm
+	select BR2_PACKAGE_HAS_LIBEGL
+	select BR2_PACKAGE_HAS_LIBGLES
+	select BR2_PACKAGE_HAS_LIBGBM
+	select BR2_PACKAGE_LIBDRM
+	help
+	  MALI driver platform
+
+comment "mali needs BR2_arm"
+	depends on !BR2_arm
+
+if BR2_PACKAGE_AML_MALI
+
+config BR2_PACKAGE_PROVIDES_LIBEGL
+    string
+	default "aml-mali"
+
+config BR2_PACKAGE_PROVIDES_LIBGBM
+    string
+	default "aml-mali"
+
+config BR2_PACKAGE_PROVIDES_LIBGLES
+    string
+	default "aml-mali"
+
+config BR2_PACKAGE_SDK_INSTALL
+    string
+	default "aml-mali"
+
+endif

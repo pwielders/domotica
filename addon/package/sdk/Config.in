@@ -7,6 +7,7 @@ config BR2_PACKAGE_SDK_INSTALL
 
 menu  "SDK's"
 comment "External SDK's"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/sdk/amlogic/Config.in"
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/sdk/explora-sdk/Config.in"
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/sdk/platco-tv-sdk/Config.in"
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/sdk/xione-sdk/Config.in"

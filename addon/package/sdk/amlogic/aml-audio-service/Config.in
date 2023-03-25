@@ -1,0 +1,7 @@
+config BR2_PACKAGE_AML_AUDIO_SERVICE
+    bool "aml-audio-service"
+    select BR2_PACKAGE_GRPC
+    select BR2_PACKAGE_AML_AMAUDIOUTILS
+    select BR2_PACKAGE_DOLBY_MS12
+    select BR2_PACKAGE_BOOST
+    select BR2_PACKAGE_BOOST_SYSTEM

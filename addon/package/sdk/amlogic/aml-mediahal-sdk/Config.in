@@ -1,0 +1,2 @@
+config BR2_PACKAGE_AML_MEDIAHAL_SDK
+    bool "aml-mediahal-sdk"
