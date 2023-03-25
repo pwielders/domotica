@@ -1,0 +1,8 @@
+config BR2_PACKAGE_AML_MEDIA_DRIVER
+	bool "aml-media-driver"
+	depends on BR2_arm
+	help
+	  BSP for Media AMLogic TV platform
+
+comment "platco-tv-bsp needs BR2_arm"
+	depends on !BR2_arm

@@ -1,0 +1,8 @@
+config BR2_PACKAGE_AML_MALI_DRIVER
+	bool "aml-mali-driver"
+	depends on BR2_arm
+	help
+	  MALI driver platform
+
+comment "mali needs BR2_arm"
+	depends on !BR2_arm
