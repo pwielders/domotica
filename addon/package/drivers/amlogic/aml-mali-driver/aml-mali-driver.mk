@@ -19,7 +19,7 @@ AML_MALI_DRIVER_KO_DIR=lib/modules/4.9.113
 
 AML_MALI_DRIVER_MODULE_SUBDIRS = bifrost/r25p0/kernel/drivers/gpu/arm/midgard
 AML_MALI_DRIVER_MODULE_MAKE_OPTS = \
-	EXTRA_CFLAGS="-I$(@D)/bifrost/r25p0/kernel/include" \
+	EXTRA_CFLAGS="-I$(@D)/bifrost/r25p0/kernel/include \
                 -DCONFIG_MALI_PLATFORM_DEVICETREE \
                 -DCONFIG_MALI_MIDGARD_DVFS \
                 -DCONFIG_MALI_BACKEND=gpu" \

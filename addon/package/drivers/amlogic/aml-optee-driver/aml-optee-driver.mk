@@ -3,7 +3,7 @@
 # aml-optee-driver
 #
 ################################################################################
-AML_OPTEE_DRIVER_VERSION = stable2
+AML_OPTEE_DRIVER_VERSION = b94690e0ccea2798ac1c3617abddbf6c968db0bd
 AML_OPTEE_DRIVER_SITE = git@github.com:Metrological/amlogic-optee-driver.git
 AML_OPTEE_DRIVER_SITE_METHOD = git
 AML_OPTEE_DRIVER_LICENSE = CLOSED
