@@ -1,0 +1,2 @@
+config BR2_PACKAGE_AML_MEDIAHAL_BSP
+    bool "aml-mediahal"

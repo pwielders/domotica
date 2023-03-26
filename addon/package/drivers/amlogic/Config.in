@@ -1,0 +1,22 @@
+menuconfig BR2_PACKAGE_AMLOGIC_SDK
+	bool "amlogic bsp"
+	help
+	  AMLogic Base Support package
+
+if BR2_PACKAGE_AMLOGIC_SDK
+
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-mali-driver/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-media-driver/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-optee-driver/Config.in"
+
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-mediahal-bsp/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-mediadrm/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-mediautils/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-mali-meson/Config.in"
+
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-amaudioutils/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-audio-service/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-avsync/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-commonlib/Config.in"
+
+endif

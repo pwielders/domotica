@@ -1,5 +1,0 @@
-config BR2_PACKAGE_AMLOGIC_MALI_DRIVER
-	bool "amlogic mali driver"
-	help
-	  mali graphics driver for platco tv platform
-

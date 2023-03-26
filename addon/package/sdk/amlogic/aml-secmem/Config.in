@@ -1,4 +1,0 @@
-config BR2_PACKAGE_AML_SECMEM
-    bool "aml-secmem"
-    select BR2_PACKAGE_AML_MEDIAHAL_SDK
-    select BR2_PACKAGE_OPENSSL
