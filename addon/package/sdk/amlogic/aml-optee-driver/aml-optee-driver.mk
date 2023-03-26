@@ -1,10 +1,10 @@
 ################################################################################
 #
-# platco-tv-bsp
+# aml-optee-driver
 #
 ################################################################################
-AML_OPTEE_DRIVER_VERSION = main
-AML_OPTEE_DRIVER_SITE = git@github.com:Metrological/SDK_Platco_TV.git
+AML_OPTEE_DRIVER_VERSION = stable2
+AML_OPTEE_DRIVER_SITE = git@github.com:Metrological/aml-optee-driver.git
 AML_OPTEE_DRIVER_SITE_METHOD = git
 AML_OPTEE_DRIVER_LICENSE = CLOSED
 AML_OPTEE_DRIVER_INSTALL_STAGING = YES
@@ -41,4 +41,5 @@ endef
 AML_OPTEE_DRIVER_POST_INSTALL_TARGET_HOOKS += AML_OPTEE_DRIVER_OPTEE_MODULES_AUTO_LOAD
 
 $(eval $(kernel-module))
+$(eval $(generic-package))
 

@@ -1,10 +1,10 @@
 ################################################################################
 #
-# platco-tv-bsp
+# aml-media-driver
 #
 ################################################################################
-AML_MEDIA_DRIVER_VERSION = main
-AML_MEDIA_DRIVER_SITE = git@github.com:Metrological/SDK_Platco_TV.git
+AML_MEDIA_DRIVER_VERSION = stable2
+AML_MEDIA_DRIVER_SITE = git@github.com:Metrological/aml-media-driver
 AML_MEDIA_DRIVER_SITE_METHOD = git
 AML_MEDIA_DRIVER_LICENSE = CLOSED
 AML_MEDIA_DRIVER_INSTALL_STAGING = YES
@@ -88,4 +88,5 @@ endef
 AML_MEDIA_DRIVER_POST_INSTALL_TARGET_HOOKS += AML_MEDIA_DRIVER_INSTALL_MEDIA_MODULES_AUTO_LOAD
 
 $(eval $(kernel-module))
+$(eval $(generic-package))
 

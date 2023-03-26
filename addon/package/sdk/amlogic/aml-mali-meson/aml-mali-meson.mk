@@ -3,7 +3,7 @@
 # aml-mali-meson
 #
 ################################################################################
-AML_MALI_MESON_VERSION = 67d90e57e27f0fc17ac1a49d6d8ca32a9b133240
+AML_MALI_MESON_VERSION = 96f1d4ccd8c4e16df820984fa9f534553fee1f2e
 AML_MALI_MESON_SITE = git@github.com:Metrological/amlogic-mali-userspace.git
 AML_MALI_MESON_SITE_METHOD = git
 AML_MALI_MESON_LICENSE = CLOSED

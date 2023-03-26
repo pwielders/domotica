@@ -1,6 +1,7 @@
 config BR2_PACKAGE_AML_MEDIA_DRIVER
 	bool "aml-media-driver"
 	depends on BR2_arm
+	depends on BR2_LINUX_KERNEL
 	help
 	  BSP for Media AMLogic TV platform
 

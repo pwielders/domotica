@@ -1,6 +1,7 @@
 config BR2_PACKAGE_AML_MALI_DRIVER
 	bool "aml-mali-driver"
 	depends on BR2_arm
+	depends on BR2_LINUX_KERNEL
 	help
 	  MALI driver platform
 

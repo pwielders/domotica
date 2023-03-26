@@ -1,6 +1,7 @@
 config BR2_PACKAGE_AML_OPTEE_DRIVER
 	bool "aml-optee-driver"
 	depends on BR2_arm
+	depends on BR2_LINUX_KERNEL
 	help
 	  BSP for AMLogic OPTEE platform
 
