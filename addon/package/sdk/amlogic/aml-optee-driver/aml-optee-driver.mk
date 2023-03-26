@@ -4,7 +4,7 @@
 #
 ################################################################################
 AML_OPTEE_DRIVER_VERSION = stable2
-AML_OPTEE_DRIVER_SITE = git@github.com:Metrological/aml-optee-driver.git
+AML_OPTEE_DRIVER_SITE = git@github.com:Metrological/amlogic-optee-driver.git
 AML_OPTEE_DRIVER_SITE_METHOD = git
 AML_OPTEE_DRIVER_LICENSE = CLOSED
 AML_OPTEE_DRIVER_INSTALL_STAGING = YES
@@ -23,16 +23,12 @@ define AML_OPTEE_DRIVER_AUTO_LOAD_MODULE_INSTALL
     fi
 endef
 
-define AML_OPTEE_DRIVER_APPLY_PATCH
-    if [ ! -f "${@D}/.${3}.applied" ]; then ($(APPLY_PATCHES) $(1) $(2) $(3) && touch "${@D}/.${3}.applied"); fi
-endef
-
 ###############################################################################
 # OPTEE driver
 ###############################################################################
 LINUX_MAKE_ENV += KERNEL_A32_SUPPORT=true
 
-AML_OPTEE_DRIVER_MODULE_SUBDIRS += optee-linux-driver/linuxdriver
+AML_OPTEE_DRIVER_MODULE_SUBDIRS += linuxdriver
 
 define AML_OPTEE_DRIVER_OPTEE_MODULES_AUTO_LOAD
     $(call AML_OPTEE_DRIVER_AUTO_LOAD_MODULE_INSTALL,optee)
