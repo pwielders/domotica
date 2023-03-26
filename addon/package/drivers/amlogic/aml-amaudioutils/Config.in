@@ -1,4 +1,0 @@
-config BR2_PACKAGE_AML_AMAUDIOUTILS
-    bool "aml-amaudioutils"
-    select BR2_PACKAGE_BOOST
-    select BR2_PACKAGE_AML_COMMONLIB

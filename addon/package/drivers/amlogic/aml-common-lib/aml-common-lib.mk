@@ -1,26 +1,26 @@
 ################################################################################
 #
-# aml_commonlib
+# aml_common_lib
 #
 ################################################################################
-AML_COMMONLIB_SITE = ssh://gerrit.teamccp.com:29418/rdk/components/sdk/soc/amlogic/aml_commonlib
-AML_COMMONLIB_VERSION = stable2
-AML_COMMONLIB_SITE_METHOD = git
-AML_COMMONLIB_LICENSE = PROPRIETARY
-AML_COMMONLIB_INSTALL_STAGING = YES
+AML_COMMON_LIB_SITE = git@github.com:Metrological/amlogic-common-lib.git
+AML_COMMON_LIB_VERSION = 67af48ec6b9db2504435a824996e588274d9f1cf
+AML_COMMON_LIB_SITE_METHOD = git
+AML_COMMON_LIB_LICENSE = PROPRIETARY
+AML_COMMON_LIB_INSTALL_STAGING = YES
 
-define AML_COMMONLIB_BUILD_CMDS
+define AML_COMMON_LIB_BUILD_CMDS
 	$(TARGET_CONFIGURE_OPTS) $(MAKE) CC=$(TARGET_CC) -C $(@D)/liblog
 endef
 
-define AML_COMMONLIB_INSTALL_STAGING_CMDS
+define AML_COMMON_LIB_INSTALL_STAGING_CMDS
 	$(INSTALL) -d ${STAGING_DIR}/usr/lib
     $(INSTALL) -d ${STAGING_DIR}/usr/include
     $(INSTALL) -m 0644 ${@D}/liblog/liblog.so ${STAGING_DIR}/usr/lib
     cp -ra ${@D}/liblog/include/* ${STAGING_DIR}/usr/include
 endef
 
-define AML_COMMONLIB_INSTALL_TARGET_CMDS
+define AML_COMMON_LIB_INSTALL_TARGET_CMDS
     $(INSTALL) -d ${TARGET_DIR}/usr/lib
     $(INSTALL) -m 0644 ${@D}/liblog/liblog.so ${TARGET_DIR}/usr/lib
 endef

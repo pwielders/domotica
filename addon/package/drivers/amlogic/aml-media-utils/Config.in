@@ -1,9 +1,9 @@
-menuconfig BR2_PACKAGE_AML_MEDIAUTILS
+menuconfig BR2_PACKAGE_AML_MEDIA_UTILS
         bool "media utilities"
         help
           AMLogic media utilities
 
-if BR2_PACKAGE_AML_MEDIAUTILS
+if BR2_PACKAGE_AML_MEDIA_UTILS
 
 config BR2_PACKAGE_DOLBY_MS12
     bool "dolby-ms12"

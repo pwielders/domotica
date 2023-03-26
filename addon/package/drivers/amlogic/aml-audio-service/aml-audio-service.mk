@@ -8,7 +8,7 @@ AML_AUDIO_SERVICE_VERSION = stable2
 AML_AUDIO_SERVICE_SITE_METHOD = git
 AML_AUDIO_SERVICE_LICENSE = PROPRIETARY
 AML_AUDIO_SERVICE_INSTALL_STAGING = YES
-AML_AUDIO_SERVICE_DEPENDENCIES = grpc host-grpc host-protobuf aml-amaudioutils dolby-ms12 aml-commonlib boost
+AML_AUDIO_SERVICE_DEPENDENCIES = grpc host-grpc host-protobuf aml-audio-utils aml-media-utils aml-common-lib boost
 
 define AML_AUDIO_SERVICE_BUILD_CMDS
 	$(TARGET_CONFIGURE_OPTS) $(MAKE) CC=$(TARGET_CC) -C $(@D)/ all

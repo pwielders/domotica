@@ -1,4 +1,4 @@
-config BR2_PACKAGE_AML_MEDIADRM
-    bool "aml-secmem"
-    select BR2_PACKAGE_AML_MEDIAHAL_BSP
+config BR2_PACKAGE_AML_MEDIA_DRM
+    bool "aml-media-drm"
+    select BR2_PACKAGE_AML_MEDIA_HAL
     select BR2_PACKAGE_OPENSSL

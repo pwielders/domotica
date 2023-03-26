@@ -1,0 +1,2 @@
+config BR2_PACKAGE_AML_COMMON_LIB
+    bool "aml-common-lib"
