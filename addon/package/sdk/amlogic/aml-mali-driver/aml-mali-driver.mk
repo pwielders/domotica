@@ -3,8 +3,8 @@
 # aml-mali
 #
 ################################################################################
-AML_MALI_DRIVER_VERSION = main
-AML_MALI_DRIVER_SITE = git@github.com:Metrological/SDK_Platco_TV.git
+AML_MALI_DRIVER_VERSION = ad08f6978ce2be1353fb2e0f37206576cb1dca8f
+AML_MALI_DRIVER_SITE = git@github.com:Metrological/amlogic-mali-driver
 AML_MALI_DRIVER_SITE_METHOD = git
 AML_MALI_DRIVER_LICENSE = CLOSED
 AML_MALI_DRIVER_INSTALL_STAGING = YES

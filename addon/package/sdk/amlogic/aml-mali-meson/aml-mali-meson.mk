@@ -17,16 +17,11 @@ define AML_MALI_MESON_FIX_LIBDRM_INCLUDE
     ln -sf libdrm/drm_mode.h $(1)/usr/include/drm_mode.h
 endef
 
-define AML_MALI_MESON_MODULE_LOAD_INIT_INSTALL
-    $(INSTALL) -m 755 -d $(1)/etc/init.d/
-    $(INSTALL) -m 755 $(@D)/init/modules $(1)/etc/init.d/S09modules
-endef
-
 ###############################################################################
 # Mali driver
 ###############################################################################
 define AML_MALI_MESON_INSTALL_MALI_LIB
-    cp -af $(@D)/meson_mali/lib/eabihf/dvalin/r25p0/wayland/drm/libMali_rdk.so $(1)/usr/lib/libMali.so
+    cp -af $(@D)/lib/eabihf/dvalin/r25p0/wayland/drm/libMali_rdk.so $(1)/usr/lib/libMali.so
 
     patchelf --set-soname libMali.so  $(1)/usr/lib/libMali.so
 
@@ -60,26 +55,19 @@ define AML_MALI_MESON_INSTALL_MALI_DEV
 
     mkdir -p $(1)/usr/include/{EGL,GLES,GLES2,GLES3,KHR}
 
-    cp -af $(@D)/meson_mali/include/EGL/*.h $(1)/usr/include/EGL
-    cp -af $(@D)/meson_mali/include/GLES/*.h $(1)/usr/include/GLES
-    cp -af $(@D)/meson_mali/include/GLES2/*.h $(1)/usr/include/GLES2
-    cp -af $(@D)/meson_mali/include/GLES3/*.h $(1)/usr/include/GLES3
-    cp -af $(@D)/meson_mali/include/KHR/*.h $(1)/usr/include/KHR
+    cp -af $(@D)/include/EGL/*.h $(1)/usr/include/EGL
+    cp -af $(@D)/include/GLES/*.h $(1)/usr/include/GLES
+    cp -af $(@D)/include/GLES2/*.h $(1)/usr/include/GLES2
+    cp -af $(@D)/include/GLES3/*.h $(1)/usr/include/GLES3
+    cp -af $(@D)/include/KHR/*.h $(1)/usr/include/KHR
 
-    cp -af $(@D)/meson_mali/include/EGL_platform/platform_wayland/*.h $(1)/usr/include/EGL
-    cp -af $(@D)/meson_mali/include/EGL_platform/platform_wayland/gbm/gbm.h $(1)/usr/include
-    cp -af $(@D)/meson_mali/include/EGL_platform/platform_wayland/weston-egl-ext.h $(1)/usr/include
+    cp -af $(@D)/include/EGL_platform/platform_wayland/*.h $(1)/usr/include/EGL
+    cp -af $(@D)/include/EGL_platform/platform_wayland/gbm/gbm.h $(1)/usr/include
+    cp -af $(@D)/include/EGL_platform/platform_wayland/weston-egl-ext.h $(1)/usr/include
 
-    cp -af $(@D)/meson_mali/lib/pkgconfig/*.pc $(1)/usr/lib/pkgconfig/
-    cp -af $(@D)/meson_mali/lib/pkgconfig/gbm/*.pc $(1)/usr/lib/pkgconfig/
-
-    cp -af $(@D)/gles3_fix/gl3ext.h $(1)/usr/include/GLES3
+    cp -af $(@D)/lib/pkgconfig/*.pc $(1)/usr/lib/pkgconfig/
+    cp -af $(@D)/lib/pkgconfig/gbm/*.pc $(1)/usr/lib/pkgconfig/
 endef
-
-define AML_MALI_MESON_APPLY_MALI_FIXES
-    $(call AML_MALI_MESON_APPLY_PATCH,$(@D)/meson_mali,$(@D)/gles3_fix,0001-RDK-Just-for-RDK-build-1-1.patch)
-endef
-AML_MALI_MESON_PRE_CONFIGURE_HOOKS +=  AML_MALI_MESON_APPLY_MALI_FIXES
 
 ###############################################################################
 # Generic BR targets
