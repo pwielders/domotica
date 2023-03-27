@@ -9,6 +9,8 @@ source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-mali-drive
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-media-driver/Config.in"
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-optee-driver/Config.in"
 
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-tdk/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-hdcp/Config.in"
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-media-hal/Config.in"
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-media-drm/Config.in"
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-mali-meson/Config.in"
