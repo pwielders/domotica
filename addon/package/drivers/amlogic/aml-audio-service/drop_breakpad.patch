@@ -1,0 +1,26 @@
+--- a/Makefile	2023-03-27 11:39:01.032400135 +0200
++++ b/Makefile	2023-03-27 11:40:54.409618954 +0200
+@@ -26,10 +26,10 @@
+ PROTOC_INC=$(HOST_DIR)/include
+ GRPC_CPP_PLUGIN_PATH=$(HOST_DIR)/bin/grpc_cpp_plugin
+ 
+-CFLAGS+=-fPIC -O2 -I$(PROTOC_INC) -I./include -I. -I./src -DINCLUDE_BREAKPAD -DENABLE_BREAKPAD $(breakpad_CFLAGS)
++CFLAGS+=-fPIC -O2 -I$(PROTOC_INC) -I./include -I. -I./src
+ CXXFLAGS+=-std=c++14
+-SC_LDFLAGS+=-Wl,--no-as-needed -lgrpc++_unsecure -lprotobuf -lboost_system -lamaudioutils -llog -ldl -lrt -lpthread -lstdc++ -pthread -lbreakpadwrapper $(breakpad_LIBS)
+-LDFLAGS+= -Wl,--no-as-needed -llog -ldl -lrt -lpthread -lstdc++ -pthread -lbreakpadwrapper $(breakpad_LIBS)
++SC_LDFLAGS+=-Wl,--no-as-needed -lgrpc++_unsecure -labsl_synchronization -lprotobuf -lboost_system -lamaudioutils -llog -ldl -lrt -lpthread -lstdc++ -pthread
++LDFLAGS+= -Wl,--no-as-needed -llog -ldl -lrt -lpthread -lstdc++ -pthread
+ 
+ %.grpc.pb.cc %.grpc.pb.h: %.proto
+ 	$(PROTOC) -I=. -I=$(PROTOC_INC) --grpc_out=. --plugin=protoc-gen-grpc=$(GRPC_CPP_PLUGIN_PATH) $<
+--- a/src/audio_server.org	2023-03-27 11:41:55.914278398 +0200
++++ b/src/audio_server.cpp	2023-03-27 11:42:39.910749452 +0200
+@@ -16,6 +16,7 @@
+ #include <chrono>
+ #include <condition_variable>
+ #include <thread>
++#include <signal.h>
+ 
+ #define LOG_TAG "audio_server"
+ #include <cutils/log.h>
