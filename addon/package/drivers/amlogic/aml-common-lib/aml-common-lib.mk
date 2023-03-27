@@ -15,9 +15,9 @@ endef
 
 define AML_COMMON_LIB_INSTALL_STAGING_CMDS
 	$(INSTALL) -d ${STAGING_DIR}/usr/lib
-    $(INSTALL) -d ${STAGING_DIR}/usr/include
-    $(INSTALL) -m 0644 ${@D}/liblog/liblog.so ${STAGING_DIR}/usr/lib
-    cp -ra ${@D}/liblog/include/* ${STAGING_DIR}/usr/include
+	$(INSTALL) -d ${STAGING_DIR}/usr/include
+	$(INSTALL) -m 0644 ${@D}/liblog/liblog.so ${STAGING_DIR}/usr/lib
+	cp -ra ${@D}/liblog/include/* ${STAGING_DIR}/usr/include
 endef
 
 define AML_COMMON_LIB_INSTALL_TARGET_CMDS

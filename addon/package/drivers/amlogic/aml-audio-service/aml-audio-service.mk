@@ -3,8 +3,8 @@
 # aml-audio-service
 #
 ################################################################################
-AML_AUDIO_SERVICE_SITE = ssh://gerrit.teamccp.com:29418/rdk/components/sdk/soc/amlogic/linux/multimedia/audio_server
-AML_AUDIO_SERVICE_VERSION = stable2
+AML_AUDIO_SERVICE_SITE = git@github.com:Metrological/amlogic-audio-server.git
+AML_AUDIO_SERVICE_VERSION = 1432bacbfd2515a752c61d323b49cc01daf482aa
 AML_AUDIO_SERVICE_SITE_METHOD = git
 AML_AUDIO_SERVICE_LICENSE = PROPRIETARY
 AML_AUDIO_SERVICE_INSTALL_STAGING = YES

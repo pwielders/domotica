@@ -14,9 +14,8 @@ source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-media-drm/
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-mali-meson/Config.in"
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-common-lib/Config.in"
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-audio-utils/Config.in"
-source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-media-utils/Config.in"
-
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-audio-sync/Config.in"
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-audio-service/Config.in"
-source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-avsync/Config.in"
+source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/drivers/amlogic/aml-media-utils/Config.in"
 
 endif

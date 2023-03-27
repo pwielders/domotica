@@ -1,0 +1,2 @@
+config BR2_PACKAGE_AML_AUDIO_SYNC
+    bool "aml-audio-sync"
