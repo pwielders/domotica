@@ -23,6 +23,23 @@ define AML_OPTEE_DRIVER_AUTO_LOAD_MODULE_INSTALL
     fi
 endef
 
+define AML_OPTEE_DRIVER_INSTALL_STAGING_APPLICATIONS
+    $(INSTALL) -d -m 755 ${STAGING_DIR}/usr/include
+    $(INSTALL) -m 755 $(@D)/ca_export_arm/include/* ${STAGING_DIR}/usr/include/
+    $(INSTALL) -m 755 $(@D)/ca_export_arm/bin/tee-supplicant ${STAGING_DIR}/usr/bin
+
+    $(INSTALL) -m 755 $(@D)/ca_export_arm/lib/libteec.so.1.0 ${STAGING_DIR}/usr/lib
+    ln -sf libteec.so.1 ${STAGING_DIR}/usr/lib/libteec.so.1.0
+    ln -sf libteec.so   ${STAGING_DIR}/usr/lib/libteec.so.1.0
+endef
+
+define AML_OPTEE_DRIVER_INSTALL_TARGET_APPLICATIONS
+    $(INSTALL) -m 755 $(@D)/ca_export_arm/bin/tee-supplicant ${TARGET_DIR}/usr/bin
+    $(INSTALL) -m 755 $(@D)/ca_export_arm/lib/libteec.so.1.0 ${TARGET_DIR}/usr/lib
+    ln -sf libteec.so.1.0 ${TARGET_DIR}/usr/lib/libteec.so
+    ln -sf libteec.so.1.0 ${TARGET_DIR}/usr/lib/libteec.so.1
+endef
+
 ###############################################################################
 # OPTEE driver
 ###############################################################################
@@ -34,7 +51,9 @@ define AML_OPTEE_DRIVER_OPTEE_MODULES_AUTO_LOAD
     $(call AML_OPTEE_DRIVER_AUTO_LOAD_MODULE_INSTALL,optee)
     $(call AML_OPTEE_DRIVER_AUTO_LOAD_MODULE_INSTALL,optee_armtz)
 endef
-AML_OPTEE_DRIVER_POST_INSTALL_TARGET_HOOKS += AML_OPTEE_DRIVER_OPTEE_MODULES_AUTO_LOAD
+
+AML_OPTEE_DRIVER_POST_INSTALL_STAGING_HOOKS += AML_OPTEE_DRIVER_INSTALL_STAGING_APPLICATIONS
+AML_OPTEE_DRIVER_POST_INSTALL_TARGET_HOOKS += AML_OPTEE_DRIVER_OPTEE_MODULES_AUTO_LOAD AML_OPTEE_DRIVER_INSTALL_TARGET_APPLICATIONS
 
 $(eval $(kernel-module))
 $(eval $(generic-package))
