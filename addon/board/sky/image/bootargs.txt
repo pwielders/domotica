@@ -1,1 +1,1 @@
-oops=panic softlockup_panic=1 hardlockup_panic=1 loglevel=0
+init=/sbin/init drm.vblankoffdelay=0 amdolby_vision.dolby_vision_enable=Y am_vecm.gamut_conv_enable=1 display_bpp=32 loglevel=0 defendkey=0x08500000,0x100000 oops=panic softlockup_panic=1 hardlockup_panic=1 loglevel=0
