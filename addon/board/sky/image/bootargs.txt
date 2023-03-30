@@ -1,0 +1,1 @@
+oops=panic softlockup_panic=1 hardlockup_panic=1 loglevel=0

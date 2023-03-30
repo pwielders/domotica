@@ -1,0 +1,191 @@
+# Files in the Yocto image not available on BR.
+# /bin/ash
+# /bin/busybox.nosuid
+# /bin/busybox.suid
+# /bin/conspy
+# /bin/iostat
+# /bin/kill.procps
+# /bin/login.shadow
+# /bin/lsmod.kmod
+# /bin/mount.util-linux
+# /bin/mpstat
+# /bin/pidof.procps
+# /bin/ping6
+# /bin/ps.procps
+# /bin/umount.util-linux
+# /bin/rev
+# /bin/run-parts
+# /bin/setserial
+# /bin/stat
+# /bin/su.shadow
+# /bin/timestamp
+
+/bin/base64
+/bin/bash
+/bin/busybox
+/bin/cat
+/bin/cp
+/bin/cpio
+/bin/date
+/bin/dd
+/bin/df
+/bin/dmesg
+/bin/dumpkmap
+/bin/echo
+/bin/egrep
+/bin/false
+/bin/fgrep
+/bin/grep
+/bin/kill
+/bin/ln
+/bin/login
+/bin/ls
+/bin/mkdir
+/bin/mknod
+/bin/mktemp
+/bin/more
+/bin/mount
+/bin/mountpoint
+/bin/mv
+/bin/nice
+/bin/pidof
+/bin/ping
+/bin/ps
+/bin/pwd
+/bin/rm
+/bin/rmdir
+/bin/sh
+/bin/sleep
+/bin/stty
+/bin/su
+/bin/sync
+/bin/touch
+/bin/true
+/bin/umount
+/bin/uname
+/bin/usleep
+
+
+# /lib/ld-2.24.so
+# /lib/libacl.so*
+# /lib/libanl-2.24.so
+# /lib/libblkid.so*
+# /lib/libBrokenLocale-2.24.so
+# /lib/libBrokenLocale.so*
+# /lib/libc-2.24.so
+# /lib/libcap.so*
+# /lib/libcgroup.so*
+# /lib/libcom_err.so*
+# /lib/libcrypt-2.24.so
+# /lib/libnsl-2.24.so
+# /lib/libnss_compat-2.24.so
+# /lib/libattr.so*
+# /lib/libdl-2.24.so
+# /lib/libm-2.24.so
+# /lib/libnss_dns-2.24.so
+# /lib/libnss_files-2.24.so
+# /lib/libpthread-2.24.so
+# /lib/libresolv-2.24.so
+# /lib/librt-2.24.so
+# /lib/libutil-2.24.so
+# /lib/libe2p.so*
+# /lib/libext2fs.so*
+# /lib/libfdisk.so*
+# /lib/libmount.so*
+# /lib/libnsl.so*
+# /lib/libnss_compat.so*
+# /lib/libpamc.so*
+# /lib/libpam_misc.so*
+# /lib/libpam.so*
+# /lib/libsmartcols.so*
+# /lib/libsysfs.so*
+# /lib/libtinfo.so*
+# /lib/libudev.so*
+# /lib/libusb-1.0.so*
+# /lib/libwrap.so*
+# /lib/libz.so*
+
+/lib/ld-linux-armhf.so*
+/lib/libanl.so*
+/lib/libatomic.so*
+/lib/libcrypt.so*
+/lib/libc.so*
+/lib/libdl.so*
+/lib/libgcc_s.so*
+/lib/libm.so*
+/lib/libnss_dns.so*
+/lib/libnss_files.so*
+/lib/libpthread.so*
+/lib/libresolv.so*
+/lib/librt.so*
+/lib/libutil.so*
+/lib/libuuid.so*
+
+# /sbin/mklost+found
+# /sbin/badblocks
+# /sbin/blockdev
+# /sbin/bootchartd
+# /sbin/depmod*
+# /sbin/ifenslave
+# /sbin/iwconfig
+# /sbin/iwgetid
+# /sbin/iwlist
+# /sbin/iwpriv
+# /sbin/iwspy
+# /sbin/modinfo*
+# /sbin/mount-copybind
+# /sbin/nologin
+# /sbin/populate-extfs.sh
+# /sbin/logsave
+# /sbin/shutdown
+# /sbin/udevd
+# /sbin/vigr*
+# /sbin/vipw*
+# /sbin/zcip
+
+/sbin/arp
+/sbin/blkid
+/sbin/hwclock
+/sbin/ifconfig
+/sbin/ifdown
+/sbin/ifup
+/sbin/init
+/sbin/insmod*
+/sbin/ip
+/sbin/ipaddr
+/sbin/iplink
+/sbin/iproute
+/sbin/iptunnel
+/sbin/klogd
+/sbin/loadkmap
+/sbin/losetup*
+/sbin/lsmod
+/sbin/mdev
+/sbin/mkswap
+/sbin/modprobe*
+/sbin/pivot_root
+/sbin/poweroff
+/sbin/reboot
+/sbin/rmmod*
+/sbin/route
+/sbin/runlevel
+/sbin/setconsole
+/sbin/start-stop-daemon
+/sbin/sulogin*
+/sbin/swapoff*
+/sbin/swapon*
+/sbin/switch_root
+/sbin/sysctl*
+/sbin/syslogd
+/sbin/udhcpc
+/sbin/vconfig
+/sbin/watchdog
+
+# /usr/lib/liblzma.so*
+# /usr/lib/libcrashlog*
+
+$SCRIPT_DIR/verity/verity_key		/
+$SCRIPT_DIR/verity/skyverity 		/
+$SCRIPT_DIR/verity/sky-init		/
+
+@/sbin/init			/init
