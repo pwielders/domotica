@@ -15,8 +15,8 @@ endef
 define AML_HDCP_INSTALL_TARGET_CMDS
     $(INSTALL) -m 755 $(@D)/ca/bin/tee_hdcp ${TARGET_DIR}/usr/bin
     $(INSTALL) -m 755 $(@D)/ca/bin/hdcp_rx22 ${TARGET_DIR}/usr/bin
-    $(INSTALL) -d -m 755 ${STAGING_DIR}/lib/teetz/
-    $(INSTALL) -m 600 $(@D)/ta/v2.4/ff2a4bea-ef6d-11e6-89cc-d4ae52a7b3b3.ta ${TARGET_DIR}/lib/teetz
+    $(INSTALL) -d -m 755 ${TARGET_DIR}/lib/teetz/
+    $(INSTALL) -m 600 $(@D)/ta/v2.4/ff2a4bea-ef6d-11e6-89cc-d4ae52a7b3b3.ta ${TARGET_DIR}/lib/teetz/
 endef
 
 $(eval $(generic-package))

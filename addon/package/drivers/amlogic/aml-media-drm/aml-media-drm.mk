@@ -18,18 +18,18 @@ define AML_MEDIA_DRM_BUILD_CMDS
 endef
 
 define AML_MEDIA_DRM_INSTALL_STAGING_CMDS
-    $(INSTALL) -d -m 755 ${STAGING_DIR}/usr/include
+	test -d "${STAGING_DIR}/usr/include" || $(INSTALL) -d -m 755 "${STAGING_DIR}/usr/include"
 
-    $(INSTALL) -m 755 $(@D)/libsecmem-bin/prebuilt/${AML_MEDIA_DRM_TA_TARGET}/include/*.h ${STAGING_DIR}/usr/include
-    $(INSTALL) -m 755 $(@D)/libsecmem-bin/prebuilt/${AML_MEDIA_DRM_ARM_TARGET}/libsecmem.so ${STAGING_DIR}/usr/lib
+	$(INSTALL) -m 755 $(@D)/libsecmem-bin/prebuilt/${AML_MEDIA_DRM_TA_TARGET}/include/*.h ${STAGING_DIR}/usr/include
+	$(INSTALL) -m 755 $(@D)/libsecmem-bin/prebuilt/${AML_MEDIA_DRM_ARM_TARGET}/libsecmem.so ${STAGING_DIR}/usr/lib
 endef
 
 define AML_MEDIA_DRM_INSTALL_TARGET_CMDS
-    $(INSTALL) -d -m 755 ${TARGET_DIR}/lib/teetz
+	test -d "${STAGING_DIR}/lib/teetz" || $(INSTALL) -d -m 755 "${TARGET_DIR}/lib/teetz"
 
-    $(INSTALL) -m 755 $(@D)/libsecmem-bin/prebuilt/${AML_MEDIA_DRM_TA_TARGET}/ta/${AML_MEDIA_DRM_TDK_VERSION}/*.ta ${TARGET_DIR}/lib/teetz/
-    $(INSTALL) -m 755 $(@D)/libsecmem-bin/prebuilt/${AML_MEDIA_DRM_ARM_TARGET}/secmem_test ${TARGET_DIR}/usr/bin
-    $(INSTALL) -m 755 $(@D)/libsecmem-bin/prebuilt/${AML_MEDIA_DRM_ARM_TARGET}/libsecmem.so ${TARGET_DIR}/usr/lib
+	$(INSTALL) -m 755 $(@D)/libsecmem-bin/prebuilt/${AML_MEDIA_DRM_TA_TARGET}/ta/${AML_MEDIA_DRM_TDK_VERSION}/*.ta ${TARGET_DIR}/lib/teetz/
+	$(INSTALL) -m 755 $(@D)/libsecmem-bin/prebuilt/${AML_MEDIA_DRM_ARM_TARGET}/secmem_test ${TARGET_DIR}/usr/bin
+	$(INSTALL) -m 755 $(@D)/libsecmem-bin/prebuilt/${AML_MEDIA_DRM_ARM_TARGET}/libsecmem.so ${TARGET_DIR}/usr/lib
 endef
 
 $(eval $(generic-package))
