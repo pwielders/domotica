@@ -238,6 +238,12 @@ config BR2_PACKAGE_PLUGIN_DIALSERVER
 	help
 	  DIALServer Plugin
 
+config BR2_PACKAGE_PLUGIN_DICTIONARY
+	bool "Dictionary"
+	select BR2_PACKAGE_PLUGIN_COMMON
+	help
+	  Dictionary Plugin
+
 config BR2_PACKAGE_PLUGIN_DEVICEINFO
 	bool "DeviceInfo"
 	select BR2_PACKAGE_PLUGIN_COMMON
