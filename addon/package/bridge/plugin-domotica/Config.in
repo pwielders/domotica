@@ -49,10 +49,18 @@ endif
 
 config BR2_PACKAGE_PLUGIN_ONEWIRECONTROL
 	bool "OneWireControl"
-	select BR2_PACKAGE_BRIDGE_DEVICES
         select BR2_PACKAGE_PLUGIN_DOMOTICA
+	select BR2_PACKAGE_BRIDGE_DEVICES
 	help
 	   1-Wire Control plugin
+
+config BR2_PACKAGE_PLUGIN_NODEJS
+	bool "NodeJS"
+        select BR2_PACKAGE_PLUGIN_DOMOTICA
+	select BR2_PACKAGE_NODEJS
+	select BR2_PACKAGE_NODEJS_LIBRARY
+	help
+	   NodeJS plugin
 
 config BR2_PACKAGE_PLUGIN_RADIOCONTROL
 	bool "RadioControl"
@@ -85,6 +93,12 @@ config BR2_PACKAGE_PLUGIN_VIRTUALCONTROL
         select BR2_PACKAGE_PLUGIN_DOMOTICA
 	help
 	   VirtualControl plugin
+
+config BR2_PACKAGE_PLUGIN_WATCHDOG
+	bool "WatchDog"
+        select BR2_PACKAGE_PLUGIN_DOMOTICA
+	help
+	   WatchDog plugin
 
 menuconfig BR2_PACKAGE_PLUGIN_ZIGBEECONTROL
 	bool "ZigBeeControl"

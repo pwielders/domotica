@@ -1,0 +1,49 @@
+diff --git a/package/nodejs/Config.in b/package/nodejs/Config.in
+index 1489306be0..b5aaaa167b 100644
+--- a/package/nodejs/Config.in
++++ b/package/nodejs/Config.in
+@@ -44,6 +44,13 @@ config BR2_PACKAGE_NODEJS
+ 
+ if BR2_PACKAGE_NODEJS
+ 
++config BR2_PACKAGE_NODEJS_LIBRARY
++	bool "library"
++        default n
++	help
++          Build the NodeJS packag as a library and an executable 
++          using the library.
++
+ config BR2_PACKAGE_NODEJS_NPM
+ 	bool "NPM for the target"
+ 	select BR2_PACKAGE_OPENSSL
+diff --git a/package/nodejs/nodejs.mk b/package/nodejs/nodejs.mk
+index 367d5d2058..ac222a932f 100644
+--- a/package/nodejs/nodejs.mk
++++ b/package/nodejs/nodejs.mk
+@@ -41,6 +41,10 @@ NODEJS_CONF_OPTS = \
+ 	--dest-os=linux \
+ 	--ninja
+ 
++ifeq ($(BR2_PACKAGE_NODEJS_LIBRARY),y)
++NODEJS_CONF_OPTS += --shared
++endif
++
+ HOST_NODEJS_MAKE_OPTS = \
+ 	$(HOST_CONFIGURE_OPTS) \
+ 	CXXFLAGS="$(HOST_NODEJS_CXXFLAGS)" \
+diff --git a/package/nodejs/0005-shared-lib-installation.patch b/package/nodejs/0005-shared-lib-installation.patch
+new file mode 100644
+index 0000000000..dab60f748f
+--- /dev/null
++++ b/package/nodejs/0005-shared-lib-installation.patch
+@@ -0,0 +1,10 @@
++--- a/tools/install.py	2022-11-04 12:22:08.000000000 +0100
+++++ b/tools/install.py	2023-04-19 00:41:42.093186113 +0200
++@@ -150,6 +150,7 @@
++   action([output_prefix + output_file], 'bin/' + output_file)
++ 
++   if 'true' == variables.get('node_shared'):
+++    output_prefix = output_prefix + 'lib/'
++     if is_windows:
++       action([output_prefix + 'libnode.dll'], 'bin/libnode.dll')
++       action([output_prefix + 'libnode.lib'], 'lib/libnode.lib')
