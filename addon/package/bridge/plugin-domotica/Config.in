@@ -54,23 +54,29 @@ config BR2_PACKAGE_PLUGIN_ONEWIRECONTROL
 	help
 	   1-Wire Control plugin
 
-config BR2_PACKAGE_PLUGIN_NODEJS
-	bool "NodeJS"
-        select BR2_PACKAGE_PLUGIN_DOMOTICA
-	select BR2_PACKAGE_NODEJS
-	select BR2_PACKAGE_NODEJS_LIBRARY
-	help
-	   NodeJS plugin
-
 config BR2_PACKAGE_PLUGIN_RADIOCONTROL
 	bool "RadioControl"
         select BR2_PACKAGE_PLUGIN_DOMOTICA
 	help
 	   RadioControl (NRF24L01) plugin
 
+config BR2_PACKAGE_PLUGIN_RULEENGINE
+	bool "RuleEngine"
+        select BR2_PACKAGE_PLUGIN_DOMOTICA
+	help
+	   Rule Engine plugin
+
+config BR2_PACKAGE_PLUGIN_RUSTBRIDGE
+	bool "RustBridge"
+        select BR2_PACKAGE_PLUGIN_DOMOTICA
+	help
+	   RUST Bridge plugin
+
 config BR2_PACKAGE_PLUGIN_SCRIPTENGINE
 	bool "ScriptEngine"
         select BR2_PACKAGE_PLUGIN_DOMOTICA
+	select BR2_PACKAGE_NODEJS
+	select BR2_PACKAGE_NODEJS_LIBRARY
 	help
 	   Script Engine plugin
 
