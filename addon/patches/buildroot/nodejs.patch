@@ -17,9 +17,18 @@ index 1489306be0..b5aaaa167b 100644
  	bool "NPM for the target"
  	select BR2_PACKAGE_OPENSSL
 diff --git a/package/nodejs/nodejs.mk b/package/nodejs/nodejs.mk
-index 367d5d2058..ac222a932f 100644
+index 367d5d2058..1e3945c234 100644
 --- a/package/nodejs/nodejs.mk
 +++ b/package/nodejs/nodejs.mk
+@@ -4,7 +4,7 @@
+ #
+ ################################################################################
+ 
+-NODEJS_VERSION = 16.18.1
++NODEJS_VERSION = 18.16.0
+ NODEJS_SOURCE = node-v$(NODEJS_VERSION).tar.xz
+ NODEJS_SITE = http://nodejs.org/dist/v$(NODEJS_VERSION)
+ NODEJS_DEPENDENCIES = \
 @@ -41,6 +41,10 @@ NODEJS_CONF_OPTS = \
  	--dest-os=linux \
  	--ninja
@@ -47,3 +56,52 @@ index 0000000000..dab60f748f
 +     if is_windows:
 +       action([output_prefix + 'libnode.dll'], 'bin/libnode.dll')
 +       action([output_prefix + 'libnode.lib'], 'lib/libnode.lib')
+diff --git a/package/nodejs/0001-add-qemu-wrapper-support.patch b/package/nodejs/0001-add-qemu-wrapper-support.patch
+index 184f3d19b7..c316a33d6e 100644
+--- a/package/nodejs/0001-add-qemu-wrapper-support.patch
++++ b/package/nodejs/0001-add-qemu-wrapper-support.patch
+@@ -17,32 +17,9 @@ host-builds.
+ 
+ Signed-off-by: Adam Duskett <aduskett@gmail.com>
+ ---
+- node.gyp                 |  4 ++--
+  tools/v8_gypfiles/v8.gyp | 10 +++++-----
+- 2 files changed, 7 insertions(+), 7 deletions(-)
++ 1 file changed, 7 insertions(+), 7 deletions(-)
+ 
+-diff --git a/node.gyp b/node.gyp
+-index 97cdbb531d..db5cf51ce6 100644
+---- a/node.gyp
+-+++ b/node.gyp
+-@@ -319,7 +319,7 @@
+-               'action_name': 'run_mkcodecache',
+-               'process_outputs_as_sources': 1,
+-               'inputs': [
+--                '<(mkcodecache_exec)',
+-+                @MAYBE_WRAPPER@ '<(mkcodecache_exec)',
+-               ],
+-               'outputs': [
+-                 '<(SHARED_INTERMEDIATE_DIR)/node_code_cache.cc',
+-@@ -346,7 +346,7 @@
+-                   'action_name': 'node_mksnapshot',
+-                   'process_outputs_as_sources': 1,
+-                   'inputs': [
+--                    '<(node_mksnapshot_exec)',
+-+                    @MAYBE_WRAPPER@ '<(node_mksnapshot_exec)',
+-                     '<(node_snapshot_main)',
+-                   ],
+-                   'outputs': [
+ diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
+ index 73099a03e4..88ca91efb4 100644
+ --- a/tools/v8_gypfiles/v8.gyp
+diff --git a/package/nodejs/nodejs.hash b/package/nodejs/nodejs.hash
+index 4408782248..ef71cc4873 100644
+--- a/package/nodejs/nodejs.hash
++++ b/package/nodejs/nodejs.hash
+@@ -1,5 +1,6 @@
+ # From https://nodejs.org/dist/v16.18.1/SHASUMS256.txt
+ sha256  1f8051a88f86f42064f4415fe7a980e59b0a502ecc8def583f6303bc4d445238  node-v16.18.1.tar.xz
++sha256	33d81a233e235a509adda4a4f2209008d04591979de6b3f0f67c1c906093f118  node-v18.16.0.tar.xz
+ 
+ # Hash for license file
+ sha256  0bec08634ba79b5404f6b7f92ea850f3c2a06e27e6f83f2267e4f5e55ae33334  LICENSE
