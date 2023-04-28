@@ -1,3 +1,10 @@
+/proc/
+/sys/
+/dev/
+/tmp/
+/system/
+/usr/
+
 # Files in the Yocto image not available on BR.
 # /bin/ash
 # /bin/busybox.nosuid
@@ -189,3 +196,4 @@ $SCRIPT_DIR/verity/skyverity 		/
 $SCRIPT_DIR/verity/sky-init		/
 
 @/sbin/init			/init
+@/bin/bash			/bin/cut
