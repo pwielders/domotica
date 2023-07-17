@@ -1,5 +1,16 @@
+config BR2_PACKAGE_WPEBACKEND_LIBWPE_VERSION
+        string
+        default "1.6.0" if BR2_PACKAGE_WPEWEBKIT_ML_2_28
+        default "1.14.0" if BR2_PACKAGE_WPEWEBKIT_ML_2_38
+
 config BR2_PACKAGE_WPEBACKEND
-	bool "wpebackend"
+        bool "wpebackend"
+        depends on !BR2_STATIC_LIBS # dlfcn.h
+        depends on BR2_INSTALL_LIBSTDCPP
+        depends on BR2_PACKAGE_HAS_LIBEGL
         select BR2_PACKAGE_LIBXKBCOMMON
-	help
-	  Base library for the WPE port of WebKit.
+        help
+          Base library for the WPE port of WebKit.
+
+          https://wpewebkit.org/
+
