@@ -47,6 +47,13 @@ config BR2_PACKAGE_PLUGIN_IOCONNECTOR_PINS
 
 endif
 
+config BR2_PACKAGE_PLUGIN_NEXTGREENENERGY
+	bool "PowerControlBoard"
+        select BR2_PACKAGE_PLUGIN_DOMOTICA
+	select BR2_PACKAGE_BRIDGE_DEVICES
+	help
+	   Controls the NextGreen Power Control Board over SPI.
+
 config BR2_PACKAGE_PLUGIN_ONEWIRECONTROL
 	bool "OneWireControl"
         select BR2_PACKAGE_PLUGIN_DOMOTICA
