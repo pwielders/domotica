@@ -24,7 +24,7 @@ index 367d5d2058..1e3945c234 100644
  #
  ################################################################################
  
--NODEJS_VERSION = 16.18.1
+-NODEJS_VERSION = 16.20.0
 +NODEJS_VERSION = 18.16.0
  NODEJS_SOURCE = node-v$(NODEJS_VERSION).tar.xz
  NODEJS_SITE = http://nodejs.org/dist/v$(NODEJS_VERSION)
@@ -94,18 +94,7 @@ index 184f3d19b7..c316a33d6e 100644
  diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
  index 73099a03e4..88ca91efb4 100644
  --- a/tools/v8_gypfiles/v8.gyp
-diff --git a/package/nodejs/nodejs.hash b/package/nodejs/nodejs.hash
-index 4408782248..ef71cc4873 100644
---- a/package/nodejs/nodejs.hash
-+++ b/package/nodejs/nodejs.hash
-@@ -1,5 +1,6 @@
- # From https://nodejs.org/dist/v16.18.1/SHASUMS256.txt
- sha256  1f8051a88f86f42064f4415fe7a980e59b0a502ecc8def583f6303bc4d445238  node-v16.18.1.tar.xz
-+sha256	33d81a233e235a509adda4a4f2209008d04591979de6b3f0f67c1c906093f118  node-v18.16.0.tar.xz
- 
- # Hash for license file
- sha256  0bec08634ba79b5404f6b7f92ea850f3c2a06e27e6f83f2267e4f5e55ae33334  LICENSE
---- /dev/null
+--- /dev/null	2023-05-30 13:09:48.302074425 +0200
 +++ b/package/nodejs/0006-std-library-usage-fix.patch	2023-06-27 14:27:00.998756710 +0200
 @@ -0,0 +1,11 @@
 +--- a/deps/v8/include/v8-internal.h	2023-04-12 06:09:14.000000000 +0200
@@ -119,3 +108,12 @@ index 4408782248..ef71cc4873 100644
 + }
 + 
 + // A base class for backing stores, which is needed due to vagaries of
+--- a/package/nodejs/nodejs.org	2023-08-08 14:48:14.067637852 +0200
++++ b/package/nodejs/nodejs.hash	2023-08-08 14:48:39.363899051 +0200
+@@ -1,5 +1,6 @@
+ # From https://nodejs.org/dist/v16.20.0/SHASUMS256.txt
+ sha256  e0990f992234e40a51fe11f92c3816c93a77e1b081145d3dd762cd1026345349  node-v16.20.0.tar.xz
++sha256  33d81a233e235a509adda4a4f2209008d04591979de6b3f0f67c1c906093f118  node-v18.16.0.tar.xz
+ 
+ # Hash for license file
+ sha256  ba325815d3df8819bebaf37cad67d6e1f82271e1e4a1189b53abd28e261977d6  LICENSE
