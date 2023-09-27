@@ -4,10 +4,9 @@
 #
 ################################################################################
 
-LIBSOUP3_VERSION_MAJOR = 3.0
-LIBSOUP3_VERSION = $(LIBSOUP3_VERSION_MAJOR).6
-LIBSOUP3_SOURCE = libsoup-$(LIBSOUP3_VERSION).tar.xz
-LIBSOUP3_SITE = http://ftp.gnome.org/pub/gnome/sources/libsoup/$(LIBSOUP3_VERSION_MAJOR)
+LIBSOUP3_VERSION = 3.0.6
+LIBSOUP3_SITE = https://gitlab.gnome.org/GNOME/libsoup.git
+LIBSOUP3_SITE_METHOD = git
 LIBSOUP3_LICENSE = LGPL-2.0+
 LIBSOUP3_LICENSE_FILES = COPYING
 LIBSOUP3_CPE_ID_VENDOR = gnome
