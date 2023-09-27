@@ -16,30 +16,6 @@ index 1489306be0..b5aaaa167b 100644
  config BR2_PACKAGE_NODEJS_NPM
  	bool "NPM for the target"
  	select BR2_PACKAGE_OPENSSL
-diff --git a/package/nodejs/nodejs.mk b/package/nodejs/nodejs.mk
-index 367d5d2058..1e3945c234 100644
---- a/package/nodejs/nodejs.mk
-+++ b/package/nodejs/nodejs.mk
-@@ -4,7 +4,7 @@
- #
- ################################################################################
- 
--NODEJS_VERSION = 16.20.0
-+NODEJS_VERSION = 18.16.0
- NODEJS_SOURCE = node-v$(NODEJS_VERSION).tar.xz
- NODEJS_SITE = http://nodejs.org/dist/v$(NODEJS_VERSION)
- NODEJS_DEPENDENCIES = \
-@@ -41,6 +41,10 @@ NODEJS_CONF_OPTS = \
- 	--dest-os=linux \
- 	--ninja
- 
-+ifeq ($(BR2_PACKAGE_NODEJS_LIBRARY),y)
-+NODEJS_CONF_OPTS += --shared
-+endif
-+
- HOST_NODEJS_MAKE_OPTS = \
- 	$(HOST_CONFIGURE_OPTS) \
- 	CXXFLAGS="$(HOST_NODEJS_CXXFLAGS)" \
 diff --git a/package/nodejs/0005-shared-lib-installation.patch b/package/nodejs/0005-shared-lib-installation.patch
 new file mode 100644
 index 0000000000..dab60f748f
@@ -117,3 +93,46 @@ index 184f3d19b7..c316a33d6e 100644
  
  # Hash for license file
  sha256  ba325815d3df8819bebaf37cad67d6e1f82271e1e4a1189b53abd28e261977d6  LICENSE
+diff --git a/package/nodejs/nodejs.mk b/package/nodejs/nodejs.mk
+index 4e70bd71a3..2547ff30d5 100644
+--- a/package/nodejs/nodejs.mk
++++ b/package/nodejs/nodejs.mk
+@@ -4,7 +4,7 @@
+ #
+ ################################################################################
+ 
+-NODEJS_VERSION = 16.20.0
++NODEJS_VERSION = 18.16.0
+ NODEJS_SOURCE = node-v$(NODEJS_VERSION).tar.xz
+ NODEJS_SITE = http://nodejs.org/dist/v$(NODEJS_VERSION)
+ NODEJS_DEPENDENCIES = \
+@@ -41,13 +41,17 @@ NODEJS_CONF_OPTS = \
+ 	--dest-os=linux \
+ 	--ninja
+ 
++ifeq ($(BR2_PACKAGE_NODEJS_LIBRARY),y)
++NODEJS_CONF_OPTS += --shared
++endif
++
+ HOST_NODEJS_MAKE_OPTS = \
+ 	$(HOST_CONFIGURE_OPTS) \
+ 	CXXFLAGS="$(HOST_NODEJS_CXXFLAGS)" \
+ 	LDFLAGS.host="$(HOST_LDFLAGS)" \
+ 	NO_LOAD=cctest.target.mk \
+ 	PATH=$(@D)/bin:$(BR_PATH) \
+-	JOBS=$(BR2_JLEVEL)
++	JOBS=$(4)
+ 
+ NODEJS_MAKE_OPTS = \
+ 	$(TARGET_CONFIGURE_OPTS) \
+@@ -55,7 +59,9 @@ NODEJS_MAKE_OPTS = \
+ 	PATH=$(@D)/bin:$(BR_PATH) \
+ 	LDFLAGS="$(NODEJS_LDFLAGS)" \
+ 	LD="$(TARGET_CXX)" \
+-	JOBS=$(BR2_JLEVEL)
++	JOBS=$(4)
++
++NODEJS_MAKE=$(MAKE1)
+ 
+ # nodejs's build system uses python which can be a symlink to an unsupported
+ # python version (e.g. python 3.10 with nodejs 14.18.1). We work around this by
