@@ -46,7 +46,7 @@ diff --git a/package/rpi-userland/rpi-userland.mk b/package/rpi-userland/rpi-use
 index 1204196e19..ee035a8040 100644
 --- a/package/rpi-userland/rpi-userland.mk
 +++ b/package/rpi-userland/rpi-userland.mk
-@@ -43,6 +43,8 @@ endif # BR2_PACKAGE_RPI_USERLAND_HELLO
+@@ -55,6 +55,8 @@ endif # BR2_PACKAGE_RPI_USERLAND_HELLO
  
  define RPI_USERLAND_POST_TARGET_CLEANUP
  	rm -Rf $(TARGET_DIR)/usr/src
