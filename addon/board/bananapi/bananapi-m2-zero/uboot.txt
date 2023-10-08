@@ -1,0 +1,6 @@
+verbosity=8
+bootlogo=off
+console=serial
+#disp_mode=1280x720p60
+usbstoragequirks=0x2537:0x1066:u,0x2537:0x1068:u
+overlays=ethernet
