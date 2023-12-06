@@ -8,17 +8,20 @@ config BR2_PACKAGE_WPEWEBKIT_ML_ARCH_SUPPORTS
 	default y if BR2_mipsel || BR2_mips64el
 	# Disabled on PowerPC pending runtime testing
 	# Disabled on SuperH because of segfault
+	depends on !BR2_PACKAGE_WPEWEBKIT
 	depends on BR2_USE_MMU # libglib2
 	depends on BR2_TOOLCHAIN_HAS_SYNC_4
 	depends on BR2_PACKAGE_LIBGPG_ERROR_ARCH_SUPPORTS # libgcrypt
 
-comment "wpewebkit needs a toolchain w/ C++, wchar, threads, dynamic library, gcc >= 7, host gcc >= 4.9"
+comment "wpewebkit-ml another webkit is detected"
+	depends on BR2_PACKAGE_WPEWEBKIT
+
+comment "wpewebkit ml needs a toolchain w/ C++, wchar, threads, dynamic library, gcc >= 7 and no other webkit should be included"
 	depends on BR2_PACKAGE_WPEWEBKIT_ML_ARCH_SUPPORTS
 	depends on !BR2_BINFMT_FLAT
 	depends on !BR2_INSTALL_LIBSTDCPP || !BR2_USE_WCHAR \
 		|| !BR2_TOOLCHAIN_HAS_THREADS || BR2_STATIC_LIBS \
-		|| !BR2_TOOLCHAIN_GCC_AT_LEAST_7 \
-		|| !BR2_HOST_GCC_AT_LEAST_4_9
+		|| !BR2_TOOLCHAIN_GCC_AT_LEAST_7
 
 comment "wpewebkit needs OpenGL ES and EGL"
 	depends on BR2_PACKAGE_WPEWEBKIT_ML_ARCH_SUPPORTS
@@ -27,10 +30,8 @@ comment "wpewebkit needs OpenGL ES and EGL"
 
 config BR2_PACKAGE_WPEWEBKIT_ML
 	bool "wpewebkit"
-	default y
 	depends on !BR2_STATIC_LIBS # wayland
 	depends on !BR2_BINFMT_FLAT # icu
-	depends on BR2_HOST_GCC_AT_LEAST_4_9 # icu, host-ruby
 	depends on BR2_INSTALL_LIBSTDCPP # harfbuzz, icu
 	depends on BR2_TOOLCHAIN_HAS_THREADS # wayland, icu, libsoup
 	depends on BR2_TOOLCHAIN_GCC_AT_LEAST_7
@@ -38,56 +39,54 @@ config BR2_PACKAGE_WPEWEBKIT_ML
 	depends on BR2_PACKAGE_HAS_LIBGLES # libepoxy
 	depends on BR2_PACKAGE_HAS_LIBEGL # libepoxy
 	depends on BR2_PACKAGE_WPEWEBKIT_ML_ARCH_SUPPORTS
-	select BR2_PACKAGE_CAIRO
-	select BR2_PACKAGE_CAIRO_PNG
-	select BR2_PACKAGE_HARFBUZZ
-	select BR2_PACKAGE_ICU
-	select BR2_PACKAGE_JPEG
-	select BR2_PACKAGE_LIBEPOXY
-	select BR2_PACKAGE_LIBGCRYPT
-	select BR2_PACKAGE_LIBPNG
-	select BR2_PACKAGE_LIBXSLT
-	select BR2_PACKAGE_OPENJPEG
-        select BR2_PACKAGE_XKEYBOARD_CONFIG
-	select BR2_PACKAGE_WEBP
-	select BR2_PACKAGE_WEBP_DEMUX
 	select BR2_PACKAGE_WPEBACKEND
 	select BR2_PACKAGE_WPEBACKEND_RDK
-	help
-	  WPE (Web Platform for Embedded) port of the WebKit engine,
-	  to allow embedders to create simple and performant systems
-	  based on Web platform technologies.
-
-	  https://wpewebkit.org/
+	select BR2_PACKAGE_LIBEPOXY
+	select BR2_PACKAGE_CAIRO
+	select BR2_PACKAGE_CAIRO_PNG
+	select BR2_PACKAGE_JPEG
+	select BR2_PACKAGE_LIBPNG
+	select BR2_PACKAGE_HARFBUZZ
+	select BR2_PACKAGE_ICU
+	select BR2_PACKAGE_WEBP
+	select BR2_PACKAGE_WEBP_DEMUX
+	select BR2_PACKAGE_LIBSOUP if BR2_PACKAGE_WPEWEBKIT_ML2_22
+	select BR2_PACKAGE_LIBSOUP_SSL if BR2_PACKAGE_WPEWEBKIT_ML2_22
+	select BR2_PACKAGE_LIBSOUP3 if BR2_PACKAGE_WPEWEBKIT_ML2_28
+	select BR2_PACKAGE_LIBSOUP3_SSL if BR2_PACKAGE_WPEWEBKIT_ML2_28
+	select BR2_PACKAGE_HOST_PYTHON3 if BR2_PACKAGE_WPEWEBKIT_ML2_38
+	select BR2_PACKAGE_HOST_PYTHON3 if BR2_PACKAGE_WPEWEBKIT_ML2_42
+	select BR2_PACKAGE_LIBGCRYPT
+	select BR2_PACKAGE_LIBXSLT
+	select BR2_PACKAGE_XKEYBOARD_CONFIG
+	select BR2_PACKAGE_OPENJPEG
 
 if BR2_PACKAGE_WPEWEBKIT_ML
-
 choice
-	bool "version"
-	default BR2_PACKAGE_WPEWEBKIT_ML_2_28
-	help
+        bool "version"
+        default BR2_PACKAGE_WPEWEBKIT_ML2_28
+        help
           Choose the WPEWEBKIT version to be built.
 
-config BR2_PACKAGE_WPEWEBKIT_ML_2_22
-	bool "2.22"
-	select BR2_PACKAGE_LIBSOUP
-	select BR2_PACKAGE_LIBSOUP_SSL
-	help
-	  "Build WPEWEBKIT 2.22"
+config BR2_PACKAGE_WPEWEBKIT_ML2_22
+        bool "2.22"
+        help
+          Build WPEWEBKIT 2.22
 
-config BR2_PACKAGE_WPEWEBKIT_ML_2_28
-	bool "2.28"
-	select BR2_PACKAGE_LIBSOUP3
-	select BR2_PACKAGE_LIBSOUP3_SSL
-	help
-	  "Build WPEWEBKIT 2.28"
+config BR2_PACKAGE_WPEWEBKIT_ML2_28
+        bool "2.28"
+        help
+          Build WPEWEBKIT 2.28
 
-config BR2_PACKAGE_WPEWEBKIT_ML_2_38
-	bool "2.38"
-	select BR2_PACKAGE_LIBSOUP3
-	select BR2_PACKAGE_LIBSOUP3_SSL
-	help
-	  "Build WPE WebKit 2.38.x"
+config BR2_PACKAGE_WPEWEBKIT_ML2_38
+        bool "2.38"
+        help
+          Build WPEWEBKIT 2.38
+
+config BR2_PACKAGE_WPEWEBKIT_ML2_42
+        bool "2.42"
+        help
+          Build WPEWEBKIT 2.42
 
 endchoice
 
@@ -100,10 +99,14 @@ choice
 	help
 	  Choose the debug flavor.
 
+if !BR2_ENABLE_DEBUG
+
 config BR2_PACKAGE_WPEWEBKIT_ML_RELEASE
 	bool "release"
 	help
 	  Release build
+
+endif
 
 config BR2_PACKAGE_WPEWEBKIT_ML_DEBUG
 	bool "debug"
@@ -112,34 +115,16 @@ config BR2_PACKAGE_WPEWEBKIT_ML_DEBUG
 
 endchoice
 
-choice
-        bool "Symbols level"
-        default BR2_PACKAGE_WPEWEBKIT_ML_SYMBOLS_LEVEL_1 if BR2_PACKAGE_WPEWEBKIT_ML_DEBUG
-        default BR2_PACKAGE_WPEWEBKIT_ML_SYMBOLS_NO
-        help
-          Choose symbols level to apply to the compiler. WebKit 2.38 might not build with level 2 or 3.
+if !BR2_PACKAGE_WPEWEBKIT_ML_DEBUG
 
-config BR2_PACKAGE_WPEWEBKIT_ML_SYMBOLS_NO
-        bool "no symbols"
-        help
-          No symbols
+config BR2_PACKAGE_WPEWEBKIT_ML_SYMBOLS
+	bool "add symbols to a release build"
+        default y if BR2_PACKAGE_WPEWEBKIT_ML_DEBUG
+        default n
+	help
+	  Add symbols to a release build
 
-config BR2_PACKAGE_WPEWEBKIT_ML_SYMBOLS_LEVEL_1
-        bool "level 1"
-        help
-          Adds -g1 to the compiler
-
-config BR2_PACKAGE_WPEWEBKIT_ML_SYMBOLS_LEVEL_2
-        bool "level 2"
-        help
-          Adds -g2 to the compiler. WebKit 2.38 might not build with this level.
-
-config BR2_PACKAGE_WPEWEBKIT_ML_SYMBOLS_LEVEL_3
-        bool "level 3"
-        help
-          Adds -g3 to the compiler. WebKit 2.38 might not build with this level.
-
-endchoice
+endif
 
 if BR2_PACKAGE_WPEWEBKIT_ML2_22
 
@@ -185,20 +170,6 @@ config BR2_PACKAGE_WPEWEBKIT_ML_USE_GSTREAMER_WEBKIT_HTTP_SRC
 	help
 	  Use the WebKit network resource loader to download Media data over HTTP(S)
 
-config BR2_PACKAGE_WPEWEBKIT_ML_ENABLE_TEXT_SINK
-	bool "Enable text sink"
-	default y
-	help
-	  Defines ENABLE_TEXT_SINK=ON
-
-config BR2_PACKAGE_WPEWEBKIT_ML_WEBDRIVER
-	bool
-	default y
-
-endif
-
-if BR2_PACKAGE_WPEWEBKIT_ML2_22 || BR2_PACKAGE_WPEWEBKIT_ML2_38
-
 config BR2_PACKAGE_WPEWEBKIT_ML_ENABLE_NATIVE_VIDEO
 	bool "Enable native video"
 	default y
@@ -211,31 +182,15 @@ config BR2_PACKAGE_WPEWEBKIT_ML_ENABLE_NATIVE_AUDIO
 	help
 	  Defines ENABLE_NATIVE_AUDIO=ON
 
+config BR2_PACKAGE_WPEWEBKIT_ML_ENABLE_TEXT_SINK
+	bool "Enable text sink"
+	default y
+	help
+	  Defines ENABLE_TEXT_SINK=ON
+
 endif
 
-config BR2_PACKAGE_WPEWEBKIT_ML2_38_GST_DEPS
-	bool
-	default n
-	select BR2_PACKAGE_GST1_PLUGINS_BAD
-	select BR2_PACKAGE_GST1_PLUGINS_BAD_PLUGIN_DEBUGUTILS
-	select BR2_PACKAGE_GST1_PLUGINS_BAD_PLUGIN_MPEGTSDEMUX
-	select BR2_PACKAGE_GST1_PLUGINS_BAD_PLUGIN_SUBENC
-	select BR2_PACKAGE_GST1_PLUGINS_BASE_PLUGIN_ALSA
-	select BR2_PACKAGE_GST1_PLUGINS_BASE_PLUGIN_APP
-	select BR2_PACKAGE_GST1_PLUGINS_BASE_PLUGIN_AUDIOCONVERT
-	select BR2_PACKAGE_GST1_PLUGINS_BASE_PLUGIN_AUDIORESAMPLE
-	select BR2_PACKAGE_GST1_PLUGINS_BASE_PLUGIN_PLAYBACK
-	select BR2_PACKAGE_GST1_PLUGINS_BASE_PLUGIN_VIDEOCONVERT
-	select BR2_PACKAGE_GST1_PLUGINS_BASE_PLUGIN_VIDEOSCALE
-	select BR2_PACKAGE_GST1_PLUGINS_BASE_PLUGIN_VOLUME
-	select BR2_PACKAGE_GST1_PLUGINS_GOOD_PLUGIN_AUDIOFX
-	select BR2_PACKAGE_GST1_PLUGINS_GOOD_PLUGIN_AUTODETECT
-	select BR2_PACKAGE_GST1_PLUGINS_GOOD_PLUGIN_ISOMP4
-	select BR2_PACKAGE_GST1_PLUGINS_GOOD_PLUGIN_MATROSKA
-	select BR2_PACKAGE_GST1_PLUGINS_GOOD_PLUGIN_RTSP
-	select BR2_PACKAGE_GST1_PLUGINS_GOOD_PLUGIN_VPX
-
-if BR2_PACKAGE_WPEWEBKIT_ML2_28 || BR2_PACKAGE_WPEWEBKIT_ML2_38
+if BR2_PACKAGE_WPEWEBKIT_ML2_28
 
 config BR2_PACKAGE_WPEWEBKIT_ML_MULTIMEDIA
 	bool "multimedia support"
@@ -243,9 +198,6 @@ config BR2_PACKAGE_WPEWEBKIT_ML_MULTIMEDIA
 	select BR2_PACKAGE_GSTREAMER1
 	select BR2_PACKAGE_GST1_PLUGINS_BASE
 	select BR2_PACKAGE_GST1_PLUGINS_GOOD
-	select BR2_PACKAGE_WPEWEBKIT_ML2_38_GST_DEPS if BR2_PACKAGE_WPEWEBKIT_ML2_38
-	# Needed for WebAudio, to enable "audiointerleave" from audiomixer
-	select BR2_PACKAGE_GST1_PLUGINS_BASE_PLUGIN_AUDIOMIXER
 	help
 	  This option pulls in all of the required dependencies
 	  to enable multimedia (video/audio) support.
