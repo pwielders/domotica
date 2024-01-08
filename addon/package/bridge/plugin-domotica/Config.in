@@ -135,10 +135,19 @@ config BR2_PACKAGE_ZIGBEE_WATCHDOG_TIME
 
 endif
 
-
-config BR2_PACKAGE_PLUGIN_ZWAVECONTROL
+menuconfig BR2_PACKAGE_PLUGIN_ZWAVECONTROL
 	bool "ZWaveControl"
 	select BR2_PACKAGE_BRIDGE_ZWAVE
         select BR2_PACKAGE_PLUGIN_DOMOTICA
 	help
 	   ZWAVE control plugin
+
+if BR2_PACKAGE_PLUGIN_ZWAVECONTROL
+
+config BR2_PACKAGE_ZWAVE_PORT
+        string "port"
+        default "/dev/ttyAMA0"
+
+endif
+
+
