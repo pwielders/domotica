@@ -17,6 +17,12 @@ config BR2_PACKAGE_PLUGIN_BLUETOOTH_AUTOSTART
     help
       Select this to start the plugin automatically when starting WPEFramework
 
+config BR2_PACKAGE_PLUGIN_BLUETOOTH_PORT
+    string "Port for communication with the BT chip"
+    default "/dev/ttyAMC0"
+    help
+      If the BT has a capability to communicate using UART (H4) this is the port to use..
+
 config BR2_PACKAGE_PLUGIN_BLUETOOTH_PERSISTMAC
     bool "Persist MAC Address"
     default n
