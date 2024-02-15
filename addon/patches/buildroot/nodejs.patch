@@ -32,107 +32,19 @@ index 0000000000..dab60f748f
 +     if is_windows:
 +       action([output_prefix + 'libnode.dll'], 'bin/libnode.dll')
 +       action([output_prefix + 'libnode.lib'], 'lib/libnode.lib')
-diff --git a/package/nodejs/0001-add-qemu-wrapper-support.patch b/package/nodejs/0001-add-qemu-wrapper-support.patch
-index 184f3d19b7..c316a33d6e 100644
---- a/package/nodejs/0001-add-qemu-wrapper-support.patch
-+++ b/package/nodejs/0001-add-qemu-wrapper-support.patch
-@@ -17,32 +17,9 @@ host-builds.
- 
- Signed-off-by: Adam Duskett <aduskett@gmail.com>
- ---
-- node.gyp                 |  4 ++--
-  tools/v8_gypfiles/v8.gyp | 10 +++++-----
-- 2 files changed, 7 insertions(+), 7 deletions(-)
-+ 1 file changed, 7 insertions(+), 7 deletions(-)
- 
--diff --git a/node.gyp b/node.gyp
--index 97cdbb531d..db5cf51ce6 100644
----- a/node.gyp
--+++ b/node.gyp
--@@ -319,7 +319,7 @@
--               'action_name': 'run_mkcodecache',
--               'process_outputs_as_sources': 1,
--               'inputs': [
---                '<(mkcodecache_exec)',
--+                @MAYBE_WRAPPER@ '<(mkcodecache_exec)',
--               ],
--               'outputs': [
--                 '<(SHARED_INTERMEDIATE_DIR)/node_code_cache.cc',
--@@ -346,7 +346,7 @@
--                   'action_name': 'node_mksnapshot',
--                   'process_outputs_as_sources': 1,
--                   'inputs': [
---                    '<(node_mksnapshot_exec)',
--+                    @MAYBE_WRAPPER@ '<(node_mksnapshot_exec)',
--                     '<(node_snapshot_main)',
--                   ],
--                   'outputs': [
- diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
- index 73099a03e4..88ca91efb4 100644
- --- a/tools/v8_gypfiles/v8.gyp
---- /dev/null	2023-05-30 13:09:48.302074425 +0200
-+++ b/package/nodejs/0006-std-library-usage-fix.patch	2023-06-27 14:27:00.998756710 +0200
-@@ -0,0 +1,11 @@
-+--- a/deps/v8/include/v8-internal.h	2023-04-12 06:09:14.000000000 +0200
-++++ b/deps/v8/include/v8-internal.h	2023-06-27 14:07:32.594066538 +0200
-+@@ -643,7 +643,7 @@
-+ template <class T>
-+ V8_INLINE void PerformCastCheck(T* data) {
-+   CastCheck<std::is_base_of<Data, T>::value &&
-+-            !std::is_same<Data, std::remove_cv_t<T>>::value>::Perform(data);
-++            !std::is_same<Data, std::remove_cv<T>>::value>::Perform(data);
-+ }
-+ 
-+ // A base class for backing stores, which is needed due to vagaries of
---- a/package/nodejs/nodejs.org	2023-08-08 14:48:14.067637852 +0200
-+++ b/package/nodejs/nodejs.hash	2023-08-08 14:48:39.363899051 +0200
-@@ -1,5 +1,6 @@
- # From https://nodejs.org/dist/v16.20.0/SHASUMS256.txt
- sha256  e0990f992234e40a51fe11f92c3816c93a77e1b081145d3dd762cd1026345349  node-v16.20.0.tar.xz
-+sha256  33d81a233e235a509adda4a4f2209008d04591979de6b3f0f67c1c906093f118  node-v18.16.0.tar.xz
- 
- # Hash for license file
- sha256  ba325815d3df8819bebaf37cad67d6e1f82271e1e4a1189b53abd28e261977d6  LICENSE
-diff --git a/package/nodejs/nodejs.mk b/package/nodejs/nodejs.mk
-index 4e70bd71a3..2547ff30d5 100644
---- a/package/nodejs/nodejs.mk
-+++ b/package/nodejs/nodejs.mk
-@@ -4,7 +4,7 @@
- #
- ################################################################################
- 
--NODEJS_VERSION = 16.20.0
-+NODEJS_VERSION = 18.16.0
- NODEJS_SOURCE = node-v$(NODEJS_VERSION).tar.xz
- NODEJS_SITE = http://nodejs.org/dist/v$(NODEJS_VERSION)
- NODEJS_DEPENDENCIES = \
-@@ -41,13 +41,17 @@ NODEJS_CONF_OPTS = \
- 	--dest-os=linux \
- 	--ninja
+diff --git a/package/nodejs/nodejs-src/nodejs-src.mk b/package/nodejs/nodejs-src/nodejs-src.mk
+index 8f934202b0..de7750868d 100644
+--- a/package/nodejs/nodejs-src/nodejs-src.mk
++++ b/package/nodejs/nodejs-src/nodejs-src.mk
+@@ -70,6 +70,10 @@ endef
+ HOST_NODEJS_SRC_PRE_CONFIGURE_HOOKS += NODEJS_SRC_PYTHON3_SYMLINK
+ NODEJS_SRC_PRE_CONFIGURE_HOOKS += NODEJS_SRC_PYTHON3_SYMLINK
  
 +ifeq ($(BR2_PACKAGE_NODEJS_LIBRARY),y)
-+NODEJS_CONF_OPTS += --shared
++NODEJS_SRC_CONF_OPTS += --shared
 +endif
 +
- HOST_NODEJS_MAKE_OPTS = \
- 	$(HOST_CONFIGURE_OPTS) \
- 	CXXFLAGS="$(HOST_NODEJS_CXXFLAGS)" \
- 	LDFLAGS.host="$(HOST_LDFLAGS)" \
- 	NO_LOAD=cctest.target.mk \
- 	PATH=$(@D)/bin:$(BR_PATH) \
--	JOBS=$(BR2_JLEVEL)
-+	JOBS=$(4)
- 
- NODEJS_MAKE_OPTS = \
- 	$(TARGET_CONFIGURE_OPTS) \
-@@ -55,7 +59,9 @@ NODEJS_MAKE_OPTS = \
- 	PATH=$(@D)/bin:$(BR_PATH) \
- 	LDFLAGS="$(NODEJS_LDFLAGS)" \
- 	LD="$(TARGET_CXX)" \
--	JOBS=$(BR2_JLEVEL)
-+	JOBS=$(4)
-+
-+NODEJS_MAKE=$(MAKE1)
- 
- # nodejs's build system uses python which can be a symlink to an unsupported
- # python version (e.g. python 3.10 with nodejs 14.18.1). We work around this by
+ ifeq ($(BR2_PACKAGE_OPENSSL),y)
+ NODEJS_SRC_DEPENDENCIES += openssl
+ NODEJS_SRC_CONF_OPTS += --shared-openssl
+
