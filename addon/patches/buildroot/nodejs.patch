@@ -20,7 +20,7 @@ diff --git a/package/nodejs/0005-shared-lib-installation.patch b/package/nodejs/
 new file mode 100644
 index 0000000000..dab60f748f
 --- /dev/null
-+++ b/package/nodejs/0005-shared-lib-installation.patch
++++ b/package/nodejs/nodejs-src/0005-shared-lib-installation.patch
 @@ -0,0 +1,10 @@
 +--- a/tools/install.py	2022-11-04 12:22:08.000000000 +0100
 ++++ b/tools/install.py	2023-04-19 00:41:42.093186113 +0200
