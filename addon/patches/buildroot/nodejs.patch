@@ -16,7 +16,7 @@ index 1489306be0..b5aaaa167b 100644
  config BR2_PACKAGE_NODEJS_NPM
  	bool "NPM for the target"
  	select BR2_PACKAGE_OPENSSL
-diff --git a/package/nodejs/0005-shared-lib-installation.patch b/package/nodejs/0005-shared-lib-installation.patch
+diff --git a/package/nodejs/nodejs-src/0005-shared-lib-installation.patch b/package/nodejs/nodejs-src/0005-shared-lib-installation.patch
 new file mode 100644
 index 0000000000..dab60f748f
 --- /dev/null
