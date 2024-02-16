@@ -45,11 +45,19 @@ Signed-off-by: Adrian Perez de Castro <aperez@igalia.com>
  .../software/FELightingSoftwareApplier.h      | 16 ++++++
  8 files changed, 58 insertions(+), 36 deletions(-)
 
-diff --git a/Source/WebCore/platform/graphics/cpu/arm/filters/FELightingNEON.cpp b/Source/WebCore/platform/graphics/cpu/arm/filters/FELightingNEON.cpp
-index f6ff8c20a5a8..42a97ffc5372 100644
+diff --Naur a/Source/WebCore/platform/graphics/cpu/arm/filters/FELightingNEON.cpp b/Source/WebCore/platform/graphics/cpu/arm/filters/FELightingNEON.cpp
 --- a/Source/WebCore/platform/graphics/cpu/arm/filters/FELightingNEON.cpp
 +++ b/Source/WebCore/platform/graphics/cpu/arm/filters/FELightingNEON.cpp
-@@ -49,7 +49,7 @@ short* feLightingConstantsForNeon()
+@@ -35,7 +35,7 @@
+ //   ALPHAX_Q ALPHAY_Q REMAPX_D REMAPY_D
+ 
+ 
+-static alignas(16) short s_FELightingConstantsForNeon[] = {
++alignas(16) static short s_FELightingConstantsForNeon[] = {
+     // Alpha coefficients.
+     -2, 1, 0, -1, 2, 1, 0, -1,
+     0, -1, -2, -1, 0, 1, 2, 1,
+@@ -49,7 +49,7 @@
      return s_FELightingConstantsForNeon;
  }
  
@@ -58,7 +66,7 @@ index f6ff8c20a5a8..42a97ffc5372 100644
  {
      neonDrawLighting(parameters);
  }
-@@ -464,7 +464,7 @@ TOSTRING(neonDrawLighting) ":" NL
+@@ -464,7 +464,7 @@
      "b .lightStrengthCalculated" NL
  ); // NOLINT
  
