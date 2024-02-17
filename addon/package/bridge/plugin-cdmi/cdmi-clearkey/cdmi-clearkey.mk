@@ -4,7 +4,7 @@
 #
 ################################################################################
 CDMI_CLEARKEY_VERSION = main
-CDMI_CLEARKEY_SITE = git@git.integraal.info:domotica/drm
+CDMI_CLEARKEY_SITE = git@git.integraal.info:integraal/drm.git
 CDMI_CLEARKEY_SUBDIR = src/clearkey
 CDMI_CLEARKEY_SITE_METHOD = git
 CDMI_CLEARKEY_INSTALL_STAGING = NO
