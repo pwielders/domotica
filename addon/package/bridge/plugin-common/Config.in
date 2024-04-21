@@ -499,3 +499,18 @@ config BR2_PACKAGE_PLUGIN_RPCLINK
 	help
 	  Plugin adding an RPC server to act as a server itself
 
+menuconfig BR2_PACKAGE_PLUGIN_EXAMPLES
+    bool "Examples"
+    default n
+    help
+      Example plugins for different purposes!
+
+if BR2_PACKAGE_PLUGIN_EXAMPLES
+
+config BR2_PACKAGE_EXAMPLE_OUT_OF_PROCESS
+    bool "OutOfProcessPlugin"
+    default y
+    help
+      Plugin to show and test out of process functionalities..
+
+endif
