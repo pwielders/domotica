@@ -8,7 +8,13 @@ COBALT_VERSION = a772cccf1da68623f3312bb8466860e2d1964f24
 COBALT_SITE_METHOD = git
 COBALT_SITE = git@github.com:Metrological/cobalt
 COBALT_INSTALL_STAGING = YES
-COBALT_DEPENDENCIES = gst1-plugins-good gst1-plugins-bad host-bison host-ninja bridge-clients host-python3 host-python-six host-gn
+COBALT_DEPENDENCIES = gst1-plugins-good gst1-plugins-bad host-bison host-ninja host-python3 host-python-six host-gn
+
+ifeq ($(BR2_PACKAGE_WPEFRAMEWORK),y)
+COBALT_DEPENDENCIES += wpeframework-clientlibraries
+else
+COBALT_DEPENDENCIES += bridge-clients
+endif
 
 export COBALT_STAGING_DIR=$(STAGING_DIR)
 export COBALT_TOOLCHAIN_PREFIX=$(TARGET_CROSS)
