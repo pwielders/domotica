@@ -378,6 +378,12 @@ config BR2_PACKAGE_PLUGIN_REMOTECONTROL_LINUX_INPUT
 
 endif
 
+config BR2_PACKAGE_PLUGIN_SCREENSAVER
+	bool "Screensaver"
+	select BR2_PACKAGE_PLUGIN_COMMON
+	help
+	  Screensaver Plugin
+
 config BR2_PACKAGE_PLUGIN_SNAPSHOT
 	bool "Snapshot"
 	select BR2_PACKAGE_PLUGIN_COMMON
