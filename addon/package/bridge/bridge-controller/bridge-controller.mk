@@ -4,7 +4,7 @@
 #
 ################################################################################
 BRIDGE_CONTROLLER_VERSION = main
-BRIDGE_CONTROLLER_SITE = git@git.integraal.info:domotica/controller.git
+BRIDGE_CONTROLLER_SITE = git@git.integraal.info:integraal/controller.git
 BRIDGE_CONTROLLER_SITE_METHOD = git
 BRIDGE_CONTROLLER_CONFIGURE_CMDS = true
 BRIDGE_CONTROLLER_BUILD_CMDS = true

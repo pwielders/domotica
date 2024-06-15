@@ -6,7 +6,7 @@
 
 BRIDGE_VERSION = main 
 BRIDGE_SITE_METHOD = git
-BRIDGE_SITE = git@git.integraal.info:domotica/framework.git
+BRIDGE_SITE = git@git.integraal.info:integraal/framework.git
 BRIDGE_SUBDIR = src
 BRIDGE_INSTALL_STAGING = YES
 BRIDGE_DEPENDENCIES = zlib host-bridge-tools

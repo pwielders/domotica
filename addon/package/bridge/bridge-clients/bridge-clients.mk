@@ -6,7 +6,7 @@
 
 BRIDGE_CLIENTS_VERSION = main
 BRIDGE_CLIENTS_SITE_METHOD = git
-BRIDGE_CLIENTS_SITE = git@git.integraal.info:domotica/clients.git
+BRIDGE_CLIENTS_SITE = git@git.integraal.info:integraal/clients.git
 BRIDGE_CLIENTS_INSTALL_STAGING = YES
 BRIDGE_CLIENTS_INSTALL_TARGET = YES
 

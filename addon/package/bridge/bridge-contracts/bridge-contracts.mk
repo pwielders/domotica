@@ -6,7 +6,7 @@
 
 BRIDGE_CONTRACTS_VERSION = main
 BRIDGE_CONTRACTS_SITE_METHOD = git
-BRIDGE_CONTRACTS_SITE = git@git.integraal.info:domotica/contracts.git
+BRIDGE_CONTRACTS_SITE = git@git.integraal.info:integraal/contracts.git
 BRIDGE_CONTRACTS_INSTALL_STAGING = YES
 BRIDGE_CONTRACTS_INSTALL_TARGET = YES
 

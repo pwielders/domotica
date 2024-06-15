@@ -6,7 +6,7 @@
 
 HOST_BRIDGE_TOOLS_VERSION = main
 HOST_BRIDGE_TOOLS_SITE_METHOD = git
-HOST_BRIDGE_TOOLS_SITE = git@git.integraal.info:domotica/framework.git
+HOST_BRIDGE_TOOLS_SITE = git@git.integraal.info:integraal/framework.git
 HOST_BRIDGE_TOOLS_INSTALL_STAGING = YES
 HOST_BRIDGE_TOOLS_INSTALL_TARGET = NO
 

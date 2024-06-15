@@ -4,7 +4,7 @@
 #
 ################################################################################
 PLUGIN_PROVISIONING_VERSION = main
-PLUGIN_PROVISIONING_SITE = git@git.integraal.info:domotica/modules.git
+PLUGIN_PROVISIONING_SITE = git@git.integraal.info:integraal/modules.git
 PLUGIN_PROVISIONING_SUBDIR = src/provisioning/Provisioning
 PLUGIN_PROVISIONING_SITE_METHOD = git
 PLUGIN_PROVISIONING_INSTALL_STAGING = NO

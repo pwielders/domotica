@@ -4,7 +4,7 @@
 #
 ################################################################################
 PLUGIN_SWITCHBOARD_VERSION = main
-PLUGIN_SWITCHBOARD_SITE = git@git.integraal.info:domotica/modules.git
+PLUGIN_SWITCHBOARD_SITE = git@git.integraal.info:integraal/modules.git
 PLUGIN_SWITCHBOARD_SUBDIR = src/switchboard
 PLUGIN_SWITCHBOARD_SITE_METHOD = git
 PLUGIN_SWITCHBOARD_INSTALL_STAGING = NO

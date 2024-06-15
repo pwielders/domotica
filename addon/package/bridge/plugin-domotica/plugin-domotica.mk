@@ -4,7 +4,7 @@
 #
 ################################################################################
 PLUGIN_DOMOTICA_VERSION = main
-PLUGIN_DOMOTICA_SITE = git@git.integraal.info:domotica/modules.git
+PLUGIN_DOMOTICA_SITE = git@git.integraal.info:integraal/modules.git
 PLUGIN_DOMOTICA_SUBDIR = src
 PLUGIN_DOMOTICA_SITE_METHOD = git
 PLUGIN_DOMOTICA_INSTALL_STAGING = NO

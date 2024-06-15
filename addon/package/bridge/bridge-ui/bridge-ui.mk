@@ -4,7 +4,7 @@
 #
 ################################################################################
 BRIDGE_UI_VERSION = main
-BRIDGE_UI_SITE = git@git.integraal.info:domotica/ui.git
+BRIDGE_UI_SITE = git@git.integraal.info:integraal/ui.git
 BRIDGE_UI_SITE_METHOD = git
 BRIDGE_UI_CONFIGURE_CMDS = true
 BRIDGE_UI_BUILD_CMDS = true
