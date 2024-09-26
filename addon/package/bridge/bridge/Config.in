@@ -30,6 +30,11 @@ config 	BR2_PACKAGE_BRIDGE_DEVICES
 	help 
           Devices contains several hardware abstractions for IC found out there.
 
+config 	BR2_PACKAGE_BRIDGE_LOCALTRACER
+	bool "localtracer"
+	help 
+          A simple helper library to display Messages in a local process..
+
 config BR2_PACKAGE_BRIDGE_ZWAVE
 	bool "zwave"
 	help 
