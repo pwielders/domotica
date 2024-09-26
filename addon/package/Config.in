@@ -28,7 +28,4 @@ source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/netflix52/Config.in"
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/nexus/Config.in"
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/playready4/Config.in"
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/widevine/Config.in"
-
-source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/wpeframework-opensource/Config.in"
-source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/wpeframework-restricted/Config.in"
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/bridge/Config.in"
