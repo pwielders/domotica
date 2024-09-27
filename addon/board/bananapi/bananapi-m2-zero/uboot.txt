@@ -3,5 +3,5 @@ bootlogo=off
 console=serial
 #disp_mode=1280x720p60
 usbstoragequirks=0x2537:0x1066:u,0x2537:0x1068:u
-overlays=ethernet w1-gpio uart2 uart3 i2c0
+overlays=ethernet w1-gpio uart2 uart3 i2c0 spi-spidev
 rootdev="/dev/mmcblk1p2"
