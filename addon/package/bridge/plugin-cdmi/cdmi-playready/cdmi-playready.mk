@@ -4,7 +4,7 @@
 #
 ################################################################################
 CDMI_PLAYREADY_VERSION = main
-CDMI_PLAYREADY_SITE = git@git.integraal.info:domotica/drm
+CDMI_PLAYREADY_SITE = git@git.integraal.info:integraal/drm
 CDMI_PLAYREADY_SUBDIR = src/playready
 CDMI_PLAYREADY_SITE_METHOD = git
 CDMI_PLAYREADY_INSTALL_STAGING = NO
