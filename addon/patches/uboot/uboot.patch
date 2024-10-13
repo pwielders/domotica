@@ -1,0 +1,11 @@
+--- a/scripts/dtc/pylibfdt/setup.py	2024-10-12 21:20:42.969489628 +0200
++++ b/scripts/dtc/pylibfdt/setup.py	2024-10-12 21:24:19.035130884 +0200
+@@ -96,7 +96,7 @@
+ files = os.environ.get('SOURCES', '').split()
+ cflags = os.environ.get('CPPFLAGS', '').split()
+ objdir = os.environ.get('OBJDIR')
+-version = os.environ.get('VERSION')
++version = os.environ.get('VERSION').split('-')[2]
+ swig_opts = os.environ.get('SWIG_OPTS', '').split()
+ 
+ # If we were called directly rather than through our Makefile (which is often
