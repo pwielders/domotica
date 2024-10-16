@@ -47,7 +47,7 @@ fatload ${devtype} ${devnum} ${kernel_addr_r} ${prefix}zImage
 fatload ${devtype} ${devnum} ${fdt_addr_r} ${prefix}sun8i-h2-plus-bananapi-m2-zero.dtb
 
 fdt addr ${fdt_addr_r}
-fdt resize
+fdt resize 0x20000
 setexpr fdt_addr_overlay_r ${fdt_addr_r} + F000
 
 for overlay in ${overlays}; do
