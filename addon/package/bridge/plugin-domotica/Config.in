@@ -87,6 +87,15 @@ config BR2_PACKAGE_PLUGIN_SCRIPTENGINE
 	help
 	   Script Engine plugin
 
+config BR2_PACKAGE_PLUGIN_SPEECHTOTEXT
+	bool "SpeechToText"
+	depends on BR2_PACKAGE_WHISPER
+	help
+	  SpeechToText plugin
+
+comment "SpeechToText plugin requires an AI Engine (like Whisper)"
+        depends on !BR2_PACKAGE_WHISPER
+
 config BR2_PACKAGE_PLUGIN_SPICONTROL
 	bool "SPIControl"
 	select BR2_PACKAGE_BRIDGE_DEVICES

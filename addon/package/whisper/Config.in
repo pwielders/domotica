@@ -1,0 +1,9 @@
+config BR2_PACKAGE_WHISPER
+	bool "whisper"
+        depends on BR2_GCC_ENABLE_OPENMP
+        select BR2_PACKAGE_LLAMA
+        select BR2_PACKAGE_GGML
+
+comment "whisper needs a toolchain with OpenMP support"
+        depends on !BR2_GCC_ENABLE_OPENMP
+
