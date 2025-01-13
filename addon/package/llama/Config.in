@@ -1,5 +1,6 @@
 config BR2_PACKAGE_LLAMA
 	bool "llama"
+        select BR2_PACKAGE_GGML
         depends on BR2_GCC_ENABLE_OPENMP
 
 comment "llama needs a toolchain with OpenMP support"
