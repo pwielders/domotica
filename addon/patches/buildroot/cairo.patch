@@ -109,38 +109,6 @@ index 0000000000..33b71df4d6
 + 
 +-- 
 +2.24.1
-diff --git a/package/cairo/0002-meson-always-skip-IPC_RMID_DEFERRED_RELEASE-check-wh.patch b/package/cairo/0002-meson-always-skip-IPC_RMID_DEFERRED_RELEASE-check-wh.patch
-deleted file mode 100644
-index 5a5c438a97..0000000000
---- a/package/cairo/0002-meson-always-skip-IPC_RMID_DEFERRED_RELEASE-check-wh.patch
-+++ /dev/null
-@@ -1,41 +0,0 @@
--From 8d5037ed642b02cdb018e49866aa286f30a7b59a Mon Sep 17 00:00:00 2001
--From: Thomas Devoogdt <thomas@devoogdt.com>
--Date: Mon, 5 Feb 2024 17:47:07 +0100
--Subject: [PATCH] meson: always skip IPC_RMID_DEFERRED_RELEASE check when
-- cross-compiling
--
--../../br-test-pkg/bootlin-armv5-uclibc/build/cairo-1.17.4/meson.build:279:13:
--ERROR: Can not run test applications in this cross environment.
--
--Commit 1bec56ea8a931e1ae1c74cc740134497ec365267 added support to define
--ipc_rmid_deferred_release in a cross-compile config, but still kept
--the default to auto, which anyhow results in an error when cross-compiling.
--
--There is only one usage of the ipc_rmid_deferred_release compile declarative
--which was originally added in this commit: 5041b462d084de8552336275914d30c23bf5dd35.
--
--If ipc_rmid_deferred_release is set to FALSE, an additional XSync is performed.
--This doesn't sound very harmful, so that is why this commit defaults to FALSE
--and thus avoids any cross-compile errors.
--
--Upstream: https://gitlab.freedesktop.org/cairo/cairo/-/merge_requests/534
--Signed-off-by: Thomas Devoogdt <thomas@devoogdt.com>
-----
-- meson.build | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
 -diff --git a/meson.build b/meson.build
 -index 9efe91978..6a670bf94 100644
 ---- a/meson.build
@@ -156,28 +124,6 @@ index 5a5c438a97..0000000000
 -   # a string and check the string value.
 ---
 -2.34.1
-diff --git a/package/cairo/0003-meson-only-require-cpp-for-windows.patch b/package/cairo/0003-meson-only-require-cpp-for-windows.patch
-deleted file mode 100644
-index 3ce396f66f..0000000000
---- a/package/cairo/0003-meson-only-require-cpp-for-windows.patch
-+++ /dev/null
-@@ -1,38 +0,0 @@
--From e93ef3feb69994e3aa4e0ab66ccd66139b097e49 Mon Sep 17 00:00:00 2001
--From: Thomas Devoogdt <thomas.devoogdt@barco.com>
--Date: Thu, 18 Jul 2024 12:16:51 +0200
--Subject: [PATCH] meson: only require cpp for windows
--
--Allow to compile cairo without c++ toolchain.
--
--Fixes:
-- - http://autobuild.buildroot.net/results/98b62ab7ed3092f9f9085f723baf7d6267451e5c/
--
--Upstream: https://gitlab.freedesktop.org/cairo/cairo/-/merge_requests/573
--Signed-off-by: Thomas Devoogdt <thomas.devoogdt@barco.com>
-----
-- meson.build | 4 +++-
-- 1 file changed, 3 insertions(+), 1 deletion(-)
--
 -diff --git a/meson.build b/meson.build
 -index 9100152ee..297482b03 100644
 ---- a/meson.build
@@ -252,12 +198,12 @@ index c41a12fe81..0c87a2904b 100644
  
  endif
 diff --git a/package/cairo/cairo.hash b/package/cairo/cairo.hash
-index df9c693bad..1dbd64d325 100644
+index b2d384d01a..d80fcb8aa0 100644
 --- a/package/cairo/cairo.hash
 +++ b/package/cairo/cairo.hash
 @@ -1,5 +1,6 @@
- # From https://www.cairographics.org/releases/cairo-1.18.0.tar.xz.sha256sum
- sha256  243a0736b978a33dee29f9cca7521733b78a65b5418206fef7bd1c3d4cf10b64  cairo-1.18.0.tar.xz
+ # From https://www.cairographics.org/releases/cairo-1.18.2.tar.xz.sha256sum
+ sha256  a62b9bb42425e844cc3d6ddde043ff39dbabedd1542eba57a2eb79f85889d45a  cairo-1.18.2.tar.xz
 +sha256  5e7b29b3f113ef870d1e3ecf8adf21f923396401604bda16d44be45e66052331  cairo-1.16.0.tar.xz
  
  # Hash for license files:
@@ -270,7 +216,7 @@ index ba25620f8d..f479aa252a 100644
  #
  ################################################################################
  
--CAIRO_VERSION = 1.18.0
+-CAIRO_VERSION = 1.18.2
 +CAIRO_VERSION = 1.16.0
  CAIRO_SOURCE = cairo-$(CAIRO_VERSION).tar.xz
  CAIRO_LICENSE = LGPL-2.1 or MPL-1.1 (library)
