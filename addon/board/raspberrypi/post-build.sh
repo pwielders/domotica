@@ -149,7 +149,7 @@ ttyS0::respawn:/sbin/getty -L ttyS0 115200 vt100 # ttyS0 console' ${TARGET_DIR}/
 
                 --gpu_mem_256=*|--gpu_mem_512=*|--gpu_mem_1024=*)
                 # Set GPU memory
-                gpu_mem="${arg:2}"
+                gpu_mem=$(eval echo ${arg} | cut -d'=' -f2)
                 sed -e "/^${gpu_mem%=*}=/s,=.*,=${gpu_mem##*=}," -i "${BINARIES_DIR}/rpi-firmware/config.txt"
                 ;;
 
