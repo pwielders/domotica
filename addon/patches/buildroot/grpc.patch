@@ -1,0 +1,17 @@
+diff --git a/package/grpc/0005-missing-include-file.patch b/package/grpc/0005-missing-include-file.patch
+new file mode 100644
+index 0000000000..a016a7d83b
+--- /dev/null
++++ b/package/grpc/0005-missing-include-file.patch
+@@ -0,0 +1,11 @@
++--- a/src/core/lib/iomgr/tcp_posix.cc	2025-04-02 18:14:01.987985207 +0000
+++++ b/src/core/lib/iomgr/tcp_posix.cc	2025-04-02 18:11:10.787320952 +0000
++@@ -69,6 +69,8 @@
++ #include "src/core/lib/slice/slice_internal.h"
++ #include "src/core/lib/slice/slice_string_helpers.h"
++ 
+++#include "absl/strings/str_cat.h"
+++
++ #ifndef SOL_TCP
++ #define SOL_TCP IPPROTO_TCP
++ #endif
