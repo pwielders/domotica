@@ -14,7 +14,7 @@ BR2_SYSTEM_DHCP="eth0"
 BR2_ROOTFS_POST_BUILD_SCRIPT="$(BR2_EXTERNAL)/board/raspberrypi/post-build.sh"
 BR2_ROOTFS_POST_IMAGE_SCRIPT="$(TOPDIR)/support/scripts/genimage.sh"
 BR2_ROOTFS_POST_BUILD_SCRIPT_ARGS="--rpi-wifi --gpu_mem_1024=384 --silent --hdmi-console --mount-boot --add-vc4-fkms-v3d-overlay --install-ssh-id"
-BR2_ROOTFS_POST_IMAGE_SCRIPT_ARGS="-c $(BR2_EXTERNAL)/board/raspberrypi/genimage.cfg"
+BR2_ROOTFS_POST_IMAGE_SCRIPT_ARGS="-c $(BR2_EXTERNAL)/board/raspberrypi/genimage5.cfg"
 BR2_LINUX_KERNEL=y
 BR2_LINUX_KERNEL_CUSTOM_GIT=y
 BR2_LINUX_KERNEL_CUSTOM_REPO_URL="https://github.com/raspberrypi/linux.git"
