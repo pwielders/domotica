@@ -45,4 +45,18 @@ index 8f934202b0..de7750868d 100644
 ++
 + namespace v8 {
 + namespace base {
-+ 
++
+--- /dev/null	2024-09-23 10:38:10.659163567 +0200
++++ b/package/nodejs/nodejs-src/0005-shared-lib-installation.patch	2024-09-23 11:08:49.867138620 +0200
+@@ -0,0 +1,11 @@
++--- a/tools/install.org	2024-09-23 11:07:15.974139893 +0200
+++++ b/tools/install.py		2024-09-23 11:07:27.607139736 +0200
++@@ -175,7 +175,7 @@
++       link_path = abspath(options.install_path, 'lib/libnode.so')
++       try_symlink(options, so_name, link_path)
++     else:
++-      output_lib = 'libnode.' + options.variables.get('shlib_suffix')
+++      output_lib = 'lib/libnode.' + options.variables.get('shlib_suffix')
++       action(options, [os.path.join(options.build_dir, output_lib)],
++              os.path.join(options.variables.get('libdir'), output_lib))
++  
