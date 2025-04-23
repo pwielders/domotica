@@ -94,6 +94,13 @@ config BR2_PACKAGE_BRIDGE_OOM_ADJUST
 	string "oom-adjust"
 	default ""
 
+config BR2_PACKAGE_BRIDGE_SECURE_SOCKETS
+	bool "secure sockets"
+        default n
+	help 
+          Enables the posisbility to configure and run the framework over 
+          https/wss (secure) sockets. Adds a dependency on OpenSSL or alike. 
+
 config BR2_PACKAGE_BRIDGE_COMRPC_PLATFORM_DEFINITION
         bool "Select COMRPC platform"
 	default n
@@ -114,6 +121,7 @@ config BR2_PACKAGE_BRIDGE_COMRPC_INSTANCE_32
 config BR2_PACKAGE_BRIDGE_COMRPC_INSTANCE_64
         bool "64bits platform"
 
+
 endchoice
 
 endif
@@ -129,7 +137,7 @@ source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/bridge/bridge-devtools/Config.
 
 endmenu
 
-menu "Extensions"
+menu "Clients"
 
 source "$BR2_EXTERNAL_ADDON_PACKAGES_PATH/package/bridge/bridge-clients/Config.in"
 

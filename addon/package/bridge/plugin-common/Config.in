@@ -2,15 +2,24 @@ config BR2_PACKAGE_PLUGIN_COMMON
 	select BR2_PACKAGE_BRIDGE_CONTRACTS
 	bool
 
-config BR2_PACKAGE_PLUGIN_BACKOFFICE
-	bool "Backoffice"
+config BR2_PACKAGE_PLUGIN_BACKEND
+	bool "Backend"
 	select BR2_PACKAGE_PLUGIN_COMMON
+        select BR2_PACKAGE_BRIDGE_SECURE_SOCKETS
 	help
-	  BackOffice Plugin, opens a connection to a cloudservice to service incoming
+	  Backend Plugin, opens a connection to a cloudservice to service incoming
           requests from the cloud on the local device. This plugin is a modular plugin
           that loads components (within the plugin process space) to handle various
           extendable requests from the cloud.
           So do not forget to include components to load into this plugin!
+
+config BR2_PACKAGE_PLUGIN_BACKOFFICE
+	bool "Backoffice"
+	select BR2_PACKAGE_PLUGIN_COMMON
+	help
+	  BackOffice Plugin, opens a connection to a cloudservice to service specific, 
+          dedictaed incoming requests from the cloud. This is a simplified version of 
+          backend plugin
 
 menuconfig BR2_PACKAGE_PLUGIN_BLUETOOTH
     bool "BluetoothControl"
