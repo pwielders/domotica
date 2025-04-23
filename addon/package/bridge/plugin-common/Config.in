@@ -2,6 +2,16 @@ config BR2_PACKAGE_PLUGIN_COMMON
 	select BR2_PACKAGE_BRIDGE_CONTRACTS
 	bool
 
+config BR2_PACKAGE_PLUGIN_BACKOFFICE
+	bool "Backoffice"
+	select BR2_PACKAGE_PLUGIN_COMMON
+	help
+	  BackOffice Plugin, opens a connection to a cloudservice to service incoming
+          requests from the cloud on the local device. This plugin is a modular plugin
+          that loads components (within the plugin process space) to handle various
+          extendable requests from the cloud.
+          So do not forget to include components to load into this plugin!
+
 menuconfig BR2_PACKAGE_PLUGIN_BLUETOOTH
     bool "BluetoothControl"
     select BR2_PACKAGE_BRIDGE_BLUETOOTH
@@ -292,11 +302,25 @@ config BR2_PACKAGE_PLUGIN_DHCPSERVER
 	help
 	  DHCPServer Plugin, implements the dhcp protocol as server (IPv4 only).
 
+config BR2_PACKAGE_PLUGIN_DNSSERVER
+	bool "DNSServer"
+	select BR2_PACKAGE_PLUGIN_COMMON
+        select BR2_PACKAGE_BRIDGE_NETWORKING
+	help
+	  DNSServer Plugin, implements the DNS and mDNS protocol as server.
+
 config BR2_PACKAGE_PLUGIN_DISPLAYINFO
 	bool "DisplayInfo"
 	select BR2_PACKAGE_PLUGIN_COMMON
 	help
 	  DisplayInfo Plugin
+
+config BR2_PACKAGE_PLUGIN_FIREWALL
+	bool "Firewall"
+	select BR2_PACKAGE_PLUGIN_COMMON
+        select BR2_PACKAGE_BRIDGE_NETWORKING
+	help
+	  Firewall Plugin, implements a COMRPC/JSONRPC capable firwall (reading and setting).
 
 config BR2_PACKAGE_PLUGIN_LAUNCHER
 	bool "Launcher"

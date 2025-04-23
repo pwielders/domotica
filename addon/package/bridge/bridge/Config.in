@@ -24,6 +24,13 @@ config BR2_PACKAGE_BRIDGE_BLUETOOTH
        help 
           Bluetooth abstraction layer on top of Bluez (Kernel module stuff).
 
+config 	BR2_PACKAGE_BRIDGE_NETWORKING
+	bool "networking"
+	default n
+	select BR2_PACKAGE_IPTABLES
+	help 
+          C Abstraction layer on top of linux (and partially windows) network functionality.
+
 config 	BR2_PACKAGE_BRIDGE_DEVICES
 	bool "devices"
 	select BR2_PACKAGE_LIBUSB
