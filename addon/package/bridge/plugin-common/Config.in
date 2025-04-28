@@ -133,6 +133,118 @@ config BR2_PACKAGE_PLUGIN_BRIDGELINK
 	help
 	  BridgeLink Plugin, connect one bridge to another..
 
+menuconfig BR2_PACKAGE_PLUGIN_COBALT
+    bool "Cobalt"
+    select BR2_PACKAGE_COBALT
+    select BR2_PACKAGE_PLUGINS_COMMON
+    select BR2_PACKAGE_THUNDER_HAS_YOUTUBE
+    help
+        Cobalt plugin
+
+    if BR2_PACKAGE_PLUGIN_COBALT
+        config BR2_PACKAGE_PLUGIN_COBALT_URL
+            string "url"
+            default "https://www.youtube.com/tv"
+            help
+            Select cobalt URL for startup
+
+        config BR2_PACKAGE_PLUGIN_COBALT_VIDEO_BUFFER_BUDGET
+            string "VideoBuffer"
+            default "15"
+            help
+            Select the maximum size (in MB) for the video buffers
+
+        config BR2_PACKAGE_PLUGIN_COBALT_AUDIO_BUFFER_BUDGET
+            string "AudioBuffer"
+            default "3"
+            help
+            Select the maximum size (in MB) for the audio buffers
+
+        config BR2_PACKAGE_PLUGIN_COBALT_PROGRESSIVE_BUFFER_BUDGET
+            string "AudioBuffer"
+            default "5"
+            help
+            Select the maximum size (in MB) for the progressive buffers
+
+        config BR2_PACKAGE_PLUGIN_COBALT_MEDIA_GARBAGE_COLLECT
+            string "MediaGarbageCollect"
+            default "30"
+            help
+            Select the maximum time (in Seconds) for the garabage collect on media buffers.
+
+        choice BR2_PACKAGE_PLUGIN_COBALT_RESOLUTION
+            default BR2_PACKAGE_PLUGIN_COBALT_RESOLUTION_720P
+            prompt "resolution"
+            help
+            Select cobalt output resolution
+
+        config BR2_PACKAGE_PLUGIN_COBALT_RESOLUTION_720P
+            bool "720p"
+            help
+                Set the resolution to 720p (HD Ready)
+
+        config BR2_PACKAGE_PLUGIN_COBALT_RESOLUTION_1080P
+            bool "1080p"
+            help
+                Set the resolution to 1080p (Full HD)
+
+        config BR2_PACKAGE_PLUGIN_COBALT_RESOLUTION_2160P
+            bool "2160p"
+            help
+                Set the resolution to 2160p (4k)
+        endchoice
+
+        config BR2_PACKAGE_PLUGIN_COBALT_SINGLE_PLAYBACKRATE
+            bool "only 1x playback rate"
+            default n
+            help
+            Select this to enable only 1x playback rate.
+
+        config BR2_PACKAGE_PLUGIN_COBALT_AUTOSTART
+            bool "Start Automatically"
+            default n
+            help
+            Select this to start the plugin automatically when starting Thunder
+
+        config BR2_PACKAGE_PLUGIN_COBALT_RESUMED
+            bool "Start Resumed"
+            default n
+            help
+            Select this to resume the plugin automatically when starting Thunder
+
+        config BR2_PACKAGE_PLUGIN_COBALT_OUTOFPROCESS
+            bool "Out of process"
+            default y
+            help
+            Select this to run this plugin in its own process.
+
+        config BR2_PACKAGE_PLUGIN_COBALT_USER
+            string "user"
+            default ""
+            help
+                run Cobalt under this user, leave empty to use the same as
+                Thunder
+
+        config BR2_PACKAGE_PLUGIN_COBALT_GROUP
+            string "group"
+            default BR2_PACKAGE_PLUGIN_COBALT_USER
+            help
+                run Cobalt under this group, leave empty to use the same as
+                Thunder
+
+        config BR2_PACKAGE_PLUGIN_COBALT_OPERATOR_NAME
+            string "operatorname"
+            default ""
+
+        config BR2_PACKAGE_PLUGIN_COBALT_SCOPE
+            string "scope"
+            default ""
+
+        config BR2_PACKAGE_PLUGIN_COBALT_SECRET
+            string "secret"
+            default ""
+    endif
+
 config BR2_PACKAGE_PLUGIN_COMMANDER
 	bool "Commander"
 	select BR2_PACKAGE_PLUGIN_COMMON

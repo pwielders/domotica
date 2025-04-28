@@ -34,6 +34,14 @@ config BR2_PACKAGE_BRIDGE_OPENCDM
         help
           Creates a ocdm compatible library to be used as a plugin to the OpenCDMServer in the bridge.
 
+config BR2_PACKAGE_BRIDGE_DEVICEINFO
+	select BR2_PACKAGE_BRIDGE_CONTRACTS
+        select BR2_PACKAGE_BRIDGE_CLIENTS
+        bool "DeviceInfo"
+        default y if BR2_PACKAGE_PLUGIN_DEVICEINFO
+        help
+            A helpful C-interface to easily get information from the DeviceInfo plugin.
+
 config BR2_PACKAGE_BRIDGE_DISPLAYINFO
 	select BR2_PACKAGE_BRIDGE_CONTRACTS
         select BR2_PACKAGE_BRIDGE_CLIENTS
