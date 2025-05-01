@@ -34,7 +34,7 @@ config BR2_PACKAGE_PLUGIN_BLUETOOTH_AUTOSTART
     bool "Start Automatically"
     default y
     help
-      Select this to start the plugin automatically when starting WPEFramework
+      Select this to start the plugin automatically when starting Bridge
 
 config BR2_PACKAGE_PLUGIN_BLUETOOTH_PORT
     string "Port for communication with the BT chip"
@@ -262,7 +262,7 @@ if BR2_PACKAGE_PLUGIN_COMPOSITOR
 config BR2_PACKAGE_PLUGIN_COMPOSITOR_AUTOSTART
     bool "Start Automatically"
     help
-      Select this to start the plugin automatically when starting WPEFramework
+      Select this to start the plugin automatically when starting Bridge
 
 config BR2_PACKAGE_PLUGIN_COMPOSITOR_OUTOFPROCESS
     bool "Out of process"
@@ -417,18 +417,36 @@ config BR2_PACKAGE_PLUGIN_DEVICEINFO
 	help
 	  DeviceInfo Plugin
 
-config BR2_PACKAGE_PLUGIN_DHCPSERVER
+menuconfig BR2_PACKAGE_PLUGIN_DHCPSERVER
 	bool "DHCPServer"
 	select BR2_PACKAGE_PLUGIN_COMMON
 	help
 	  DHCPServer Plugin, implements the dhcp protocol as server (IPv4 only).
 
-config BR2_PACKAGE_PLUGIN_DNSSERVER
+if BR2_PACKAGE_PLUGIN_DHCPSERVER
+
+config BR2_PACKAGE_PLUGIN_DHCPSERVER_AUTOSTART
+    bool "Start Automatically"
+    help
+      Select this to start the plugin automatically when starting Bridge
+
+endif
+
+menuconfig BR2_PACKAGE_PLUGIN_DNSSERVER
 	bool "DNSServer"
 	select BR2_PACKAGE_PLUGIN_COMMON
         select BR2_PACKAGE_BRIDGE_NETWORKING
 	help
 	  DNSServer Plugin, implements the DNS and mDNS protocol as server.
+
+if BR2_PACKAGE_PLUGIN_DNSSERVER
+
+config BR2_PACKAGE_PLUGIN_DNSSERVER_FIREWALL
+    string "firewall"
+    help
+      Set the callsign of the firewall if you want to block DNS resoving for denied clients
+
+endif
 
 config BR2_PACKAGE_PLUGIN_DISPLAYINFO
 	bool "DisplayInfo"
