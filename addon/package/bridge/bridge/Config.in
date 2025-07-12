@@ -27,7 +27,7 @@ config BR2_PACKAGE_BRIDGE_BLUETOOTH
 config 	BR2_PACKAGE_BRIDGE_NETWORKING
 	bool "networking"
 	default n
-	select BR2_PACKAGE_IPTABLES
+	select BR2_PACKAGE_LIBMNL
 	help 
           C Abstraction layer on top of linux (and partially windows) network functionality.
 

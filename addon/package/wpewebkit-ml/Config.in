@@ -51,10 +51,6 @@ config BR2_PACKAGE_WPEWEBKIT_ML
 	select BR2_PACKAGE_WEBP
 	select BR2_PACKAGE_WEBP_DEMUX
 	select BR2_PACKAGE_WEBP_MUX
-	select BR2_PACKAGE_LIBSOUP if BR2_PACKAGE_WPEWEBKIT_ML2_22
-	select BR2_PACKAGE_LIBSOUP_SSL if BR2_PACKAGE_WPEWEBKIT_ML2_22
-	select BR2_PACKAGE_LIBSOUP3 if !BR2_PACKAGE_WPEWEBKIT_ML2_22
-	select BR2_PACKAGE_LIBSOUP3_SSL if !BR2_PACKAGE_WPEWEBKIT_ML2_22
 	select BR2_PACKAGE_HOST_PYTHON3 if BR2_PACKAGE_WPEWEBKIT_ML2_38 || BR2_PACKAGE_WPEWEBKIT_ML2_42 || BR2_PACKAGE_WPEWEBKIT_ML2_46
 	select BR2_PACKAGE_LIBBACKTRACE if BR2_PACKAGE_WPEWEBKIT_ML2_46
 	select BR2_PACKAGE_LIBGCRYPT
@@ -68,16 +64,6 @@ choice
         default BR2_PACKAGE_WPEWEBKIT_ML2_46
         help
           Choose the WPEWEBKIT version to be built.
-
-config BR2_PACKAGE_WPEWEBKIT_ML2_22
-        bool "2.22"
-        help
-          Build WPEWEBKIT 2.22
-
-config BR2_PACKAGE_WPEWEBKIT_ML2_28
-        bool "2.28"
-        help
-          Build WPEWEBKIT 2.28
 
 config BR2_PACKAGE_WPEWEBKIT_ML2_38
         bool "2.38"
@@ -127,71 +113,7 @@ config BR2_PACKAGE_WPEWEBKIT_ML_SYMBOLS
 
 endif
 
-if BR2_PACKAGE_WPEWEBKIT_ML2_22
-
-config BR2_PACKAGE_WPEWEBKIT_ML_PREQ
-	bool
-	default y
-	select BR2_PACKAGE_GSTREAMER1
-	select BR2_PACKAGE_GST1_PLUGINS_BASE
-	select BR2_PACKAGE_GST1_PLUGINS_GOOD
-	select BR2_PACKAGE_GST1_PLUGINS_BAD
-
-config BR2_PACKAGE_WPEWEBKIT_ML_USE_WEB_AUDIO
-	bool "Web Audio"
-	default y
-	help
-	  Enable Web Audio
-
-config BR2_PACKAGE_WPEWEBKIT_ML_ENABLE_MEDIA_SOURCE
-	depends on BR2_PACKAGE_GST1_PLUGINS_GOOD_PLUGIN_ISOMP4
-	select BR2_PACKAGE_GST1_PLUGINS_BAD_PLUGIN_DEBUGUTILS if BR2_PACKAGE_GST1_PLUGINS_BAD
-	bool "Media Source Extensions (MSE)"
-	default y
-	help
-	  Enable Media Source Extensions
-
-config BR2_PACKAGE_WPEWEBKIT_ML_USE_ENCRYPTED_MEDIA
-	bool "Encrypted Media Extensions (EME)"
-	default y
-        depends on !BR2_PACKAGE_GST1_PLUGINS_BAD_PLUGIN_DASH_MPD_NO_INIT_DATA_XML_PARSING
-	help
-	  Use Enable Encrypted Media Extensions (EME) API.
-
-config BR2_PACKAGE_WPEWEBKIT_ML_USE_GSTREAMER_GL
-	bool "gstreamer-gl"
-	depends on BR2_PACKAGE_GST1_PLUGINS_BAD_PLUGIN_GL
-	default y if BR2_PACKAGE_WPEWEBKIT_ML_USE_PUNCH_HOLE_NONE
-	help
-	  Use gstreamer-gl video sink for rendering
-
-config BR2_PACKAGE_WPEWEBKIT_ML_USE_GSTREAMER_WEBKIT_HTTP_SRC
-	bool "Use WebKit for Media network resources loading"
-	default y if !BR2_PACKAGE_HORIZON_SDK
-	help
-	  Use the WebKit network resource loader to download Media data over HTTP(S)
-
-config BR2_PACKAGE_WPEWEBKIT_ML_ENABLE_NATIVE_VIDEO
-	bool "Enable native video"
-	default y
-	help
-	  Defines ENABLE_NATIVE_VIDEO=ON
-
-config BR2_PACKAGE_WPEWEBKIT_ML_ENABLE_NATIVE_AUDIO
-	bool "Enable native audio"
-	default n
-	help
-	  Defines ENABLE_NATIVE_AUDIO=ON
-
-config BR2_PACKAGE_WPEWEBKIT_ML_ENABLE_TEXT_SINK
-	bool "Enable text sink"
-	default y
-	help
-	  Defines ENABLE_TEXT_SINK=ON
-
-endif
-
-if BR2_PACKAGE_WPEWEBKIT_ML2_28 || BR2_PACKAGE_WPEWEBKIT_ML2_38 || BR2_PACKAGE_WPEWEBKIT_ML2_42 || BR2_PACKAGE_WPEWEBKIT_ML2_46 
+if BR2_PACKAGE_WPEWEBKIT_ML2_38 || BR2_PACKAGE_WPEWEBKIT_ML2_42 || BR2_PACKAGE_WPEWEBKIT_ML2_46 
 
 config BR2_PACKAGE_WPEWEBKIT_ML_ENABLE_NATIVE_AUDIO
 	bool "Enable native audio"
