@@ -31,9 +31,15 @@ config 	BR2_PACKAGE_BRIDGE_NETWORKING
 	help 
           C Abstraction layer on top of linux (and partially windows) network functionality.
 
+config 	BR2_PACKAGE_BRIDGE_LIBUSB
+	bool "libusb"
+	select BR2_PACKAGE_LIBUSB
+	help 
+          The bridgelibusb is a wrapper around the famous libusb (windows/mac and linux)
+
 config 	BR2_PACKAGE_BRIDGE_DEVICES
 	bool "devices"
-	select BR2_PACKAGE_LIBUSB
+	select BR2_PACKAGE_BRIDGE_LIBUSB
 	help 
           Devices contains several hardware abstractions for IC found out there.
 
