@@ -370,25 +370,25 @@ endif
 
 config BR2_PACKAGE_PLUGIN_COMPOSITOR_MESA
     bool "Mesa"
-    depends on BR2_PACKAGE_MESA3D
     select BR2_PACKAGE_BRIDGE_EXTENSION_LOCALTRACER
     select BR2_PACKAGE_BRIDGE_GRAPHICS_BUFFER
     select BR2_PACKAGE_LIBPNG
+    select BR2_PACKAGE_MESA3D
     help
-      Include a mesa compositor.
+      Select this to build the linux generic compositor implementation based on libGBM/libDRM/Mes
 
 if BR2_PACKAGE_PLUGIN_COMPOSITOR_MESA
 
     config BR2_PACKAGE_PLUGIN_COMPOSITOR_RENDER_NODE
         string "Render node"
-        default ""
+        default "/dev/dri/card0"
         help
             Manually specify the render node to use
             (e.g. /dev/dri/renderxxx or /dev/dri/cardx).
 
     config BR2_PACKAGE_PLUGIN_COMPOSITOR_OUTPUT_MODES
         string "Output modesetting"
-        default ""
+        default "HDMI-A-1;0;0;1080;1920"
         help
             Specify the output mode (name1;x;y;h;w)
             that the compositor should use.
