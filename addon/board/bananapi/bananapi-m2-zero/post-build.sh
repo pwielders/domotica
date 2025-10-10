@@ -12,10 +12,6 @@ for entry in $BOARD_DIR/overlays/*.dts ; do
 	$HOST_DIR/bin/dtc -@ -O dtb -o $BINARIES_DIR/overlays/$base.dtb $entry
 done
 
-if [ -f $BINARIES_DIR/sun8i-h2-plus-bananapi-eth0.dtb ]; then
-	mv $BINARIES_DIR/sun8i-h2-plus-bananapi-eth0.dtb $BINARIES_DIR/overlays/ethernet.dtb
-else
-	echo "Did not move the Ethernet Overlay file, assume it is already moved or it is missing :-)"
-fi
+echo $TARGET_DIR
 
 $HOST_DIR/bin/mkimage -C none -A arm -T script -d $BOARD_DIR/boot.cmd $BINARIES_DIR/boot.scr
