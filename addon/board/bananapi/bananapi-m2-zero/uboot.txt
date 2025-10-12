@@ -1,12 +1,12 @@
 # uart0 -> Debug console
 # uart1 -> BT connector
-# uart2 -> Enabled on extensin PCB and loaded here
-# uart3 -> Enabled on extensin PCB and loaded here
+# uart2 -> Enabled for the extension PCB 
+# uart3 -> Enabled for the extension PCB
 bootlogo=off
 verbosity=1
 console=serial
 device=0
 partition=2
 rootfstype=ext4
-overlays=ethernet w1-gpio uart2 uart3 i2c0 spi0-dual-cs
-extraargs=mmc_core.force_probe=mmc1,mmc0 hdmi.audio=EDID:0 consoleblank=0 disp.screen0_output_mode=1920x1080p60 usb-storage.quirks=0x2537:0x1066:u,0x2537:0x1068:u
+overlays=network w1-gpio uart2 uart3 i2c0 spi0-dual-cs
+extraargs=hdmi.audio=EDID:0 consoleblank=0 disp.screen0_output_mode=1920x1080p60 usb-storage.quirks=0x2537:0x1066:u,0x2537:0x1068:u
