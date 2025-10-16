@@ -60,6 +60,37 @@ config BR2_PACKAGE_BRIDGE_ZIGBEE
 	
 menu "Options"
 
+config BR2_PACKAGE_BRIDGE_DISCOVERY
+	bool "discovery"
+	default n
+        help
+          Enables the Bridge to respond to UPNP requests over HTTP and 
+          searches the network at startup fro other Thunder instances,
+          if probed.
+
+
+if BR2_PACKAGE_BRIDGE_DISCOVERY
+
+menu "Discovery"
+
+config BR2_PACKAGE_BRIDGE_DISCOVERY_BINDING
+	string "bind"
+	default "239.255.255.255:1900"
+        help
+          The multicast IP address and port to listen on for incoming
+          Thunder Discovery requests.
+
+config BR2_PACKAGE_BRIDGE_DISCOVERY_TTL
+	string "ttl"
+	default "1"
+        help
+          The TTL to be associated with the discovery requests, being send out.
+          Using a value of 1 you can prevent discovery requests to pass a router.
+
+endmenu
+
+endif
+
 config BR2_PACKAGE_BRIDGE_PORT
 	string "port"
 	default "80"
