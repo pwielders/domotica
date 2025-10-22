@@ -1,6 +1,13 @@
 config BR2_PACKAGE_BRIDGE_CLIENTS
         bool 
 
+config BR2_PACKAGE_BRIDGE_BUTLERCLIENT
+        bool "ButlerClient"
+        select BR2_PACKAGE_BRIDGE_CLIENTS
+        help
+          A client library that exposes a C++ interface (process agnostic) to interact with the 
+          ButlerPlugin
+
 config BR2_PACKAGE_BRIDGE_COMPOSITORCLIENT
         bool "CompositorClient"
 	select BR2_PACKAGE_BRIDGE_CONTRACTS
@@ -60,7 +67,6 @@ config BR2_PACKAGE_BRIDGE_DISPLAYINFO
         default n
         help
           A helpful C-interface to easily get information from the DisplayInfo plugin.
-
 
 config BR2_PACKAGE_BRIDGE_GRAPHICS_BUFFER
         bool "GraphicsBuffer"

@@ -113,8 +113,13 @@ config BR2_PACKAGE_PLUGIN_TEMPCONTROL
 config BR2_PACKAGE_PLUGIN_VIRTUALCONTROL
 	bool "VirtualControl"
         select BR2_PACKAGE_PLUGIN_DOMOTICA
+        select BR2_PACKAGE_BRIDGE_BUTLERCLIENT
+        depends on BR2_PACKAGE_PLUGIN_BUTLER
 	help
 	   VirtualControl plugin
+
+comment "VirtualControl plugin requires a Butler plugin to expose IValuePoints"
+        depends on !BR2_PACKAGE_PLUGIN_BUTLER
 
 config BR2_PACKAGE_PLUGIN_WATCHDOG
 	bool "WatchDog"

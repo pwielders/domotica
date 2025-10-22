@@ -1,0 +1,6 @@
+config BR2_PACKAGE_SIPEED_LPI4ABIN
+    bool "sipeed-lpi4abin"
+    depends on BR2_riscv=y
+    help
+      This package provides TH1520 SoC binary blobs for LicheePi 4A.
+

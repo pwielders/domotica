@@ -2,6 +2,7 @@ config BR2_PACKAGE_BRIDGE
 	bool "bridge"
         depends on BR2_INSTALL_LIBSTDCPP
         depends on BR2_TOOLCHAIN_HAS_THREADS 
+        select BR2_PACKAGE_ZLIB
 	help
 	  Framework to build the functionality to realize a plugin structure for 
           rapid and easy development of REST-full API modules that realize simple
